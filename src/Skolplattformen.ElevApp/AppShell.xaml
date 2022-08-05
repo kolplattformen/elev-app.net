@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Skolplattformen.ElevApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Skolplattformen.ElevApp.Pages"
+    Shell.FlyoutBehavior="Disabled">
+
+
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate local:LoginPage}"
+        Route="LoginPage" />
+
+    <TabBar >
+        <Tab
+            Title="Min dag"
+            Icon="today_svgrepo_com.png"
+            Route="TodayPage" >
+            <ShellContent ContentTemplate="{DataTemplate local:TodayPage}"/>
+        </Tab>
+
+
+        <ShellContent
+           Title="Lunch"
+           Icon="food_svgrepo_com.png"
+           ContentTemplate="{DataTemplate local:LunchPage}"
+           Route="LunchPage" />
+
+
+        <ShellContent
+           Title="Lärare"
+           Icon="teacher_with_stick_svgrepo_com.png"
+           ContentTemplate="{DataTemplate local:TeachersPage}"
+           Route="TeacherPage" />
+
+
+        <ShellContent
+           Title="Jag"
+           Icon="headphones_svgrepo_com.png"
+           ContentTemplate="{DataTemplate local:MePage}"
+           Route="MePage" />
+
+    </TabBar>
+
+</Shell>

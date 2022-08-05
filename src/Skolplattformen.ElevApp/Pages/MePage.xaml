@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Skolplattformen.ElevApp.Pages.MePage"
+             Title="Jag i Skolplattformen">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label 
+                Text="{Binding StudentName}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                FontSize="28"
+                Margin="0,30,0,0"/>
+
+            <Label 
+                Text="{Binding SchoolName}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                FontSize="20"
+                Margin="0,0"/>
+            
+            <Label 
+                Text="{Binding VisitingAddress}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                FontSize="16"
+                Margin="0,0"/>
+
+            <VerticalStackLayout Padding="30,30">
+
+                <Label 
+                    Text="Postadress och kontakt"
+                    FontAttributes="Bold"/>
+                <Label 
+                    Text="{Binding Street}"/>
+
+                <Label>
+                    <Label.Text>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path="PostalCode"></Binding>
+                            <Binding Path="Locality"></Binding>
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+                <Label 
+                    Text="{Binding Phone}"/>
+                <Label 
+                    Text="{Binding SchoolEmail}"/>
+
+                <Label 
+                    Text="Rektor" FontAttributes="Bold" Margin="0,12,0,0"/>
+                <Label 
+                    Text="{Binding PrincipalName}"/>
+                <Label 
+                    Text="{Binding PrincipalPhone}"/>
+                <Label 
+                    Text="{Binding PrincipalEmail}"/>
+
+            </VerticalStackLayout>
+
+            <Button
+                    
+                Text="Logga ut"
+                SemanticProperties.Hint="Loggar ut"
+                Command="{Binding LogoutCommand}"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

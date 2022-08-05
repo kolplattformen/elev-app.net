@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Skolplattformen.ElevApp.Pages.TodayPage"
+             Title="{Binding Title}">
+
+  <ScrollView>
+        <VerticalStackLayout>
+            <Label FontSize="32" HorizontalOptions="Center" Margin="0,16,0,0">
+                <Label.Text>
+                    <MultiBinding StringFormat="{}{0}-{1}">
+                        <Binding Path="SchoolStartTime"></Binding>
+                        <Binding Path="SchoolEndTime"></Binding>
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+            <Label 
+            Text="Glöm inte gympapåsen"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            IsVisible="{Binding IsSportsbagDay}"/>
+
+            <CollectionView  Margin="20,10,20,10"
+                             ItemsSource="{Binding Items}"                             
+                             SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10,15">
+                        <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
+                            <Label FontSize="12" >
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0}-{1}">
+                                        <Binding Path="StartTime" />
+                                        <Binding Path="EndTime" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Label Text="{Binding Title}" FontSize="24"/>
+                            <Label Text="{Binding Description}"  FontSize="14"/>
+                        </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+  </ScrollView>
+</ContentPage>

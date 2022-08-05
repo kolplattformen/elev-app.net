@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Skolplattformen.ElevApp.Pages.TeachersPage"
+             Title="Mina lärare">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:ListToStringConverter x:Key="ListToStringConverter" Separator=", " />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+    <VerticalStackLayout>
+        <CollectionView  Margin="20,10,20,10"
+                         ItemsSource="{Binding Items}"                             
+                         SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="1" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout Padding="10,0" Margin="0,10,10,10">
+                        <Label FontSize="24" FontAttributes="Bold">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="Firstname" />
+                                    <Binding Path="Lastname" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <Label Text="{Binding Email}" FontSize="14"/>
+                        <Label Text="{Binding Subjects, Converter={StaticResource ListToStringConverter}}" FontSize="18"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Skolplattformen.ElevApp.Pages.LoginPage"
+             xmlns:viewmodel="clr-namespace:Skolplattformen.ElevApp.ViewModels"
+             x:DataType="viewmodel:LoginViewModel">
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <VerticalStackLayout
+                Spacing="25"
+                Padding="30,0"
+                VerticalOptions="Center">
+
+                <Image
+                    Source="children.png"
+                    SemanticProperties.Description="Barn leker"
+                    HeightRequest="200"
+                    HorizontalOptions="Center" />
+
+                <Label
+                    Text="Öppna skolplattformen"
+                    SemanticProperties.HeadingLevel="Level1"
+                    FontSize="32"
+                    HorizontalOptions="Center" />
+
+            </VerticalStackLayout>
+
+ 
+
+            <VerticalStackLayout
+                Spacing="10"
+                Padding="30,20,30,0"
+                VerticalOptions="Center">
+
+                <Frame BorderColor="LightGray"
+                       Padding="16,0">
+                    <HorizontalStackLayout Spacing="1">
+                        <Entry
+                            MaxLength="200"
+                            Text="{Binding Email}" 
+                            Placeholder="E-mail"/>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <Frame BorderColor="LightGray"
+                           Padding="16,0">
+                    <HorizontalStackLayout Spacing="1">
+                        <Entry
+                                MaxLength="200"
+                                Text="{Binding Username}" 
+                                Placeholder="Användarnamn"/>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <Frame BorderColor="LightGray"
+                       Padding="16,0">
+                    <HorizontalStackLayout Spacing="1">
+                        <Entry
+                            MaxLength="200"
+                            Text="{Binding Password}" 
+                            IsPassword="true"
+                            Placeholder="Lösenord"/>
+                    </HorizontalStackLayout>
+                </Frame>
+                <Button
+                    Text="Logga in"
+                    Command="{Binding LoginCommand}"
+                    HorizontalOptions="End" />
+
+                <Picker x:Name="picker"
+                        Title="Välj inloggning"
+                        ItemsSource="{Binding PlattformList}"
+                        SelectedIndex="{Binding PlattformSelectedIndex}">
+
+
+                </Picker>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
