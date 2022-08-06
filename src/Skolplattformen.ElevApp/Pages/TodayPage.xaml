@@ -6,14 +6,25 @@
 
   <ScrollView>
         <VerticalStackLayout>
-            <Label FontSize="32" HorizontalOptions="Center" Margin="0,16,0,0">
-                <Label.Text>
-                    <MultiBinding StringFormat="{}{0}-{1}">
-                        <Binding Path="SchoolStartTime"></Binding>
-                        <Binding Path="SchoolEndTime"></Binding>
-                    </MultiBinding>
-                </Label.Text>
-            </Label>
+            <HorizontalStackLayout HorizontalOptions="Fill">
+                <Button
+                    Text="Förra"
+                    Command="{Binding PreviousCommand}"
+                    HorizontalOptions="Start" />
+                <Label FontSize="32" HorizontalOptions="Fill" Margin="0,16,0,0">
+                    <Label.Text>
+                        <MultiBinding StringFormat="{}{0}-{1}">
+                            <Binding Path="SchoolStartTime"></Binding>
+                            <Binding Path="SchoolEndTime"></Binding>
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+                <Button
+                    Text="Nästa"
+                    Command="{Binding NextCommand}"
+                    HorizontalOptions="End" />
+            </HorizontalStackLayout>
+           
             <Label 
             Text="Glöm inte gympapåsen"
             VerticalOptions="Center" 

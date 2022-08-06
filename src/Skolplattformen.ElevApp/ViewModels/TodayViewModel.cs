@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Skolplattformen.ElevApp.Data;
 using Skolplattformen.ElevApp.Models;
 using SkolplattformenElevApi.Models;
@@ -29,9 +30,24 @@ namespace Skolplattformen.ElevApp.ViewModels
             Task.Run(LoadData);
         }
 
+        [RelayCommand]
+        void Previous()
+        {
+            CurrentDate = currentDate.AddDays(-1);
+            Task.Run(LoadData);
+        }
+
+        [RelayCommand]
+        void Next()
+        {
+            CurrentDate = currentDate.AddDays(1);
+            Task.Run(LoadData);
+        }
+
+
         public async Task LoadData()
         {
-            title = (currentDate.Date == DateTime.Now.Date)
+            Title = (currentDate.Date == DateTime.Now.Date)
                 ? "Idag"
                 : $"Min dag {currentDate.ToString("dd/MM")}";
             
