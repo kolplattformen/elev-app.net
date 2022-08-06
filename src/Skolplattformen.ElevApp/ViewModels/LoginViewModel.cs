@@ -22,10 +22,12 @@ namespace Skolplattformen.ElevApp.ViewModels
 
             PlattformList = new ObservableCollection<string>
             {
-                "Skolplattformen",
+                "Skolplattformen Stockholm",
                 "Demo"
             };
             PlattformSelectedIndex = 0;
+
+            //Task.Run(() => PlattformSelectedIndex = -1);
         }
 
         [RelayCommand]

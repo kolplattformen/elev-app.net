@@ -28,7 +28,7 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="10,15">
+                        <Frame Padding="10,15" BackgroundColor="{Binding Color}">
                         <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
                             <Label FontSize="12" >
                                 <Label.Text>

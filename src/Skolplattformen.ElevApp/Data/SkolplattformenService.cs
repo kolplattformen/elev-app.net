@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using SkolplattformenElevApi;
 using SkolplattformenElevApi.Models;
-using SkolplattformenElevApi.Models.News;
 
 namespace Skolplattformen.ElevApp.Data;
 
@@ -124,4 +123,15 @@ public class SkolplattformenService
         return _api.GetSchoolDetailsAsync(schoolId);
     }
 
+    public Task<List<CalendarItem>> GetCalendarAsync(DateTime date)
+    {
+        return _api.GetCalendarAsync(new DateOnly(date.Year,date.Month,date.Day));
+    }
+
+    public async Task<List<PlannedAbsenceItem>> GetPlannedAbsenceAsync(DateTime date)
+    { 
+        var all = await  _api.GetPlannedAbsenceListAsync();
+        var today = all.Where(x => x.DateTimeFrom.Date == date.Date || x.DateTimeTo.Date == date.Date);
+        return today.ToList();
+    }
 }

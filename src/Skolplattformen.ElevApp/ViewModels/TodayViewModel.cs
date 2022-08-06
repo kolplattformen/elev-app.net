@@ -36,28 +36,88 @@ namespace Skolplattformen.ElevApp.ViewModels
                 : $"Min dag {currentDate.ToString("dd/MM")}";
             
             var todayItems = new List<TodayItem>();
+            var allDayItems = new List<TodayItem>();
 
+            // get lunch
+            var lunch = await _skolplattformenService.GetMealAsync(CurrentDate);
+            
             // get lessons
 
             var timetable = await _skolplattformenService.GetTimetableAsync(currentDate);
             foreach (var lesson in timetable)
             {
-                todayItems.Add(new TodayItem
+
+                var item = new TodayItem
                 {
                     StartTime = lesson.TimeStart.Substring(0, 5),
                     EndTime = lesson.TimeEnd.Substring(0, 5),
                     Title = lesson.SubjectName,
-                    Description = $"{lesson.TeacherName}" 
+                    Description = $"{lesson.TeacherName}"
                                   + (string.IsNullOrWhiteSpace(lesson.Location)
-                                  ? string.Empty
-                                  : $" ({lesson.Location})")
-                });
+                                      ? string.Empty
+                                      : $" ({lesson.Location})")
+                };
+
+                if (lesson.SubjectCode.ToUpper() == "LUNCH")
+                {
+                    item.Description = lunch?.Description;
+                }
+
+                todayItems.Add(item);
+                
             }
 
             // get calendar entries
+            var calendar = await _skolplattformenService.GetCalendarAsync(currentDate);
+            foreach (var item in calendar)
+            {
+                if (item.IsAllDay)
+                {
+                    allDayItems.Add(new TodayItem
+                    {
+                        Title = item.Title,
+                        Mark = TodatItemMark.AllDay
+                    });
+                }
+                else
+                {
+                    todayItems.Add(new TodayItem
+                    {
+                        Title = item.Title,
+                        Description = item.Location,
+                        StartTime = item.Start.ToString("HH:mm"),
+                        EndTime = item.End.ToString("HH:mm"),
+                        Mark = TodatItemMark.Warning
+                    });
+                }
+            }
+            
 
-            // get lunch
+            // get planned absence
+            var absence = await _skolplattformenService.GetPlannedAbsenceAsync(currentDate);
+            foreach (var item in absence)
+            {
+                if (item.IsFullDayAbsence)
+                {
+                    allDayItems.Add(new TodayItem
+                    {
+                        Title = item.ReasonDescription,
+                        Description = item.Reporter,
+                        Mark = TodatItemMark.AllDay
+                        });
+                }
+                else
+                {
+                    todayItems.Add(new TodayItem
+                    {
+                        StartTime = item.DateTimeFrom.ToString("´HH:mm"),
+                        EndTime = item.DateTimeTo.ToString("HH:mm"),
+                        Title = item.ReasonDescription,
+                        Description = item.Reporter
 
+                    });
+                }
+            }
 
 
 
@@ -72,6 +132,11 @@ namespace Skolplattformen.ElevApp.ViewModels
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 items.Clear();
+
+                foreach (var item in allDayItems)
+                {
+                    items.Add(item);
+                }
                 foreach (var item in todayItems)
                 {
                     items.Add(item);
