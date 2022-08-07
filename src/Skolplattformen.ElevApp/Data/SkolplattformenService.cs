@@ -110,7 +110,7 @@ public class SkolplattformenService
         var week = ISOWeek.GetWeekOfYear(day);
         var year = ISOWeek.GetYear(day);
         var meals = await _api.GetMealsAsync(year, week);
-        return meals.FirstOrDefault(m => m.Date.Date == DateTime.Now.Date);
+        return meals.FirstOrDefault(m => m.Date.Date == day.Date);
     }
 
     public Task<ApiUser?> GetUserAsync()
