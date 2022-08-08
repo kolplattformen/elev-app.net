@@ -6,76 +6,49 @@
              x:DataType="viewmodel:LoginViewModel">
 
     <ScrollView>
-        <VerticalStackLayout>
-            <VerticalStackLayout
-                Spacing="25"
-                Padding="30,0"
-                VerticalOptions="Center">
+        <VerticalStackLayout
+            Spacing="5"
+            Padding="30,20,30,0"
+            VerticalOptions="Center">
 
-                <Image
+            <Image
                     Source="children.png"
                     SemanticProperties.Description="Barn leker"
-                    HeightRequest="200"
+                    HeightRequest="180"
                     HorizontalOptions="Center" />
 
-                <Label
+            <Label
                     Text="Öppna skolplattformen"
                     SemanticProperties.HeadingLevel="Level1"
                     FontSize="32"
                     HorizontalOptions="Center" />
 
-            </VerticalStackLayout>
+            <Entry
+                    MaxLength="200"
+                    Text="{Binding Email}" 
+                    Placeholder="E-mail"/>
+            <Entry
+                    MaxLength="200"
+                    Text="{Binding Username}" 
+                    Placeholder="Användarnamn"/>
+            <Entry
+                    MaxLength="200"
+                    Text="{Binding Password}" 
+                    IsPassword="true"
+                    Placeholder="Lösenord"/>
 
- 
-
-            <VerticalStackLayout
-                Spacing="10"
-                Padding="30,20,30,0"
-                VerticalOptions="Center">
-
-                <Frame BorderColor="LightGray"
-                       Padding="16,0">
-                    <HorizontalStackLayout Spacing="1">
-                        <Entry
-                            MaxLength="200"
-                            Text="{Binding Email}" 
-                            Placeholder="E-mail"/>
-                    </HorizontalStackLayout>
-                </Frame>
-
-                <Frame BorderColor="LightGray"
-                           Padding="16,0">
-                    <HorizontalStackLayout Spacing="1">
-                        <Entry
-                                MaxLength="200"
-                                Text="{Binding Username}" 
-                                Placeholder="Användarnamn"/>
-                    </HorizontalStackLayout>
-                </Frame>
-
-                <Frame BorderColor="LightGray"
-                       Padding="16,0">
-                    <HorizontalStackLayout Spacing="1">
-                        <Entry
-                            MaxLength="200"
-                            Text="{Binding Password}" 
-                            IsPassword="true"
-                            Placeholder="Lösenord"/>
-                    </HorizontalStackLayout>
-                </Frame>
-                <Button
+            <Button
                     Text="Logga in"
                     Command="{Binding LoginCommand}"
                     HorizontalOptions="End" />
 
-                <Picker x:Name="picker"
+            <Picker x:Name="picker"
                         Title="Välj inloggning"
                         ItemsSource="{Binding PlattformList}"
                         SelectedIndex="{Binding PlattformSelectedIndex}">
 
+            </Picker>
 
-                </Picker>
-            </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
