@@ -51,7 +51,7 @@
 
             <Picker x:Name="picker"
                         Title="Välj inloggning"
-                        ItemsSource="{Binding PlattformList}"
+                        ItemsSource="{Binding PlatformList}"
                         SelectedIndex="{Binding PlatformSelectedIndex}">
 
             </Picker>
