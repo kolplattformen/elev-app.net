@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>Skolplattformen.ElevApp</ApplicationTitle>
+		<ApplicationTitle>ElevApp</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.skolplattformen.elevapp</ApplicationId>

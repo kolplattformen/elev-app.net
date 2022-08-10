@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Skolplattformen.ElevApp.Data;
+using Skolplattformen.ElevApp.Models;
 using Skolplattformen.ElevApp.Pages;
 
 namespace Skolplattformen.ElevApp.ViewModels
@@ -11,8 +12,8 @@ namespace Skolplattformen.ElevApp.ViewModels
         [ObservableProperty] private string email;
         [ObservableProperty] private string username;
         [ObservableProperty] private string password;
-        [ObservableProperty] private ObservableCollection<string> plattformList;
-        [ObservableProperty] private int plattformSelectedIndex;
+        [ObservableProperty] private ObservableCollection<string> platformList;
+        [ObservableProperty] private int _platformSelectedIndex;
 
         private readonly SkolplattformenService _skolplattformenService;
 
@@ -20,30 +21,55 @@ namespace Skolplattformen.ElevApp.ViewModels
         {
             _skolplattformenService = skolplattformenService;
 
-            PlattformList = new ObservableCollection<string>
+            PlatformList = new ObservableCollection<string>
             {
                 "Skolplattformen Stockholm",
                 "Demo"
             };
-            PlattformSelectedIndex = 0;
+            PlatformSelectedIndex = 0;
 
-            //Task.Run(() => PlattformSelectedIndex = -1);
+            Task.Run(LoadData);
         }
+
+        Task LoadData()
+        {
+            var loginDetails = Storage.Get<LoginDetails>("login_details");
+            if (loginDetails.RememberMe)
+            {
+                Email = loginDetails.Email;
+                Username = loginDetails.Username;
+                Password = loginDetails.Password;
+            }
+
+            PlatformSelectedIndex = loginDetails?.Platform ?? 0;
+            return Task.CompletedTask;
+        }
+
 
         [RelayCommand]
         async Task Login()
         {
 
-            ApiKind kind = PlattformSelectedIndex switch
+            ApiKind kind = PlatformSelectedIndex switch
             {
                 0 => ApiKind.Skolplattformen,
                 1 => ApiKind.FakeData,
                 _ => ApiKind.FakeData
             };
-            if (PlattformSelectedIndex != -1)
+            if (PlatformSelectedIndex != -1)
             {
                 _skolplattformenService.SelectApi(kind);
             }
+
+            var loginDetails = new LoginDetails
+            {
+                Username = username,
+                Email = email,
+                Password = password,
+                RememberMe = true,
+                Platform = PlatformSelectedIndex
+            };
+            Storage.Store("login_details", loginDetails);
 
             await _skolplattformenService.LogInAsync(email, username, password);
 

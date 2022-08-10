@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Skolplattformen.ElevApp.Models
+﻿namespace Skolplattformen.ElevApp.Models
 {
-    public enum TodatItemMark
+    public enum TodayItemMark
     {
         Standard = 0,
         Warning = 1,
@@ -18,13 +12,13 @@ namespace Skolplattformen.ElevApp.Models
         public string EndTime { get; set; } = "00:00";
         public string Title { get; set; } = "";
         public string Description { get; set; } = "";
-        public TodatItemMark Mark { get; set; } = TodatItemMark.Standard;
+        public TodayItemMark Mark { get; set; } = TodayItemMark.Standard;
 
         public Color Color => Mark switch
         {
-            TodatItemMark.AllDay => Microsoft.Maui.Graphics.Color.FromRgb(255, 0, 0),
-            TodatItemMark.Warning => Microsoft.Maui.Graphics.Color.FromRgb(255, 255, 0),
-            _ => Microsoft.Maui.Graphics.Color.FromRgb(255, 255, 255)
+            TodayItemMark.AllDay => Microsoft.Maui.Graphics.Color.FromRgb(255, 0, 0),
+            TodayItemMark.Warning => Microsoft.Maui.Graphics.Color.FromRgb(255, 255, 0),
+            _ => Microsoft.Maui.Graphics.Color.FromRgba(255, 255, 255, 0)
         };
     }
 }

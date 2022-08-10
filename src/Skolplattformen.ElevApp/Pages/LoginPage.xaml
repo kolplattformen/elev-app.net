@@ -7,6 +7,7 @@
 
     <ScrollView>
         <VerticalStackLayout
+            x:Name="layout"
             Spacing="5"
             Padding="30,20,30,0"
             VerticalOptions="Center">
@@ -26,16 +27,22 @@
             <Entry
                     MaxLength="200"
                     Text="{Binding Email}" 
-                    Placeholder="E-mail"/>
+                    Placeholder="E-mail" 
+                    Focused="Entry_Focused" 
+                    Unfocused="Entry_Unfocused"/>
             <Entry
                     MaxLength="200"
                     Text="{Binding Username}" 
-                    Placeholder="Användarnamn"/>
+                    Placeholder="Användarnamn" 
+                    Focused="Entry_Focused" 
+                    Unfocused="Entry_Unfocused"/>
             <Entry
                     MaxLength="200"
                     Text="{Binding Password}" 
                     IsPassword="true"
-                    Placeholder="Lösenord"/>
+                    Placeholder="Lösenord" 
+                    Focused="Entry_Focused" 
+                    Unfocused="Entry_Unfocused"/>
 
             <Button
                     Text="Logga in"
@@ -45,7 +52,7 @@
             <Picker x:Name="picker"
                         Title="Välj inloggning"
                         ItemsSource="{Binding PlattformList}"
-                        SelectedIndex="{Binding PlattformSelectedIndex}">
+                        SelectedIndex="{Binding PlatformSelectedIndex}">
 
             </Picker>
 

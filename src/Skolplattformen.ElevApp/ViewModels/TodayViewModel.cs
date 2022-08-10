@@ -92,7 +92,7 @@ namespace Skolplattformen.ElevApp.ViewModels
                     allDayItems.Add(new TodayItem
                     {
                         Title = item.Title,
-                        Mark = TodatItemMark.AllDay
+                        Mark = TodayItemMark.AllDay
                     });
                 }
                 else
@@ -103,7 +103,7 @@ namespace Skolplattformen.ElevApp.ViewModels
                         Description = item.Location,
                         StartTime = item.Start.ToString("HH:mm"),
                         EndTime = item.End.ToString("HH:mm"),
-                        Mark = TodatItemMark.Warning
+                        Mark = TodayItemMark.Warning
                     });
                 }
             }
@@ -119,7 +119,7 @@ namespace Skolplattformen.ElevApp.ViewModels
                     {
                         Title = item.ReasonDescription,
                         Description = item.Reporter,
-                        Mark = TodatItemMark.AllDay
+                        Mark = TodayItemMark.AllDay
                         });
                 }
                 else
