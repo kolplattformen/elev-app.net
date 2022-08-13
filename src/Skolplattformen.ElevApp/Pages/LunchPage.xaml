@@ -7,7 +7,7 @@
                  Command="{Binding RefreshCommand}">-->
         <ScrollView>
             <VerticalStackLayout>
-                <CollectionView  Margin="20,10,20,10"
+                <CollectionView  Margin="12,10,20,10"
                              ItemsSource="{Binding Items}"                             
                              SelectionMode="None">
                     <CollectionView.ItemsLayout>

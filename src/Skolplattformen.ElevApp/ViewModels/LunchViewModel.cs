@@ -54,5 +54,10 @@ namespace Skolplattformen.ElevApp.ViewModels
             await LoadData();
             IsRefreshing = false;
         }
+
+        public Task OnActivated()
+        {
+            return LoadData();
+        }
     }
 }

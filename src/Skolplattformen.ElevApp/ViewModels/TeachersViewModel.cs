@@ -17,10 +17,10 @@ namespace Skolplattformen.ElevApp.ViewModels
             _skolplattformenService = skolplattformenService;
             items = new ObservableCollection<Teacher>();
 
-            Task.Run(LoadData);
+            //Task.Run(LoadData);
         }
 
-        public async Task LoadData()
+        private async Task LoadData()
         {
             var teachers = await _skolplattformenService.GetTeachersAsync();
             MainThread.BeginInvokeOnMainThread(() =>
@@ -31,6 +31,10 @@ namespace Skolplattformen.ElevApp.ViewModels
                     items.Add(teacher);
                 }
             });
+        }
+        public Task OnActivated()
+        {
+            return LoadData();
         }
     }
 

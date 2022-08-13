@@ -38,7 +38,7 @@ namespace Skolplattformen.ElevApp.ViewModels
         {
             _skolplattformenService = skolplattformenService;
 
-            Task.Run(LoadData);
+        //    Task.Run(LoadData);
         }
 
         private async Task LoadData()
@@ -57,6 +57,11 @@ namespace Skolplattformen.ElevApp.ViewModels
             PrincipalName = schoolDetails.PrincipalName;
             PrincipalPhone = schoolDetails.PrincipalPhone;
             PrincipalEmail = schoolDetails.PrincipalEmail;
+        }
+
+        public Task OnActivated()
+        {
+            return LoadData();
         }
     }
 }

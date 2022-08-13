@@ -9,4 +9,10 @@ public partial class LunchPage : ContentPage
 		InitializeComponent();
         this.BindingContext = model;
     }
+
+    protected override void OnAppearing()
+    {
+        var model = this.BindingContext as LunchViewModel;
+        Task.Run(model.OnActivated);
+    }
 }

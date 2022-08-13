@@ -10,4 +10,9 @@ public partial class TeachersPage : ContentPage
         this.BindingContext = model;
     }
 
+    protected override void OnAppearing()
+    {
+        var model = this.BindingContext as TeachersViewModel;
+        Task.Run(model.OnActivated);
+    }
 }

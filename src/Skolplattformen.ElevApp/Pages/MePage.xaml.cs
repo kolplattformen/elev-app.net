@@ -9,4 +9,10 @@ public partial class MePage : ContentPage
 		InitializeComponent();
         this.BindingContext = model;
     }
+
+    protected override void OnAppearing()
+    {
+        var model = this.BindingContext as MeViewModel;
+        Task.Run(model.OnActivated);
+    }
 }

@@ -18,8 +18,17 @@ namespace Skolplattformen.ElevApp.ViewModels
         [ObservableProperty] private string schoolStartTime  = "";
         [ObservableProperty] private string schoolEndTime  = "";
         [ObservableProperty] public bool isSportsbagDay = false;
-        
 
+        private string WeekdaySe(DayOfWeek dow) => dow switch
+        {
+            DayOfWeek.Monday => "Måndag",
+            DayOfWeek.Tuesday => "Tisdag",
+            DayOfWeek.Wednesday => "Onsdag",
+            DayOfWeek.Thursday => "Torsdag",
+            DayOfWeek.Friday => "Fredag",
+            DayOfWeek.Saturday => "Lördag",
+            _=> "Söndag"
+        };
 
         public TodayViewModel(SkolplattformenService skolplattformenService)
         {
@@ -27,7 +36,7 @@ namespace Skolplattformen.ElevApp.ViewModels
 
             items = new ObservableCollection<TodayItem>();
 
-            Task.Run(LoadData);
+         //   Task.Run(LoadData);
         }
 
         [RelayCommand]
@@ -44,12 +53,16 @@ namespace Skolplattformen.ElevApp.ViewModels
             Task.Run(LoadData);
         }
 
+        public Task OnActivated()
+        {
+            return LoadData();
+        }
 
         public async Task LoadData()
         {
             Title = (currentDate.Date == DateTime.Now.Date)
-                ? "Idag"
-                : $"Min dag {currentDate.ToString("dd/MM")}";
+                ? $"Idag {WeekdaySe(currentDate.DayOfWeek).ToLower()} {currentDate.ToString("dd/MM")}"
+                : $"{WeekdaySe(currentDate.DayOfWeek)} {currentDate.ToString("dd/MM")}";
             
             var todayItems = new List<TodayItem>();
             var allDayItems = new List<TodayItem>();
@@ -160,6 +173,8 @@ namespace Skolplattformen.ElevApp.ViewModels
             });
 
         }
+
+    
     }
 
 

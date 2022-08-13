@@ -9,4 +9,10 @@ public partial class TodayPage : ContentPage
 		InitializeComponent();
         this.BindingContext = model;
     }
+
+    protected override void OnAppearing()
+    {
+        var model = this.BindingContext as TodayViewModel;
+        Task.Run(model.OnActivated);
+    }
 }
