@@ -8,7 +8,7 @@
         <VerticalStackLayout Margin="6,6,6,6">
             <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                 <Button
-                    Text="Förra"
+                    Text="«"
                     Command="{Binding PreviousCommand}"
                     HorizontalOptions="Start" />
                 <Label FontSize="32" HorizontalOptions="CenterAndExpand" Margin="0,6,0,0">
@@ -20,7 +20,7 @@
                     </Label.Text>
                 </Label>
                 <Button
-                    Text="Nästa"
+                    Text="»"
                     Command="{Binding NextCommand}"
                     HorizontalOptions="End" />
             </StackLayout>
