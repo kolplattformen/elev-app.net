@@ -10,6 +10,7 @@ public enum ApiKind
     FakeData = 2
 }
 
+
 public class SkolplattformenService
 {
     private IApi _api;
@@ -21,7 +22,7 @@ public class SkolplattformenService
 
     public SkolplattformenService()
     {
-        _api = new SkolplattformenElevApi.Api();
+        _api = new CachedSchoolPlatformenElevApi(new SkolplattformenElevApi.Api());
 
     }
 
@@ -37,7 +38,7 @@ public class SkolplattformenService
         _loggedInTime = DateTime.MinValue;
         if (_apiKind == ApiKind.Skolplattformen)
         {
-            _api = new Api();
+            _api = new CachedSchoolPlatformenElevApi(new SkolplattformenElevApi.Api());
         }
         else
         {
