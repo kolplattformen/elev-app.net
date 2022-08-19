@@ -35,14 +35,29 @@ namespace Skolplattformen.ElevApp.ViewModels
             _skolplattformenService = skolplattformenService;
 
             items = new ObservableCollection<TodayItem>();
+            if (CurrentDate.DayOfWeek == DayOfWeek.Saturday)
+            {
+                CurrentDate = CurrentDate.AddDays(1);
+            }
+            if (CurrentDate.DayOfWeek == DayOfWeek.Sunday)
+            {
+                CurrentDate = CurrentDate.AddDays(1);
+            }
 
-         //   Task.Run(LoadData);
         }
 
         [RelayCommand]
         void Previous()
         {
             CurrentDate = currentDate.AddDays(-1);
+            if (CurrentDate.DayOfWeek == DayOfWeek.Sunday)
+            {
+                CurrentDate = CurrentDate.AddDays(-1);
+            }
+            if (CurrentDate.DayOfWeek == DayOfWeek.Saturday)
+            {
+                CurrentDate = CurrentDate.AddDays(-1);
+            }
             Task.Run(LoadData);
         }
 
@@ -50,6 +65,14 @@ namespace Skolplattformen.ElevApp.ViewModels
         void Next()
         {
             CurrentDate = currentDate.AddDays(1);
+            if (CurrentDate.DayOfWeek == DayOfWeek.Saturday)
+            {
+                CurrentDate = CurrentDate.AddDays(1);
+            }
+            if (CurrentDate.DayOfWeek == DayOfWeek.Sunday)
+            {
+                CurrentDate = CurrentDate.AddDays(1);
+            }
             Task.Run(LoadData);
         }
 
