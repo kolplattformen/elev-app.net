@@ -10,12 +10,12 @@ using SkolplattformenElevApi.Models.News;
 
 namespace Skolplattformen.ElevApp.Data
 {
-    internal class CachedSchoolPlatformenElevApi: IApi
+    internal class CachedSchoolPlattformenElevApi: IApi
     {
         private readonly IApi _api;
         private readonly Dictionary<string, object> _cache = new Dictionary<string, object>();
 
-        public CachedSchoolPlatformenElevApi(IApi api)
+        public CachedSchoolPlattformenElevApi(IApi api)
         {
             _api = api;
         }
