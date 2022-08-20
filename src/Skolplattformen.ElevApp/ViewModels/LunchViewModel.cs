@@ -13,11 +13,22 @@ namespace Skolplattformen.ElevApp.ViewModels
         [ObservableProperty] private ObservableCollection<Meal> items;
         [ObservableProperty] private string title;
         [ObservableProperty] private bool isRefreshing;
+        [ObservableProperty] private DateTime day;
 
         public LunchViewModel(SkolplattformenService skolplattformenService)
         {
             _skolplattformenService = skolplattformenService;
             items = new ObservableCollection<Meal>();
+
+            Day = DateTime.Now; // Skip weekends
+            if (Day.DayOfWeek == DayOfWeek.Saturday)
+            {
+                Day = Day.AddDays(1);
+            }
+            if (Day.DayOfWeek == DayOfWeek.Sunday)
+            {
+                Day = Day.AddDays(1);
+            }
 
             Task.Run(LoadData);
         }
@@ -26,9 +37,9 @@ namespace Skolplattformen.ElevApp.ViewModels
         {
            // if (this.IsRefreshing) return;
 
-            var today = DateTime.Now;
-            var isoYear = ISOWeek.GetYear(today);
-            var week = ISOWeek.GetWeekOfYear(today);
+            
+            var isoYear = ISOWeek.GetYear(Day);
+            var week = ISOWeek.GetWeekOfYear(Day);
 
             var meals = await _skolplattformenService.GetMealsAsync(isoYear, week);
             foreach (var meal in meals)
@@ -47,6 +58,21 @@ namespace Skolplattformen.ElevApp.ViewModels
                 }
             });
         }
+
+        [RelayCommand]
+        void Previous()
+        {
+            Day = Day.AddDays(-7);
+            Task.Run(LoadData);
+        }
+
+        [RelayCommand]
+        void Next()
+        {
+            Day = Day.AddDays(7);
+            Task.Run(LoadData);
+        }
+
 
         [RelayCommand]
         private async Task Refresh()
