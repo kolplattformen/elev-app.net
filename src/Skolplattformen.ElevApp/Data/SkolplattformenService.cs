@@ -22,7 +22,7 @@ public class SkolplattformenService
 
     public SkolplattformenService()
     {
-        _api = new CachedSchoolPlatformenElevApi(new SkolplattformenElevApi.Api());
+        _api = new CachedSchoolPlattformenElevApi(new SkolplattformenElevApi.Api());
 
     }
 
@@ -38,7 +38,7 @@ public class SkolplattformenService
         _loggedInTime = DateTime.MinValue;
         if (_apiKind == ApiKind.Skolplattformen)
         {
-            _api = new CachedSchoolPlatformenElevApi(new SkolplattformenElevApi.Api());
+            _api = new CachedSchoolPlattformenElevApi(new SkolplattformenElevApi.Api());
         }
         else
         {
@@ -66,10 +66,17 @@ public class SkolplattformenService
 
     public async Task<List<Teacher>> GetTeachersAsync()
     {
+        // Get timetable from two weeks, so we don't miss subjects while holidays etc.
         var today = DateTime.Now;
         var week = ISOWeek.GetWeekOfYear(today);
         var year = ISOWeek.GetYear(today);
         var timetable = await _api.GetTimetableAsync(year, week);
+        var nextWeek = DateTime.Now.AddDays(7);
+        var nextWeekWeek = ISOWeek.GetWeekOfYear(nextWeek);
+        var nextWeekYear = ISOWeek.GetYear(nextWeek);
+        var nextWeekTimetable = await _api.GetTimetableAsync(nextWeekYear, nextWeekWeek);
+        timetable.AddRange(nextWeekTimetable);
+
         var teachers = await _api.GetTeachersAsync();
         _api.EnrichTimetableWithCurriculum(timetable);
         _api.EnrichTeachersWithSubjects(teachers, timetable);
