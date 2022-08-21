@@ -120,57 +120,62 @@ namespace Skolplattformen.ElevApp.ViewModels
             }
 
             // get calendar entries
-            var calendar = await _skolplattformenService.GetCalendarAsync(currentDate);
-            foreach (var item in calendar)
+            if (Settings.ShowCalendarInTodayView)
             {
-                if (item.IsAllDay)
+                var calendar = await _skolplattformenService.GetCalendarAsync(currentDate);
+                foreach (var item in calendar)
                 {
-                    allDayItems.Add(new TodayItem
+                    if (item.IsAllDay)
                     {
-                        Title = item.Title,
-                        Mark = TodayItemMark.AllDay
-                    });
-                }
-                else
-                {
-                    todayItems.Add(new TodayItem
+                        allDayItems.Add(new TodayItem
+                        {
+                            Title = item.Title,
+                            Mark = TodayItemMark.AllDay
+                        });
+                    }
+                    else
                     {
-                        Title = item.Title,
-                        Description = item.Location,
-                        StartTime = item.Start.ToString("HH:mm"),
-                        EndTime = item.End.ToString("HH:mm"),
-                        Mark = TodayItemMark.Warning
-                    });
+                        todayItems.Add(new TodayItem
+                        {
+                            Title = item.Title,
+                            Description = item.Location,
+                            StartTime = item.Start.ToString("HH:mm"),
+                            EndTime = item.End.ToString("HH:mm"),
+                            Mark = TodayItemMark.Warning
+                        });
+                    }
                 }
             }
-            
 
             // get planned absence
-            var absence = await _skolplattformenService.GetPlannedAbsenceAsync(currentDate);
-            foreach (var item in absence)
+            if (Settings.ShowPlannedAbsenceInTodayView)
             {
-                if (item.IsFullDayAbsence)
+                var absence = await _skolplattformenService.GetPlannedAbsenceAsync(currentDate);
+                foreach (var item in absence)
                 {
-                    allDayItems.Add(new TodayItem
+                    if (item.IsFullDayAbsence)
                     {
-                        Title = item.ReasonDescription,
-                        Description = item.Reporter,
-                        Mark = TodayItemMark.AllDay
+                        allDayItems.Add(new TodayItem
+                        {
+                            Title = item.ReasonDescription,
+                            Description = item.Reporter,
+                            Mark = TodayItemMark.AllDay
                         });
-                }
-                else
-                {
-                    todayItems.Add(new TodayItem
+                    }
+                    else
                     {
-                        StartTime = item.DateTimeFrom.ToString("´HH:mm"),
-                        EndTime = item.DateTimeTo.ToString("HH:mm"),
-                        Title = item.ReasonDescription,
-                        Description = item.Reporter
+                        todayItems.Add(new TodayItem
+                        {
+                            StartTime = item.DateTimeFrom.ToString("´HH:mm"),
+                            EndTime = item.DateTimeTo.ToString("HH:mm"),
+                            Title = item.ReasonDescription,
+                            Description = item.Reporter
 
-                    });
+                        });
+                    }
                 }
             }
-
+               
 
 
             todayItems = todayItems.OrderBy(t => t.StartTime).ToList();
