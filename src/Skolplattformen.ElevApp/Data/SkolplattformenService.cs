@@ -110,6 +110,11 @@ public class SkolplattformenService
 
     public async Task<List<Meal>> GetMealsAsync(int year, int week)
     {
+        if (Settings.UseSkolmatenSe)
+        {
+            return await SkolmatenSeService.GetWeekAsync(Settings.SkolmatenSeSchoolName, year, week);
+        }
+
         return await _api.GetMealsAsync(year, week);
     }
 
@@ -117,7 +122,15 @@ public class SkolplattformenService
     {
         var week = ISOWeek.GetWeekOfYear(day);
         var year = ISOWeek.GetYear(day);
-        var meals = await _api.GetMealsAsync(year, week);
+        List<Meal> meals;
+        if (Settings.UseSkolmatenSe)
+        {
+            meals = await SkolmatenSeService.GetWeekAsync(Settings.SkolmatenSeSchoolName, year, week);
+        }
+        else
+        {
+            meals = await _api.GetMealsAsync(year, week);
+        }
         return meals.FirstOrDefault(m => m.Date.Date == day.Date);
     }
 

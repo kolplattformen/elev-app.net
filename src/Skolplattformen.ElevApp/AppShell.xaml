@@ -12,6 +12,12 @@
         ContentTemplate="{DataTemplate local:LoginPage}"
         Route="LoginPage" />
 
+    <!--<ShellContent
+        Title="Inställningar skolmaten.se"
+        Shell.PresentationMode="Modal"
+        ContentTemplate="{DataTemplate local:SettingsSkolmatenSePage}"
+        Route="SettingsPage" />-->
+
     <TabBar >
         <Tab
             Title="Min dag"
@@ -40,6 +46,12 @@
            Icon="headphones_svgrepo_com.png"
            ContentTemplate="{DataTemplate local:MePage}"
            Route="MePage" />
+        
+        <ShellContent
+            Title="Inställningar"
+            Icon="settings_svgrepo_com.png"
+            ContentTemplate="{DataTemplate local:SettingsPage}"
+            Route="MePage" />
 
     </TabBar>
 

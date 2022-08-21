@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Skolplattformen.ElevApp.Pages.SettingsPage"
+             xmlns:viewmodel="clr-namespace:Skolplattformen.ElevApp.ViewModels"
+             x:DataType="viewmodel:SettingsViewModel"
+             Title="Inställningar">
+    <VerticalStackLayout Margin="6,6,6,6">
+        <VerticalStackLayout>
+            <Label 
+                Text="Skolmaten.se skola"
+                FontAttributes="Bold"
+                VerticalOptions="Start" 
+                HorizontalOptions="Start" />
+            <Entry 
+                Text="{Binding SkolmatenSeSchoolName}"
+                Placeholder="Namn"
+                VerticalOptions="Start" 
+                HorizontalOptions="Start" />
+
+            <StackLayout  Orientation="Horizontal">
+                <Label HorizontalOptions="StartAndExpand" Text="Använd skolmaten.se" Margin="0,10"></Label>
+                <Switch IsToggled="{Binding UseSkolmatenSe}" HorizontalOptions="End"></Switch>
+            </StackLayout>
+        </VerticalStackLayout>
+        <VerticalStackLayout Margin="0,20">
+            <Label 
+                Text="Inkludera i Min dag-vyn"
+                FontAttributes="Bold"
+                VerticalOptions="Start" 
+                HorizontalOptions="Start" />
+            <StackLayout  Orientation="Horizontal">
+                <Label HorizontalOptions="StartAndExpand" Text="Min kalender" Margin="0,10"></Label>
+                <Switch IsToggled="{Binding ShowCalendarInTodayView}" HorizontalOptions="End"></Switch>
+            </StackLayout>
+            <StackLayout  Orientation="Horizontal">
+                <Label HorizontalOptions="StartAndExpand" Text="Frånvaro" Margin="0,10"></Label>
+                <Switch IsToggled="{Binding ShowPlannedAbsenceInTodayView}" HorizontalOptions="End"></Switch>
+            </StackLayout>
+            <StackLayout  Orientation="Horizontal">
+                <Label HorizontalOptions="StartAndExpand" Text="Skolans kalendarium" Margin="0,10"></Label>
+                <Switch IsToggled="{Binding ShowKalendariumInTodayView}" HorizontalOptions="End"></Switch>
+            </StackLayout>
+            
+        </VerticalStackLayout>
+        
+        <Button Text="Spara"
+                Command="{Binding SaveCommand}"
+                VerticalOptions="End" 
+                HorizontalOptions="End" />
+    </VerticalStackLayout>
+    
+</ContentPage>
