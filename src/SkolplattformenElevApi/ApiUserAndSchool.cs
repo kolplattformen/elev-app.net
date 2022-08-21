@@ -46,7 +46,7 @@ public partial class Api
         {
             Id = Guid.Parse(u.Id),
             ExternalId = Guid.Parse(u.ExternalId),
-            Name = u.Name,
+            Name = u.Name.Replace(" (elev)", ""),
             PrimarySchoolGuid = Guid.Parse(u.PrimarySchool.Split(';').First()),
             PrimarySchoolName = u.PrimarySchool.Split(';').Last(),
         };
