@@ -31,7 +31,7 @@ namespace Skolplattformen.ElevApp.ViewModels
                 Day = Day.AddDays(1);
             }
 
-            Task.Run(LoadData);
+//Task.Run(async () => await LoadData());
         }
 
         private async Task LoadData()
@@ -57,8 +57,14 @@ namespace Skolplattformen.ElevApp.ViewModels
                 {
                     items.Add(meal);
                 }
+                NotifyScrollChangeAction();
             });
+
+            
         }
+
+        public Action NotifyScrollChangeAction;
+        
 
         [RelayCommand]
         void Previous()
