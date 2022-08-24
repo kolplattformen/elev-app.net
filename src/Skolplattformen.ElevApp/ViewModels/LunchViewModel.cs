@@ -14,7 +14,7 @@ namespace Skolplattformen.ElevApp.ViewModels
         [ObservableProperty] private string title;
         [ObservableProperty] private bool isRefreshing;
         [ObservableProperty] private DateTime day;
-        public bool UsingSkolmatenSe => Settings.UseSkolmatenSe;
+        [ObservableProperty] private bool usingSkolmatenSe;
 
         public LunchViewModel(SkolplattformenService skolplattformenService)
         {
@@ -57,7 +57,10 @@ namespace Skolplattformen.ElevApp.ViewModels
                 {
                     items.Add(meal);
                 }
+
+                UsingSkolmatenSe = Settings.UseSkolmatenSe;
                 NotifyScrollChangeAction();
+                
             });
 
             

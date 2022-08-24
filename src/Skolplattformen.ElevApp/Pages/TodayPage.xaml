@@ -4,7 +4,7 @@
              x:Class="Skolplattformen.ElevApp.Pages.TodayPage"
              Title="{Binding Title}">
 
-  <ScrollView>
+    <ScrollView  x:Name="ScrollViewCtrl">
         <VerticalStackLayout Margin="6,6,6,6">
             <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                 <Button
@@ -31,31 +31,29 @@
             HorizontalOptions="Center"
             IsVisible="{Binding IsSportsbagDay}"/>
 
-            <CollectionView  Margin="0,10,0,10"
-                             ItemsSource="{Binding Items}"                             
-                             SelectionMode="None">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
+
+            <StackLayout BindableLayout.ItemsSource="{Binding Items}">
+                <BindableLayout.ItemTemplate>
+
                     <DataTemplate>
-                        <Frame Padding="6,6" BackgroundColor="{Binding Color}">
-                        <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
-                            <Label FontSize="12" >
-                                <Label.Text>
-                                    <MultiBinding StringFormat="{}{0}-{1}">
-                                        <Binding Path="StartTime" />
-                                        <Binding Path="EndTime" />
-                                    </MultiBinding>
-                                </Label.Text>
-                            </Label>
-                            <Label Text="{Binding Title}" FontSize="24"/>
-                            <Label Text="{Binding Description}"  FontSize="14"/>
-                        </VerticalStackLayout>
+                        <Frame Padding="6,6" BackgroundColor="{Binding Color}" Margin="0,4,0,0">
+                            <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
+                                <Label FontSize="12" >
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{}{0}-{1}">
+                                            <Binding Path="StartTime" />
+                                            <Binding Path="EndTime" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                                <Label Text="{Binding Title}" FontSize="24"/>
+                                <Label Text="{Binding Description}"  FontSize="14"/>
+                            </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
         </VerticalStackLayout>
   </ScrollView>
 </ContentPage>

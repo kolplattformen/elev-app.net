@@ -30,8 +30,12 @@ namespace Skolplattformen.ElevApp.ViewModels
                 {
                     items.Add(teacher);
                 }
+
+                NotifyScrollChangeAction();
             });
         }
+
+        public Action NotifyScrollChangeAction;
         public Task OnActivated()
         {
             return LoadData();

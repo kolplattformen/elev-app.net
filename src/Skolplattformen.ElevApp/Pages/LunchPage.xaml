@@ -30,11 +30,12 @@
 
                 </BindableLayout.ItemTemplate>
             </StackLayout>
-
+    
             <Label Text="Matsedeln kommer från skolmaten.se" 
                        HorizontalOptions="Center" 
                        IsVisible="{Binding UsingSkolmatenSe}" 
                        Margin="0,10"/>
+
         </StackLayout>
     </ScrollView>
     <!--</RefreshView>-->

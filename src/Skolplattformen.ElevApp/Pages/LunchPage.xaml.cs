@@ -22,9 +22,13 @@ public partial class LunchPage : ContentPage
 
     private void NotifyScrollChanged()
     {
-        var content = ScrollViewCtrl.Content;
-        ScrollViewCtrl.Content = null;
-        ScrollViewCtrl.Content = content;
+        if (DeviceInfo.Current.Platform == DevicePlatform.iOS)
+        {
+            var content = ScrollViewCtrl.Content;
+            ScrollViewCtrl.Content = null;
+            ScrollViewCtrl.Content = content;
+        }
+        
     }
 
   

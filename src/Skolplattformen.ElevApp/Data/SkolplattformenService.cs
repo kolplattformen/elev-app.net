@@ -71,11 +71,11 @@ public class SkolplattformenService
         var week = ISOWeek.GetWeekOfYear(today);
         var year = ISOWeek.GetYear(today);
         var timetable = await _api.GetTimetableAsync(year, week);
-        var nextWeek = DateTime.Now.AddDays(7);
-        var nextWeekWeek = ISOWeek.GetWeekOfYear(nextWeek);
-        var nextWeekYear = ISOWeek.GetYear(nextWeek);
-        var nextWeekTimetable = await _api.GetTimetableAsync(nextWeekYear, nextWeekWeek);
-        timetable.AddRange(nextWeekTimetable);
+        //var nextWeek = DateTime.Now.AddDays(7);
+        //var nextWeekWeek = ISOWeek.GetWeekOfYear(nextWeek);
+        //var nextWeekYear = ISOWeek.GetYear(nextWeek);
+        //var nextWeekTimetable = await _api.GetTimetableAsync(nextWeekYear, nextWeekWeek);
+        //timetable.AddRange(nextWeekTimetable);
 
         var teachers = await _api.GetTeachersAsync();
         _api.EnrichTimetableWithCurriculum(timetable);
@@ -152,7 +152,14 @@ public class SkolplattformenService
     public async Task<List<PlannedAbsenceItem>> GetPlannedAbsenceAsync(DateTime date)
     { 
         var all = await  _api.GetPlannedAbsenceListAsync();
-        var today = all.Where(x => x.DateTimeFrom.Date == date.Date || x.DateTimeTo.Date == date.Date);
+        var today = all.Where(x => x.DateTimeFrom.Date <= date.Date && x.DateTimeTo.Date >= date.Date);
+        return today.ToList();
+    }
+
+    public async Task<List<KalendariumItem>> GetKalendariumAsync(DateTime date)
+    {
+        var all = await _api.GetKalendariumAsync();
+        var today = all.Where(x => x.StartDate.Date <= date.Date && x.EndDate.Date >= date.Date);
         return today.ToList();
     }
 }

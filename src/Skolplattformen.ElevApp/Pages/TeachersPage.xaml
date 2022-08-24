@@ -9,15 +9,11 @@
             <toolkit:ListToStringConverter x:Key="ListToStringConverter" Separator=", " />
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ScrollView>
-    <VerticalStackLayout>
-        <CollectionView  Margin="20,10,20,10"
-                         ItemsSource="{Binding Items}"                             
-                         SelectionMode="None">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="1" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
+    <ScrollView  x:Name="ScrollViewCtrl">
+
+        <StackLayout BindableLayout.ItemsSource="{Binding Items}">
+            <BindableLayout.ItemTemplate>
+
                 <DataTemplate>
                     <VerticalStackLayout Padding="10,0" Margin="0,10,10,10">
                         <Label FontSize="24" FontAttributes="Bold">
@@ -32,9 +28,8 @@
                         <Label Text="{Binding Subjects, Converter={StaticResource ListToStringConverter}}" FontSize="18"/>
                     </VerticalStackLayout>
                 </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
 
-    </VerticalStackLayout>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
     </ScrollView>
 </ContentPage>

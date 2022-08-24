@@ -166,7 +166,7 @@ namespace Skolplattformen.ElevApp.ViewModels
                     {
                         todayItems.Add(new TodayItem
                         {
-                            StartTime = item.DateTimeFrom.ToString("´HH:mm"),
+                            StartTime = item.DateTimeFrom.ToString("HH:mm"),
                             EndTime = item.DateTimeTo.ToString("HH:mm"),
                             Title = item.ReasonDescription,
                             Description = item.Reporter
@@ -175,7 +175,35 @@ namespace Skolplattformen.ElevApp.ViewModels
                     }
                 }
             }
-               
+
+            if (Settings.ShowKalendariumInTodayView)
+            {
+                var kalendarium = await _skolplattformenService.GetKalendariumAsync(currentDate);
+                foreach (var item in kalendarium)
+                {
+                    if (item.IsAllDayEvent)
+                    {
+                        allDayItems.Add(new TodayItem
+                        {
+                            Title = item.Title,
+                            Description = item.Description,
+                            Mark = TodayItemMark.Warning
+                        });
+                    }
+                    else
+                    {
+                        todayItems.Add(new TodayItem
+                        {
+                            StartTime = item.StartDate.ToString("HH:mm"),
+                            EndTime = item.EndDate.ToString("HH:mm"),
+                            Title = item.Title,
+                            Description = item.Description,
+                            Mark = TodayItemMark.Warning
+                        });
+                    }
+                }
+
+            }
 
 
             todayItems = todayItems.OrderBy(t => t.StartTime).ToList();
@@ -198,11 +226,14 @@ namespace Skolplattformen.ElevApp.ViewModels
                 {
                     items.Add(item);
                 }
+
+                NotifyScrollChangeAction();
             });
 
         }
 
-    
+        public Action NotifyScrollChangeAction;
+
     }
 
 
