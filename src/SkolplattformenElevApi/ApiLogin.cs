@@ -19,21 +19,18 @@ namespace SkolplattformenElevApi
             var temp_url = "https://skolplattformen.stockholm.se/";
             var temp_res = await _httpClient.GetAsync(temp_url);
 
-            temp_url = "https://elevstockholm.sharepoint.com/sites/skolplattformen/";
-            temp_res = await _httpClient.GetAsync(temp_url);
+            var temp_host = "https://elevstockholm.sharepoint.com";
+            while (temp_res.Headers.Location != null)
+            {
+                temp_url = temp_res.Headers.Location?.ToString();
 
-            temp_url = "https://elevstockholm.sharepoint.com/sites/skolplattformen/_layouts/15/Authenticate.aspx?Source=%2Fsites%2Fskolplattformen%2F";
-            temp_res = await _httpClient.GetAsync(temp_url);
+                if (temp_url.StartsWith("/"))
+                {
+                    temp_url = temp_host + temp_url;
+                }
 
-            temp_url = "https://elevstockholm.sharepoint.com/_forms/default.aspx?ReturnUrl=%2fsites%2fskolplattformen%2f_layouts%2f15%2fAuthenticate.aspx%3fSource%3d%252Fsites%252Fskolplattformen%252F&Source=cookie";
-            temp_res = await _httpClient.GetAsync(temp_url);
-
-            temp_url = temp_res.Headers.Location?.ToString();
-            temp_res = await _httpClient.GetAsync(temp_url);
-
-            // temp_url = "https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/authorize?client_id=00000003-0000-0ff1-ce00-000000000000&response_mode=form_post&protectedtoken=true&response_type=code%20id_token&resource=00000003-0000-0ff1-ce00-000000000000&scope=openid&nonce=D183A6ABC1D1AC7C936304BB86DF8DAC910B49EBC59F2480-DAC0A994AB24A884A2F5B50818B527241CDB7D3431E47CA861C947015C5C1F6F&redirect_uri=https%3A%2F%2Felevstockholm.sharepoint.com%2F_forms%2Fdefault.aspx&state=OD0w&claims=%7B%22id_token%22%3A%7B%22xms_cc%22%3A%7B%22values%22%3A%5B%22CP1%22%5D%7D%7D%7D&wsucxt=1&cobrandid=11bd8083-87e0-41b5-bb78-0bc43c8a8e8a&client-request-id=7a323fa0-c071-4000-4218-a4696e60d3c2";
-            temp_url = temp_res.Headers.Location?.ToString();
-            temp_res = await _httpClient.GetAsync(temp_url);
+                temp_res = await _httpClient.GetAsync(temp_url);
+            }
 
 
             // temp_url = "https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/authorize?client_id=00000003-0000-0ff1-ce00-000000000000&response_mode=form_post&protectedtoken=true&response_type=code%20id_token&resource=00000003-0000-0ff1-ce00-000000000000&scope=openid&nonce=D183A6ABC1D1AC7C936304BB86DF8DAC910B49EBC59F2480-DAC0A994AB24A884A2F5B50818B527241CDB7D3431E47CA861C947015C5C1F6F&redirect_uri=https%3A%2F%2Felevstockholm.sharepoint.com%2F_forms%2Fdefault.aspx&state=OD0w&claims=%7B%22id_token%22%3A%7B%22xms_cc%22%3A%7B%22values%22%3A%5B%22CP1%22%5D%7D%7D%7D&wsucxt=1&cobrandid=11bd8083-87e0-41b5-bb78-0bc43c8a8e8a&client-request-id=7a323fa0-c071-4000-4218-a4696e60d3c2&sso_reload=true";

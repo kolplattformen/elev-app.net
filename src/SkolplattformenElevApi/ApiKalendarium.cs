@@ -3,6 +3,7 @@ using System.Text.Json;
 using SkolplattformenElevApi.Models;
 using System.Text.Json.Serialization;
 using SkolplattformenElevApi.Models.Internal.Kalendarium;
+using SkolplattformenElevApi.Utils;
 
 namespace SkolplattformenElevApi;
 
@@ -52,17 +53,29 @@ public partial class Api
                 var deserialized = JsonSerializer.Deserialize<KalendariumResponse>(content);
 
 
-                foreach (var item in deserialized.Value)
+                foreach (var item in deserialized.Value.Where(x => x.EventDate > DateTime.Now.AddDays(-10)))
                 {
-                    items.Add(new KalendariumItem
+
+                    var kalendeItem = new KalendariumItem
                     {
+                        // Dates seems to be in UTC, and should be converted unless it's all day event
                         Title = item.Title,
                         Description = item.Description,
-                        Created = item.Created,
-                        StartDate = item.EventDate,
-                        EndDate = item.EndDate,
                         IsAllDayEvent = item.FAllDayEvent
-                    });
+                    };
+
+                    try
+                    {
+                        kalendeItem.Created = item.Created.ToCEST();
+                        kalendeItem.StartDate = item.FAllDayEvent ? item.EventDate : item.EventDate.ToCEST();
+                        kalendeItem.EndDate = item.FAllDayEvent ? item.EndDate : item.EndDate.ToCEST();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+
+                    items.Add(kalendeItem);
                 }
 
                 if (string.IsNullOrEmpty(deserialized.OdataNextLink))
