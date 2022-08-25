@@ -90,7 +90,7 @@ public partial class Api
         }
 
 
-        return items.Where(i => i.StartDate.Date > DateTime.Now.AddDays(-10).Date).ToList();
+        return items;
     }
 
 
