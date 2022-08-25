@@ -131,5 +131,15 @@ namespace Skolplattformen.ElevApp.Data
             }
             return _cache[key] as List<Meal>;
         }
+
+        public async Task<List<KalendariumItem>> GetKalendariumAsync()
+        {
+            var key = $"kalendarium";
+            if (!_cache.ContainsKey(key))
+            {
+                _cache[key] = await _api.GetKalendariumAsync();
+            }
+            return _cache[key] as List<KalendariumItem>;
+        }
     }
 }

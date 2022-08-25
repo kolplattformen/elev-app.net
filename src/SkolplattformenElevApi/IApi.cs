@@ -18,5 +18,6 @@ namespace SkolplattformenElevApi
         void EnrichTimetableWithCurriculum(List<TimeTableLesson> timetable);
         void EnrichTeachersWithSubjects(List<Teacher> teachers, List<TimeTableLesson> timetable);
         Task<List<Meal>> GetMealsAsync(int year, int week);
+        Task<List<KalendariumItem>> GetKalendariumAsync();
     }
 }

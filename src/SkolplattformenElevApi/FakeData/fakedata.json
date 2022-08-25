@@ -135,7 +135,7 @@
 
 
 
-  ], 
+  ],
   "TimeTable": [
     {
       "DayOfWeekNumber": 1,
@@ -536,6 +536,24 @@
       "TeacherCode": "ALI",
       "TeacherName": "ALI",
       "Location": ""
+    }
+  ],
+  "Kalendarium": [
+    {
+      "Title": "Skolfotografering",
+      "Description": null,
+      "Created": "2020-06-24T12:24:49Z",
+      "StartDate": "2022-08-23T00:00:00Z",
+      "EndDate": "2022-08-23T23:59:00Z",
+      "IsAllDayEvent": true
+    },
+    {
+      "Title": "APM",
+      "Description": null,
+      "Created": "2020-06-24T12:24:49Z",
+      "StartDate": "2022-08-24T14:45:00Z",
+      "EndDate": "2022-08-24T17:00:00Z",
+      "IsAllDayEvent": false
     }
   ]
 }

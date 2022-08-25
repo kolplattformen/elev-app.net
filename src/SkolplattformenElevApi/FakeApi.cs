@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using Microsoft.VisualBasic;
 using SkolplattformenElevApi.Models;
 using SkolplattformenElevApi.Models.News;
 using System.Reflection;
@@ -30,6 +29,7 @@ namespace SkolplattformenElevApi
             AdjustCalenderDates();
             AdjustMealDates();
             AdjustPlannedAbsenceDates();
+            AdjustKalendariumDates();
 
         }
 
@@ -37,12 +37,25 @@ namespace SkolplattformenElevApi
         {
             var today = DateTime.Today;
             var firstDayOdWeek = today.AddDays(-1 * (int)today.DayOfWeek);
-            var daysSince = (today - new DateTime(2001, 01, 01)).TotalDays;
+
             _fakeData.CalendarItems[0].Start = firstDayOdWeek.AddDays(1).AddHours(14);
             _fakeData.CalendarItems[0].End = firstDayOdWeek.AddDays(1).AddHours(14).AddMinutes(30);
 
             _fakeData.CalendarItems[1].Start = firstDayOdWeek.AddDays(5).AddHours(10);
             _fakeData.CalendarItems[1].End = firstDayOdWeek.AddDays(5).AddHours(11).AddMinutes(30);
+        }
+
+        private void AdjustKalendariumDates()
+        {
+            var today = DateTime.Today;
+            var firstDayOdWeek = today.AddDays(-1 * (int)today.DayOfWeek);
+
+            _fakeData.Kalendarium[0].StartDate = firstDayOdWeek.AddDays(1).AddHours(0);
+            _fakeData.Kalendarium[0].EndDate = firstDayOdWeek.AddDays(1).AddHours(23).AddMinutes(59);
+
+            _fakeData.Kalendarium[1].StartDate = firstDayOdWeek.AddDays(3).AddHours(15).AddMinutes(30);
+            _fakeData.Kalendarium[1].EndDate = firstDayOdWeek.AddDays(3).AddHours(18).AddMinutes(0);
+
         }
 
         private void AdjustMealDates()
@@ -110,7 +123,6 @@ namespace SkolplattformenElevApi
 
         public Task<List<CalendarItem>> GetCalendarAsync(DateOnly date)
         {
-            //var dateTime = new DateTime(date.Year, date.Month, date.Day);
             var dateTime = date.ToDateTime(TimeOnly.Parse("00:00"));
             return Task.FromResult(_fakeData.CalendarItems.Where(ci => ci.Start.Date <= dateTime.Date && ci.End.Date >= dateTime.Date).ToList());
         }
@@ -123,6 +135,11 @@ namespace SkolplattformenElevApi
         public Task<List<Meal>> GetMealsAsync(int year, int week)
         {
             return Task.FromResult(_fakeData.Meals);
+        }
+
+        public Task<List<KalendariumItem>> GetKalendariumAsync()
+        {
+            return Task.FromResult(_fakeData.Kalendarium);
         }
 
         public void EnrichTimetableWithTeachers(List<TimeTableLesson> timetable, List<Teacher> teachers)
