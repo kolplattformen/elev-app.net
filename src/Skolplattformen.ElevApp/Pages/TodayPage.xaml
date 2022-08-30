@@ -18,6 +18,9 @@
                             <Binding Path="SchoolEndTime"></Binding>
                         </MultiBinding>
                     </Label.Text>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TodayCommand}"/>
+                    </Label.GestureRecognizers>
                 </Label>
                 <Button
                     Text="»"

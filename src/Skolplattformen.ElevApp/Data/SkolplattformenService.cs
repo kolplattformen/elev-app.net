@@ -162,4 +162,9 @@ public class SkolplattformenService
         var today = all.Where(x => x.StartDate.Date <= date.Date && x.EndDate.Date >= date.Date);
         return today.ToList();
     }
+
+    public Dictionary<string, ApiReadSuccessIndicator> GetStatusAll()
+    {
+        return _api.GetStatusAll();
+    }
 }

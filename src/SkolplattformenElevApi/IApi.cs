@@ -19,5 +19,8 @@ namespace SkolplattformenElevApi
         void EnrichTeachersWithSubjects(List<Teacher> teachers, List<TimeTableLesson> timetable);
         Task<List<Meal>> GetMealsAsync(int year, int week);
         Task<List<KalendariumItem>> GetKalendariumAsync();
+        Task RefreshLoginAsync();
+        ApiReadSuccessIndicator GetStatus(string part);
+        Dictionary<string, ApiReadSuccessIndicator> GetStatusAll();
     }
 }
