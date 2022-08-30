@@ -66,6 +66,13 @@ namespace Skolplattformen.ElevApp.ViewModels
         }
 
         [RelayCommand]
+        void Today()
+        {
+            CurrentDate = DateTime.Now;
+            Task.Run(LoadData);
+        }
+
+        [RelayCommand]
         void Previous()
         {
             CurrentDate = currentDate.AddDays(-1);
