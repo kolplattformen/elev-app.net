@@ -8,6 +8,7 @@ public partial class Api
     {
         // https://elevstockholm.sharepoint.com/sites/<skola>/_api/web/lists/getByTitle('Matsedel')/items
 
+        var part = ApiPart.GetMeals;
 
         if (string.IsNullOrEmpty(_schoolSharepointUrl))
         {
@@ -40,7 +41,7 @@ public partial class Api
 
         }
 
-
+        UpdateStatus(part, ApiReadSuccessIndicator.Unknown);
         return new List<Meal>();
     }
 }
