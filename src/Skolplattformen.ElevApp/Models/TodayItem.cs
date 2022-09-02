@@ -16,8 +16,8 @@
 
         public Color Color => Mark switch
         {
-            TodayItemMark.AllDay => Microsoft.Maui.Graphics.Color.FromRgb(255, 0, 0),
-            TodayItemMark.Warning => Microsoft.Maui.Graphics.Color.FromRgb(255, 255, 0),
+            TodayItemMark.AllDay => Microsoft.Maui.Graphics.Color.FromRgb(128, 128, 128),
+            TodayItemMark.Warning => Microsoft.Maui.Graphics.Color.FromRgb(128, 128, 128),
             _ => Microsoft.Maui.Graphics.Color.FromRgba(255, 255, 255, 0)
         };
     }
