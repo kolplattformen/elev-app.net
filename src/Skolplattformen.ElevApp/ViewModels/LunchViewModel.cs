@@ -77,6 +77,13 @@ namespace Skolplattformen.ElevApp.ViewModels
         }
 
         [RelayCommand]
+        void Today()
+        {
+            Day = DateTime.Now;
+            Task.Run(LoadData);
+        }
+
+        [RelayCommand]
         void Next()
         {
             Day = Day.AddDays(7);

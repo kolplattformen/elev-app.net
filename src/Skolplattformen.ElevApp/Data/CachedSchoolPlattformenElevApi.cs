@@ -141,5 +141,20 @@ namespace Skolplattformen.ElevApp.Data
             }
             return _cache[key] as List<KalendariumItem>;
         }
+
+        public Task RefreshLoginAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApiReadSuccessIndicator GetStatus(string part)
+        {
+            return _api.GetStatus(part);
+        }
+
+        public Dictionary<string, ApiReadSuccessIndicator> GetStatusAll()
+        {
+            return _api.GetStatusAll();
+        }
     }
 }

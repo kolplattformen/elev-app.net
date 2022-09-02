@@ -12,7 +12,11 @@
                         Text="«"
                         Command="{Binding PreviousCommand}"
                         HorizontalOptions="Start" />
-                <Label FontSize="32" HorizontalOptions="CenterAndExpand" Margin="0,6,0,0" Text="Matsedel"/>
+                <Label FontSize="32" HorizontalOptions="CenterAndExpand" Margin="0,6,0,0" Text="Matsedel">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TodayCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
                 <Button
                         Text="»"
                         Command="{Binding NextCommand}"
