@@ -87,7 +87,7 @@ public partial class Api
                 }
             }
 
-            UpdateStatus(part, items.Count > 0 ? ApiReadSuccessIndicator.Success : ApiReadSuccessIndicator.Error);
+            UpdateStatus(part, items.Count > 0 ? ApiReadSuccessIndicator.Success : ApiReadSuccessIndicator.NoData);
 
             return items;
         }
