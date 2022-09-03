@@ -4,6 +4,7 @@
     <TargetFrameworks>net6.0;net6.0-ios</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	  <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
