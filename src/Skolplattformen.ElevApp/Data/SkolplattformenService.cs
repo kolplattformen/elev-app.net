@@ -15,7 +15,6 @@ public class SkolplattformenService
 {
     private IApi _api;
     private DateTime _loggedInTime = DateTime.MinValue;
-    public string LoggedInName { get; set; } = string.Empty;
     public bool IsLoggedIn => _loggedInTime > DateTime.UtcNow.AddMinutes(-29);
     private ApiKind _apiKind = ApiKind.Skolplattformen;
 
@@ -51,7 +50,6 @@ public class SkolplattformenService
         await _api.LogInAsync(email, username, password);
         _loggedInTime = DateTime.UtcNow;
         var user = await _api.GetUserAsync();
-        LoggedInName = user?.Name ?? email;
     }
 
     //public Task<List<NewsListItem>> GetNewsItemList()
