@@ -58,7 +58,7 @@
 
             </VerticalStackLayout>
 
-            <!--<Label Text="API Status (kommer tas bort)"></Label>
+            <Label Text="API Status (kommer tas bort)"></Label>
             <StackLayout BindableLayout.ItemsSource="{Binding Status}" Margin="30,0">
                 <BindableLayout.ItemTemplate>
 
@@ -70,7 +70,7 @@
                     </DataTemplate>
 
                 </BindableLayout.ItemTemplate>
-            </StackLayout>-->
+            </StackLayout>
 
             <Button
                     
