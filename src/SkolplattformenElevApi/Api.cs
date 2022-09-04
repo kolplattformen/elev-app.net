@@ -12,6 +12,9 @@ public partial class Api:IApi
     private string _formDigestValue;
 
     private string _email;
+    private string _username;
+    private string _password;
+    
     private string? _schoolSharepointUrl;
     private string _spfx3rdPartyServicePrincipalId;
     private string _apiEndpoint;

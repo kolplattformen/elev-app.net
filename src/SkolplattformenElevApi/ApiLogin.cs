@@ -12,6 +12,11 @@ namespace SkolplattformenElevApi
         public async Task LogInAsync(string email, string username, string password)
         {
 
+            _email = email;
+            _username = username;
+            _password = password;
+
+
             var jsonSerializerOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
