@@ -183,8 +183,9 @@ public class SkolplattformenService
     {
         if (!IsLoggedIn)
         {
+            _loggedInTime = DateTime.UtcNow;
             await _api.RefreshLoginAsync();
-            _loggedInTime = DateTime.UtcNow;            
+                       
         }
     }
 }

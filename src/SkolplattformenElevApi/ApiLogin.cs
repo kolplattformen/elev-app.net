@@ -246,6 +246,7 @@ namespace SkolplattformenElevApi
         public async Task RefreshLoginAsync()
         {
             var url = "https://elevstockholm.sharepoint.com/sites/skolplattformen/";
+            _apiEndpointAccessToken = null;
 
             var res = await _httpClient.GetAsync(url);
 

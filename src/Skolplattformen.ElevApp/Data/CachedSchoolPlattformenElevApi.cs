@@ -142,9 +142,10 @@ namespace Skolplattformen.ElevApp.Data
             return _cache[key] as List<KalendariumItem>;
         }
 
-        public Task RefreshLoginAsync()
+        public async Task RefreshLoginAsync()
         {
-            throw new NotImplementedException();
+            await _api.RefreshLoginAsync();
+            _cache.Clear();
         }
 
         public ApiReadSuccessIndicator GetStatus(string part)
