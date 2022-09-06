@@ -10,6 +10,8 @@ namespace Skolplattformen.ElevApp.ViewModels
     public partial class LunchViewModel: ObservableObject
     {
         private readonly SkolplattformenService _skolplattformenService;
+        [ObservableProperty] private bool isLoading;
+
         [ObservableProperty] private ObservableCollection<Meal> items;
         [ObservableProperty] private string title;
         [ObservableProperty] private bool isRefreshing;
@@ -37,8 +39,9 @@ namespace Skolplattformen.ElevApp.ViewModels
         private async Task LoadData()
         {
            // if (this.IsRefreshing) return;
+           if (IsLoading) return;
+           IsLoading = true; 
 
-            
             var isoYear = ISOWeek.GetYear(Day);
             var week = ISOWeek.GetWeekOfYear(Day);
 
@@ -63,7 +66,7 @@ namespace Skolplattformen.ElevApp.ViewModels
                 
             });
 
-            
+            IsLoading = false;
         }
 
         public Action NotifyScrollChangeAction;

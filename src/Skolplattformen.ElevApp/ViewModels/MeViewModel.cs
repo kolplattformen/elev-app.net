@@ -11,6 +11,7 @@ namespace Skolplattformen.ElevApp.ViewModels
     public partial class MeViewModel : ObservableObject
     {
         private readonly SkolplattformenService _skolplattformenService;
+        [ObservableProperty] private bool isLoading;
 
         // Student
         [ObservableProperty] private string studentName = string.Empty;
@@ -49,7 +50,9 @@ namespace Skolplattformen.ElevApp.ViewModels
 
         private async Task LoadData()
         {
-            
+            if (IsLoading) return;
+            IsLoading = true;
+
             var user = await _skolplattformenService.GetUserAsync();
             StudentName = user?.Name ?? "";
             
@@ -75,7 +78,7 @@ namespace Skolplattformen.ElevApp.ViewModels
                     Status.Add(new KeyValuePair<string, string>(stat.Key, stat.Value.ToString()));
                 }
             });
-
+            IsLoading = false;
         }
 
         public Task OnActivated()

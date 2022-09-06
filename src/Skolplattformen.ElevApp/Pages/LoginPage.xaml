@@ -24,6 +24,8 @@
                     FontSize="32"
                     HorizontalOptions="Center" />
 
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
+
             <Entry
                     MaxLength="200"
                     Text="{Binding Email}" 

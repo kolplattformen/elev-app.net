@@ -12,6 +12,7 @@ namespace Skolplattformen.ElevApp.ViewModels
     public partial class TodayViewModel: ObservableObject
     {
         private readonly SkolplattformenService _skolplattformenService;
+        [ObservableProperty] private bool isLoading;
 
         [ObservableProperty] private DateTime currentDate = DateTime.Now;
         [ObservableProperty] private string title = "";
@@ -109,6 +110,9 @@ namespace Skolplattformen.ElevApp.ViewModels
 
         public async Task LoadData()
         {
+            if (IsLoading) return;
+            IsLoading = true;
+
             Title = (currentDate.Date == DateTime.Now.Date)
                 ? $"Idag {WeekdaySe(currentDate.DayOfWeek).ToLower()} {currentDate.Day} {MonthSe(currentDate.Month)}"
                 : $"{WeekdaySe(currentDate.DayOfWeek)} {currentDate.Day} {MonthSe(currentDate.Month)}";
@@ -255,7 +259,7 @@ namespace Skolplattformen.ElevApp.ViewModels
 
                 NotifyScrollChangeAction();
             });
-
+            IsLoading = false;
         }
 
         public Action NotifyScrollChangeAction;

@@ -5,6 +5,7 @@
              Title="Jag i Skolplattformen">
     <ScrollView>
         <VerticalStackLayout>
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
             <Label 
                 Text="{Binding StudentName}"
                 VerticalOptions="Center" 

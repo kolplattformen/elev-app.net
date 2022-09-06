@@ -6,6 +6,7 @@
              x:DataType="viewmodel:SettingsViewModel"
              Title="Inställningar">
     <VerticalStackLayout Margin="6,6,6,6">
+        <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
         <VerticalStackLayout>
             <Label 
                 Text="Skolmaten.se skola"
