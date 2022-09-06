@@ -5,7 +5,9 @@
              Title="{Binding Title}">
 
     <ScrollView  x:Name="ScrollViewCtrl">
+
         <VerticalStackLayout Margin="6,6,6,6">
+            
             <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                 <Button
                     Text="«"
@@ -27,13 +29,14 @@
                     Command="{Binding NextCommand}"
                     HorizontalOptions="End" />
             </StackLayout>
-           
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
+
             <Label 
             Text="Glöm inte gympapåsen"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
             IsVisible="{Binding IsSportsbagDay}"/>
-
 
             <StackLayout BindableLayout.ItemsSource="{Binding Items}">
                 <BindableLayout.ItemTemplate>

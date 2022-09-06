@@ -9,6 +9,8 @@ namespace Skolplattformen.ElevApp.ViewModels
 {
     public partial class LoginViewModel : ObservableObject
     {
+        [ObservableProperty] private bool isLoading;
+
         [ObservableProperty] private string email;
         [ObservableProperty] private string username;
         [ObservableProperty] private string password;
@@ -33,6 +35,8 @@ namespace Skolplattformen.ElevApp.ViewModels
 
         Task LoadData()
         {
+            if(IsLoading) return Task.CompletedTask;
+            IsLoading = true;
             var loginDetails = Storage.Get<LoginDetails>("login_details");
             if (loginDetails.RememberMe)
             {
@@ -42,6 +46,8 @@ namespace Skolplattformen.ElevApp.ViewModels
             }
 
             PlatformSelectedIndex = loginDetails?.Platform ?? 0;
+
+            IsLoading = false;
             return Task.CompletedTask;
         }
 
@@ -49,6 +55,8 @@ namespace Skolplattformen.ElevApp.ViewModels
         [RelayCommand]
         async Task Login()
         {
+            if(IsLoading) return; 
+            IsLoading = true;
 
             ApiKind kind = PlatformSelectedIndex switch
             {
@@ -73,6 +81,7 @@ namespace Skolplattformen.ElevApp.ViewModels
 
             await _skolplattformenService.LogInAsync(email, username, password);
 
+            IsLoading = false;
             await Shell.Current.GoToAsync($"//{nameof(TodayPage)}");
         }
 
