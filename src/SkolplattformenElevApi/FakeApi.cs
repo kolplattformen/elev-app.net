@@ -142,6 +142,32 @@ namespace SkolplattformenElevApi
             return Task.FromResult(_fakeData.Kalendarium);
         }
 
+        public async Task RefreshLoginAsync()
+        {
+            await Task.Delay(100);
+        }
+
+        public ApiReadSuccessIndicator GetStatus(string part)
+        {
+            return ApiReadSuccessIndicator.Success;
+        }
+
+        public Dictionary<string, ApiReadSuccessIndicator> GetStatusAll()
+        {
+            return new Dictionary<string, ApiReadSuccessIndicator>
+            {
+                { ApiPart.GetCalendar, ApiReadSuccessIndicator.Success },
+                { ApiPart.GetKalendarium, ApiReadSuccessIndicator.Success },
+                { ApiPart.GetMeals, ApiReadSuccessIndicator.Success },
+                { ApiPart.GetPlannedAbsence, ApiReadSuccessIndicator.Success },
+                { ApiPart.GetSchoolDetails, ApiReadSuccessIndicator.Success },
+                { ApiPart.GetTeachers, ApiReadSuccessIndicator.Success },
+                { ApiPart.GetTimetable, ApiReadSuccessIndicator.Success },
+                { ApiPart.GetUser, ApiReadSuccessIndicator.Success },
+
+            };
+        }
+
         public void EnrichTimetableWithTeachers(List<TimeTableLesson> timetable, List<Teacher> teachers)
         {
             Utils.Enrichers.EnrichTimetableWithTeachers(timetable, teachers);

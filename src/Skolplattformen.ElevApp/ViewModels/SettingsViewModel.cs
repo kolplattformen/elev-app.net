@@ -6,6 +6,7 @@ namespace Skolplattformen.ElevApp.ViewModels
 {
     public partial class SettingsViewModel: ObservableObject
     {
+        [ObservableProperty] private bool isLoading;
         [ObservableProperty] private string skolmatenSeSchoolName;
         [ObservableProperty] private bool useSkolmatenSe;
         [ObservableProperty] private bool showCalendarInTodayView;
@@ -26,12 +27,15 @@ namespace Skolplattformen.ElevApp.ViewModels
 
         public Task LoadData()
         {
+            if(IsLoading) return Task.CompletedTask;
+            IsLoading = true;
+
             UseSkolmatenSe = Settings.UseSkolmatenSe;
             SkolmatenSeSchoolName = Settings.SkolmatenSeSchoolName;
             ShowCalendarInTodayView = Settings.ShowCalendarInTodayView;
             ShowPlannedAbsenceInTodayView = Settings.ShowPlannedAbsenceInTodayView;
             ShowKalendariumInTodayView = Settings.ShowKalendariumInTodayView;
-
+            IsLoading = false;
             return Task.CompletedTask;
         }
 

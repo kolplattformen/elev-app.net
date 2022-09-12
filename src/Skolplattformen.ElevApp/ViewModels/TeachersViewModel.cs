@@ -9,6 +9,7 @@ namespace Skolplattformen.ElevApp.ViewModels
     public partial class TeachersViewModel : ObservableObject
     {
         private readonly SkolplattformenService _skolplattformenService;
+        [ObservableProperty] private bool isLoading;
 
         [ObservableProperty] private ObservableCollection<Teacher> items;
 
@@ -22,6 +23,8 @@ namespace Skolplattformen.ElevApp.ViewModels
 
         private async Task LoadData()
         {
+            if (IsLoading) return;
+            IsLoading = true;
             var teachers = await _skolplattformenService.GetTeachersAsync();
             MainThread.BeginInvokeOnMainThread(() =>
             {
@@ -33,6 +36,7 @@ namespace Skolplattformen.ElevApp.ViewModels
 
                 NotifyScrollChangeAction();
             });
+            IsLoading = false;
         }
 
         public Action NotifyScrollChangeAction;

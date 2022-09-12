@@ -2,30 +2,36 @@
 using CommunityToolkit.Mvvm.Input;
 using Skolplattformen.ElevApp.Data;
 using Skolplattformen.ElevApp.Pages;
+using SkolplattformenElevApi;
+using SkolplattformenElevApi.Models;
+using System.Collections.ObjectModel;
 
 namespace Skolplattformen.ElevApp.ViewModels
 {
-    public partial class MeViewModel: ObservableObject
+    public partial class MeViewModel : ObservableObject
     {
         private readonly SkolplattformenService _skolplattformenService;
+        [ObservableProperty] private bool isLoading;
 
-        
         // Student
         [ObservableProperty] private string studentName = string.Empty;
         
-
         // School
         [ObservableProperty] private string schoolName = string.Empty;
         [ObservableProperty] private string phone = string.Empty;
 
-        [ObservableProperty] private string street  = string.Empty;
+        [ObservableProperty] private string street = string.Empty;
         [ObservableProperty] private string postalCode = string.Empty;
         [ObservableProperty] private string locality = string.Empty;
         [ObservableProperty] private string visitingAddress = string.Empty;
         [ObservableProperty] private string schoolEmail = string.Empty;
-        [ObservableProperty] private string principalName  = string.Empty;
-        [ObservableProperty] private string principalPhone  = string.Empty;
-        [ObservableProperty] private string principalEmail  = string.Empty;
+        [ObservableProperty] private string principalName = string.Empty;
+        [ObservableProperty] private string principalPhone = string.Empty;
+        [ObservableProperty] private string principalEmail = string.Empty;
+        
+        //[ObservableProperty] private Dictionary<string, ApiReadSuccessIndicator> status = new Dictionary<string, ApiReadSuccessIndicator>();
+
+        [ObservableProperty] private ObservableCollection<KeyValuePair<string, string>> status;
 
         [RelayCommand]
         async Task Logout()
@@ -37,12 +43,16 @@ namespace Skolplattformen.ElevApp.ViewModels
         public MeViewModel(SkolplattformenService skolplattformenService)
         {
             _skolplattformenService = skolplattformenService;
+            status = new ObservableCollection<KeyValuePair<string, string>>();
 
-        //    Task.Run(LoadData);
+            //    Task.Run(LoadData);
         }
 
         private async Task LoadData()
         {
+            if (IsLoading) return;
+            IsLoading = true;
+
             var user = await _skolplattformenService.GetUserAsync();
             StudentName = user?.Name ?? "";
             
@@ -57,6 +67,18 @@ namespace Skolplattformen.ElevApp.ViewModels
             PrincipalName = schoolDetails.PrincipalName;
             PrincipalPhone = schoolDetails.PrincipalPhone;
             PrincipalEmail = schoolDetails.PrincipalEmail;
+
+            var stats = _skolplattformenService.GetStatusAll();
+
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                Status.Clear();
+                foreach (var stat in stats)
+                {
+                    Status.Add(new KeyValuePair<string, string>(stat.Key, stat.Value.ToString()));
+                }
+            });
+            IsLoading = false;
         }
 
         public Task OnActivated()

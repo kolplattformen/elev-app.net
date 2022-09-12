@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Web;
 using SkolplattformenElevApi.Models;
 using SkolplattformenElevApi.Models.Internal.Calendar;
+using SkolplattformenElevApi.Utils;
 
 namespace SkolplattformenElevApi;
 
@@ -34,15 +35,17 @@ https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/v2
 &response_mode=fragment
          */
 
-        
+
 
         // try random guids and see what happens
         var nonce = Guid.NewGuid().ToString().ToLower();
         var clientRequestId = Guid.NewGuid().ToString().ToLower();
-        var scope = HttpUtility.UrlEncode( $"{_apiEndpoint}/.default openid profile");
+        var scope = HttpUtility.UrlEncode($"{_apiEndpoint}/.default openid profile");
         var ts = (Int32)(DateTime.Now.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-        var blaj = "{\"id\":\"" + Guid.NewGuid().ToString().ToLower() +  "\",\"ts\":" + ts + ",\"method\":\"redirectInteraction\"}";
-        var state = HttpUtility.UrlEncode($"{Base64Encode(blaj)}|https://elevstockholm.sharepoint.com/sites/skolplattformen/");
+        var blaj = "{\"id\":\"" + Guid.NewGuid().ToString().ToLower() + "\",\"ts\":" + ts +
+                   ",\"method\":\"redirectInteraction\"}";
+        var state = HttpUtility.UrlEncode(
+            $"{Base64Encode(blaj)}|https://elevstockholm.sharepoint.com/sites/skolplattformen/");
         var loginHint = HttpUtility.UrlEncode(_email);
 
         var url = "https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/v2.0/authorize"
@@ -82,52 +85,87 @@ https://login.microsoftonline.com/e36726e9-4d94-4a77-be61-d4597f4acd02/oauth2/v2
     public async Task<List<CalendarItem>> GetCalendarAsync(DateOnly date)
     {
 
-        var token = await GetAzureApiAccessTokenAsync();
+        var part = ApiPart.GetCalendar;
 
-        var url =
-            $"https://stockholm-o365-api.azurewebsites.net//api/Calender/calender?date={date.ToString("yyyy-MM-dd")}";
-
-        var request = new HttpRequestMessage
+        try
         {
-            RequestUri = new Uri(url),
-            Method = HttpMethod.Get,
-            Headers =
+            var token = await GetAzureApiAccessTokenAsync();
+
+            var url =
+                $"https://stockholm-o365-api.azurewebsites.net//api/Calender/calender?date={date.ToString("yyyy-MM-dd")}";
+
+            var request = new HttpRequestMessage
             {
-                { "Referer", "https://elevstockholm.sharepoint.com/" },
-                { "Accept", "application/json"},
-                { "Origin", "https://elevstockholm.sharepoint.com" },
-            },
-        };
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        var response = await _httpClient.SendAsync(request);
+                RequestUri = new Uri(url),
+                Method = HttpMethod.Get,
+                Headers =
+                {
+                    { "Referer", "https://elevstockholm.sharepoint.com/" },
+                    { "Accept", "application/json" },
+                    { "Origin", "https://elevstockholm.sharepoint.com" },
+                },
+            };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await _httpClient.SendAsync(request);
 
 
-   
-        var content = await response.Content.ReadAsStringAsync();
-        var deserialized = JsonSerializer.Deserialize<CalendarResponse>(content);
 
-        if (deserialized?.Data == null)
+            var content = await response.Content.ReadAsStringAsync();
+            var deserialized = JsonSerializer.Deserialize<CalendarResponse>(content);
+
+            if (deserialized?.Data == null)
+            {
+                return new List<CalendarItem>();
+            }
+
+            var calendarItemList = new List<CalendarItem>();
+            foreach (var item in deserialized.Data)
+            {
+                var ca = new CalendarItem
+                {
+                    Id = item.Id,
+                    Title = item.Title,
+                    Location = item.Location,
+                    Start = item.Start,
+                    End = item.End,
+                    IsAllDay = false,
+                    WebLink = item.WebLink,
+                };
+
+
+                
+
+                if (ca.Start.ToUniversalTime().Hour == 0 && ca.End.ToUniversalTime().Hour == 0 && ca.Start.Minute == 0 &&
+                    ca.End.Minute == 0)
+                {
+                    // Whole day events gets wrong timezone
+                    ca.Start = new DateTime(ca.Start.Year, ca.Start.Month, ca.Start.Day, 0, 0, 0);
+                    ca.End = new DateTime(ca.End.Year, ca.End.Month, ca.End.Day, 0, 0, 0);
+                    ca.IsAllDay = true;
+
+                }
+                calendarItemList.Add(ca);
+            }
+
+            // Sometimes the api returns events from the next day
+            calendarItemList = 
+                calendarItemList.Where(i 
+                    => !(i.End.Date < date.ToDateTime(new TimeOnly(0, 0)).Date 
+                         || i.Start.Date > date.ToDateTime(new TimeOnly(0, 0)).Date))
+                    .ToList();
+
+            UpdateStatus(part,
+                calendarItemList.Count > 0 ? ApiReadSuccessIndicator.Success : ApiReadSuccessIndicator.NoData);
+
+
+            return calendarItemList;
+        }
+        catch
         {
+            UpdateStatus(part, ApiReadSuccessIndicator.Error);
             return new List<CalendarItem>();
         }
 
-        var calendarItemList = new List<CalendarItem>();
-        foreach (var item in deserialized.Data)
-        {
-            calendarItemList.Add(new CalendarItem
-            {
-                Id = item.Id,
-                Title = item.Title,
-                Location = item.Location,
-                Start = item.Start,
-                End = item.End,
-                IsAllDay = false,
-                WebLink = item.WebLink,
-            });
-        }
-
-        // Whole day events gets wrong timezone?
-        return calendarItemList; 
     }
-    
+
 }

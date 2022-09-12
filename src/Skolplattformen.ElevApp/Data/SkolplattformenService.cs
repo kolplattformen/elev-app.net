@@ -15,7 +15,6 @@ public class SkolplattformenService
 {
     private IApi _api;
     private DateTime _loggedInTime = DateTime.MinValue;
-    public string LoggedInName { get; set; } = string.Empty;
     public bool IsLoggedIn => _loggedInTime > DateTime.UtcNow.AddMinutes(-29);
     private ApiKind _apiKind = ApiKind.Skolplattformen;
 
@@ -51,7 +50,6 @@ public class SkolplattformenService
         await _api.LogInAsync(email, username, password);
         _loggedInTime = DateTime.UtcNow;
         var user = await _api.GetUserAsync();
-        LoggedInName = user?.Name ?? email;
     }
 
     //public Task<List<NewsListItem>> GetNewsItemList()
@@ -66,6 +64,8 @@ public class SkolplattformenService
 
     public async Task<List<Teacher>> GetTeachersAsync()
     {
+        await AssureLoggedInAsync();
+
         // Get timetable from two weeks, so we don't miss subjects while holidays etc.
         var today = DateTime.Now;
         var week = ISOWeek.GetWeekOfYear(today);
@@ -85,7 +85,8 @@ public class SkolplattformenService
 
     public async Task<List<TimeTableLesson>> GetTimetableAsync(int year, int week)
     {
-
+        await AssureLoggedInAsync();
+        
         var teachers = await _api.GetTeachersAsync();
         var lessons = await _api.GetTimetableAsync(year, week);
         _api.EnrichTimetableWithCurriculum(lessons);
@@ -96,6 +97,8 @@ public class SkolplattformenService
 
     public async Task<List<TimeTableLesson>> GetTimetableAsync(DateTime day)
     {
+        await AssureLoggedInAsync();
+
         var week = ISOWeek.GetWeekOfYear(day);
         var year = ISOWeek.GetYear(day);
         var dayOdWeek = (int)day.DayOfWeek;
@@ -115,11 +118,14 @@ public class SkolplattformenService
             return await SkolmatenSeService.GetWeekAsync(Settings.SkolmatenSeSchoolName, year, week);
         }
 
+        await AssureLoggedInAsync();
         return await _api.GetMealsAsync(year, week);
     }
 
     public async Task<Meal?> GetMealAsync(DateTime day)
     {
+        await AssureLoggedInAsync();
+
         var week = ISOWeek.GetWeekOfYear(day);
         var year = ISOWeek.GetYear(day);
         List<Meal> meals;
@@ -134,23 +140,27 @@ public class SkolplattformenService
         return meals.FirstOrDefault(m => m.Date.Date == day.Date);
     }
 
-    public Task<ApiUser?> GetUserAsync()
+    public async Task<ApiUser?> GetUserAsync()
     {
-        return _api.GetUserAsync();
+        await AssureLoggedInAsync();
+        return await _api.GetUserAsync();
     }
 
-    public Task<SchoolDetails> GetSchoolDetailsAsync(Guid schoolId)
+    public async Task<SchoolDetails> GetSchoolDetailsAsync(Guid schoolId)
     {
-        return _api.GetSchoolDetailsAsync(schoolId);
+        await AssureLoggedInAsync();
+        return await _api.GetSchoolDetailsAsync(schoolId);
     }
 
-    public Task<List<CalendarItem>> GetCalendarAsync(DateTime date)
+    public async Task<List<CalendarItem>> GetCalendarAsync(DateTime date)
     {
-        return _api.GetCalendarAsync(new DateOnly(date.Year,date.Month,date.Day));
+        await AssureLoggedInAsync();
+        return await _api.GetCalendarAsync(new DateOnly(date.Year,date.Month,date.Day));
     }
 
     public async Task<List<PlannedAbsenceItem>> GetPlannedAbsenceAsync(DateTime date)
-    { 
+    {
+        await AssureLoggedInAsync();
         var all = await  _api.GetPlannedAbsenceListAsync();
         var today = all.Where(x => x.DateTimeFrom.Date <= date.Date && x.DateTimeTo.Date >= date.Date);
         return today.ToList();
@@ -158,8 +168,24 @@ public class SkolplattformenService
 
     public async Task<List<KalendariumItem>> GetKalendariumAsync(DateTime date)
     {
+        await AssureLoggedInAsync();
         var all = await _api.GetKalendariumAsync();
         var today = all.Where(x => x.StartDate.Date <= date.Date && x.EndDate.Date >= date.Date);
         return today.ToList();
+    }
+
+    public Dictionary<string, ApiReadSuccessIndicator> GetStatusAll()
+    {
+        return _api.GetStatusAll();
+    }
+
+    private async Task AssureLoggedInAsync()
+    {
+        if (!IsLoggedIn)
+        {
+            _loggedInTime = DateTime.UtcNow;
+            await _api.RefreshLoginAsync();
+                       
+        }
     }
 }

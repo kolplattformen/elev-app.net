@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.Json;
 using System.Web;
 using SkolplattformenElevApi.Models.Internal.Login;
+using SkolplattformenElevApi.Models.Internal.Sharepoint;
 
 namespace SkolplattformenElevApi
 {
@@ -10,6 +11,11 @@ namespace SkolplattformenElevApi
     {
         public async Task LogInAsync(string email, string username, string password)
         {
+
+            _email = email;
+            _username = username;
+            _password = password;
+
 
             var jsonSerializerOptions = new JsonSerializerOptions
             {
@@ -218,26 +224,14 @@ namespace SkolplattformenElevApi
 
             // DONE at last. The last redirect should be back to the startpage but now logged in.
 
-            temp_content = await temp_res.Content.ReadAsStringAsync();
-            _formDigestValue = RegExp("formDigestValue\":\"([^\\\"]*)\"", temp_content);
-            _spfx3rdPartyServicePrincipalId = RegExp("spfx3rdPartyServicePrincipalId\":\"([^\\\"]*)\"", temp_content);
+            var url = "https://elevstockholm.sharepoint.com/sites/skolplattformen/";
 
-            //TODO: Try find a better way to get this, maybe get and deserialize the entire object to get this and the above values
-            _apiEndpoint = RegExp("appId\\\\\\\\\\\":\\\\\\\\\\\"([^\\\\]*)\\\\", temp_content);
+            var res = await _httpClient.GetAsync(url);
 
-            if (temp_res.Headers.TryGetValues("SPRequestGuid", out var spHeader))
-            {
-                _sharePointRequestGuid = spHeader.First();
-            }
-
-            _cookieContainer.Add(new Cookie("KillSwitchOverrides_enableKillSwitches", "", "/", "sharepoint.com"));
-            _cookieContainer.Add(new Cookie("KillSwitchOverrides_disableKillSwitches", "", "/", "sharepoint.com"));
+            await SetupAfterLoginAsync(res);
 
             _email = email;
-
-            await AbsenceSsoLoginAsync();
-            await TimetableSsoLoginAsync();
-
+            
 
             // Tests below this line -------------------------------------------------------------------------------------------
 
@@ -247,6 +241,49 @@ namespace SkolplattformenElevApi
             //temp_res = await _httpClient.GetAsync(temp_url);
 
         }
+
+
+        public async Task RefreshLoginAsync()
+        {
+            var url = "https://elevstockholm.sharepoint.com/sites/skolplattformen/";
+            _apiEndpointAccessToken = null;
+
+            var res = await _httpClient.GetAsync(url);
+
+            await SetupAfterLoginAsync(res);
+
+        }
+
+        private async Task SetupAfterLoginAsync(HttpResponseMessage responseMessage)
+        {
+            var content = await responseMessage.Content.ReadAsStringAsync();
+
+            _formDigestValue = RegExp("formDigestValue\":\"([^\\\"]*)\"", content);
+            _spfx3rdPartyServicePrincipalId = RegExp("spfx3rdPartyServicePrincipalId\":\"([^\\\"]*)\"", content);
+
+            //TODO: Try find a better way to get this, maybe get and deserialize the entire object to get this and the above values
+            _apiEndpoint = RegExp("appId\\\\\\\\\\\":\\\\\\\\\\\"([^\\\\]*)\\\\", content);
+
+            if (responseMessage.Headers.TryGetValues("SPRequestGuid", out var spHeader))
+            {
+                _sharePointRequestGuid = spHeader.First();
+            }
+
+            _cookieContainer.Add(new Cookie("KillSwitchOverrides_enableKillSwitches", "", "/", "sharepoint.com"));
+            _cookieContainer.Add(new Cookie("KillSwitchOverrides_disableKillSwitches", "", "/", "sharepoint.com"));
+
+
+            try
+            {
+                await AbsenceSsoLoginAsync();
+                await TimetableSsoLoginAsync();
+            }
+            catch
+            {
+
+            }
+        }
+
         private string UpdateSamlTransactionIdInEncodedStartpageParam(string url, string samlTransationId)
         {
             // var startpage = new Uri(url).Query.Split("&").First(x => x.StartsWith("startpage=")).Split("=")[1];

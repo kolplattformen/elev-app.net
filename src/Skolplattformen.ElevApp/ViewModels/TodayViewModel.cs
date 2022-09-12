@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Handlers;
 using Skolplattformen.ElevApp.Data;
 using Skolplattformen.ElevApp.Models;
 using SkolplattformenElevApi.Models;
@@ -11,6 +12,7 @@ namespace Skolplattformen.ElevApp.ViewModels
     public partial class TodayViewModel: ObservableObject
     {
         private readonly SkolplattformenService _skolplattformenService;
+        [ObservableProperty] private bool isLoading;
 
         [ObservableProperty] private DateTime currentDate = DateTime.Now;
         [ObservableProperty] private string title = "";
@@ -30,6 +32,24 @@ namespace Skolplattformen.ElevApp.ViewModels
             _=> "Söndag"
         };
 
+        private string MonthSe(int month) => month switch
+        {
+            1 => "januari",
+            2 => "februari",
+            3 => "mars",
+            4 => "april",
+            5 => "maj",
+            6 => "juni",
+            7 => "juli",
+            8 => "augusti",
+            9 => "september",
+            10 => "oktober",
+            11 => "november",
+            12 => "december",
+            _ => "okänt"
+        };
+
+
         public TodayViewModel(SkolplattformenService skolplattformenService)
         {
             _skolplattformenService = skolplattformenService;
@@ -44,6 +64,13 @@ namespace Skolplattformen.ElevApp.ViewModels
                 CurrentDate = CurrentDate.AddDays(1);
             }
 
+        }
+
+        [RelayCommand]
+        void Today()
+        {
+            CurrentDate = DateTime.Now;
+            Task.Run(LoadData);
         }
 
         [RelayCommand]
@@ -83,9 +110,12 @@ namespace Skolplattformen.ElevApp.ViewModels
 
         public async Task LoadData()
         {
+            if (IsLoading) return;
+            IsLoading = true;
+
             Title = (currentDate.Date == DateTime.Now.Date)
-                ? $"Idag {WeekdaySe(currentDate.DayOfWeek).ToLower()} {currentDate.ToString("dd/MM")}"
-                : $"{WeekdaySe(currentDate.DayOfWeek)} {currentDate.ToString("dd/MM")}";
+                ? $"Idag {WeekdaySe(currentDate.DayOfWeek).ToLower()} {currentDate.Day} {MonthSe(currentDate.Month)}"
+                : $"{WeekdaySe(currentDate.DayOfWeek)} {currentDate.Day} {MonthSe(currentDate.Month)}";
             
             var todayItems = new List<TodayItem>();
             var allDayItems = new List<TodayItem>();
@@ -229,7 +259,7 @@ namespace Skolplattformen.ElevApp.ViewModels
 
                 NotifyScrollChangeAction();
             });
-
+            IsLoading = false;
         }
 
         public Action NotifyScrollChangeAction;

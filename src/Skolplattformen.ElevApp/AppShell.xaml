@@ -51,7 +51,7 @@
             Title="Inställningar"
             Icon="settings_svgrepo_com.png"
             ContentTemplate="{DataTemplate local:SettingsPage}"
-            Route="MePage" />
+            Route="SettingsPage" />
 
     </TabBar>
 

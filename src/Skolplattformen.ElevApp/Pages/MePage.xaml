@@ -5,6 +5,7 @@
              Title="Jag i Skolplattformen">
     <ScrollView>
         <VerticalStackLayout>
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
             <Label 
                 Text="{Binding StudentName}"
                 VerticalOptions="Center" 
@@ -57,6 +58,20 @@
                     Text="{Binding PrincipalEmail}"/>
 
             </VerticalStackLayout>
+
+            <Label Text="API Status (kommer tas bort)"></Label>
+            <StackLayout BindableLayout.ItemsSource="{Binding Status}" Margin="30,0">
+                <BindableLayout.ItemTemplate>
+
+                    <DataTemplate>
+                        <StackLayout  Orientation="Horizontal">
+                            <Label HorizontalOptions="StartAndExpand" Text="{Binding Key}" Margin="0,0"></Label>
+                            <Label HorizontalOptions="End" Text="{Binding Value}"></Label>
+                        </StackLayout>
+                    </DataTemplate>
+
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
 
             <Button
                     
