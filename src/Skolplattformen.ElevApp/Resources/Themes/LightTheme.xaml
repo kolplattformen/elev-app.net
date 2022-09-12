@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Skolplattformen.ElevApp.Resources.Themes.LightTheme">
 
-    <Color x:Key="PageBackgroundColor">#f8f9fd</Color>
+    <Color x:Key="PageBackgroundColor">#08f9fd</Color>
     <Color x:Key="NavigationBarColor">#10999e</Color>
     <Color x:Key="PrimaryColor">#10999e</Color>
     <Color x:Key="SecondaryColor">Black</Color>
