@@ -42,9 +42,9 @@
                 <BindableLayout.ItemTemplate>
 
                     <DataTemplate>
-                        <Frame Padding="6,6" BackgroundColor="{Binding Color}" Margin="0,4,0,0">
+                        <Frame Padding="6,6" Style="{DynamicResource SecondaryColorFrame}" Margin="0,4,0,0">
                             <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
-                                <Label FontSize="12" >
+                                <Label FontSize="12" Style="{DynamicResource SecondaryColorLabel}">
                                     <Label.Text>
                                         <MultiBinding StringFormat="{}{0}-{1}">
                                             <Binding Path="StartTime" />
@@ -52,8 +52,8 @@
                                         </MultiBinding>
                                     </Label.Text>
                                 </Label>
-                                <Label Text="{Binding Title}" FontSize="24"/>
-                                <Label Text="{Binding Description}"  FontSize="14"/>
+                                <Label Text="{Binding Title}" FontSize="24" Style="{DynamicResource SecondaryColorLabel}"/>
+                                <Label Text="{Binding Description}"  FontSize="14" Style="{DynamicResource SecondaryColorLabel}"/>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>

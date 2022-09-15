@@ -7,23 +7,9 @@
         <ResourceDictionary>
             <ResourceDictionary Source="Resources/Themes/DarkTheme.xaml" />
 
-            <!--<Color x:Key="Gray100">#E1E1E1</Color>
-            <Color x:Key="Gray200">#C8C8C8</Color>
-            <Color x:Key="Gray300">#ACACAC</Color>
-            <Color x:Key="Gray400">#919191</Color>
-            <Color x:Key="Gray500">#6E6E6E</Color>
-            <Color x:Key="Gray600">#404040</Color>
-            <Color x:Key="Gray900">#212121</Color>
-            <Color x:Key="Gray950">#141414</Color>
-            <Color x:Key="Primary">#512BD4</Color>
-            <Color x:Key="Secondary">#DFD8F7</Color>
-            --><!--<Color x:Key="Tertiary">#2B0B98</Color>--><!--
-            <Color x:Key="White">White</Color>
-            <Color x:Key="Black">Black</Color>-->
-
-            <!--<Style TargetType="ActivityIndicator">
+            <Style TargetType="ActivityIndicator">
                 <Setter Property="Color" Value="{DynamicResource PrimaryColor}" />
-            </Style>-->
+            </Style>
 
             <!--<Style TargetType="IndicatorView">
                 <Setter Property="IndicatorColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}"/>
@@ -40,9 +26,9 @@
                 <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
             </Style>-->
 
-            <!--<Style TargetType="Button">
+            <Style TargetType="Button">
                 <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource BoxBackgroundColor}" />
                 <Setter Property="FontFamily" Value="PoppinsRegular"/>
                 <Setter Property="FontSize" Value="14"/>
                 <Setter Property="CornerRadius" Value="8"/>
@@ -60,7 +46,7 @@
                         </VisualStateGroup>
                     </VisualStateGroupList>
                 </Setter>
-            </Style>-->
+            </Style>
 
             <!--<Style TargetType="CheckBox">
                 <Setter Property="Color" Value="{DynamicResource PrimaryColor}" />
@@ -117,31 +103,46 @@
                 </Setter>
             </Style>-->
 
-            <!--<Style TargetType="Entry">
+            <Style TargetType="Entry">
                 <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
-                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource BoxBackgroundColor}" />
                 <Setter Property="FontFamily" Value="PoppinsRegular"/>
                 <Setter Property="FontSize" Value="14" />
-                <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
+                <Setter Property="PlaceholderColor" Value="{DynamicResource DisabledTextColor}" />
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal" />
                             <VisualState x:Name="Disabled">
                                 <VisualState.Setters>
-                                    <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                                    <Setter Property="TextColor" Value="{DynamicResource DisabledTextColor}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
                     </VisualStateGroupList>
                 </Setter>
-            </Style>-->
+            </Style>
 
-            <!--<Style TargetType="Frame">
+
+            <Style TargetType="Frame">
                 <Setter Property="HasShadow" Value="False" />
-                <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
+                <Setter Property="BorderColor" Value="{DynamicResource FrameColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource BoxBackgroundColor}" />
                 <Setter Property="CornerRadius" Value="8" />
-            </Style>-->
+            </Style>
+            <Style TargetType="Frame" x:Key="PrimaryColorFrame">
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="BorderColor" Value="{DynamicResource FrameColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource BoxBackgroundColor}" />
+                <Setter Property="CornerRadius" Value="8" />
+            </Style>
+
+            <Style TargetType="Frame" x:Key="SecondaryColorFrame">
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="BorderColor" Value="{DynamicResource SecondaryFrameColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryColor}" />
+                <Setter Property="CornerRadius" Value="8" />
+            </Style>
 
             <!--<Style TargetType="ImageButton">
                 <Setter Property="Opacity" Value="1" />
@@ -162,23 +163,29 @@
                 </Setter>
             </Style>-->
 
-            <!--<Style TargetType="Label">
+            <Style TargetType="Label">
                 <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
                 <Setter Property="FontFamily" Value="PoppinsRegular" />
                 <Setter Property="FontSize" Value="14" />
-                <Setter Property="VisualStateManager.VisualStateGroups">
+                <!--<Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal" />
                             <VisualState x:Name="Disabled">
                                 <VisualState.Setters>
-                                    <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                                    <Setter Property="TextColor" Value="{DynamicResource DisabledTextColor}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
                     </VisualStateGroupList>
-                </Setter>
-            </Style>-->
+                </Setter>-->
+            </Style>
+
+            <Style TargetType="Label" x:Key="SecondaryColorLabel">
+                <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}" />
+                <Setter Property="FontFamily" Value="PoppinsRegular" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
 
             <!--<Style TargetType="ListView">
                 <Setter Property="SeparatorColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
@@ -296,9 +303,9 @@
             </Style>-->
 
             <!--<Style TargetType="Slider">
-                <Setter Property="MinimumTrackColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+                <Setter Property="MinimumTrackColor" Value="{AppThemeBinding Light={StaticResource PrimaryColor}, Dark={StaticResource PrimaryColor}}" />
                 <Setter Property="MaximumTrackColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" />
-                <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+                <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource PrimaryColor}, Dark={StaticResource White}}" />
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
@@ -319,9 +326,9 @@
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
             </Style>-->
 
-            <!--<Style TargetType="Switch">
+            <Style TargetType="Switch">
                 <Setter Property="OnColor" Value="{DynamicResource PrimaryColor}" />
-                <Setter Property="ThumbColor" Value="{StaticResource White}" />
+                <Setter Property="ThumbColor" Value="{DynamicResource SecondaryColor}" />
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
@@ -334,8 +341,8 @@
                             </VisualState>
                             <VisualState x:Name="On">
                                 <VisualState.Setters>
-                                    <Setter Property="OnColor" Value="{DynamicResource PrimaryColor}" />
-                                    <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+                                    <Setter Property="OnColor" Value="{DynamicResource SecondaryColor}" />
+                                    <Setter Property="ThumbColor" Value="{DynamicResource SecondaryColor}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Off">
@@ -346,7 +353,7 @@
                         </VisualStateGroup>
                     </VisualStateGroupList>
                 </Setter>
-            </Style>-->
+            </Style>
 
             <!--<Style TargetType="TimePicker">
                 <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
