@@ -2,12 +2,57 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Skolplattformen.ElevApp.Pages.TodayPage"
+             xmlns:s="Skolplattformen.ElevApp.ViewModels"
+             xmlns:viewModels="clr-namespace:Skolplattformen.ElevApp.ViewModels"
              Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="PrimaryColorTemplate">
+                <Frame Padding="6,6" Style="{DynamicResource PrimaryColorFrame}" Margin="0,4,0,0">
+                    <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
+                        <Label FontSize="12" Style="{DynamicResource PrimaryColorLabel}">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0}-{1}">
+                                    <Binding Path="StartTime" />
+                                    <Binding Path="EndTime" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <Label Text="{Binding Title}" FontSize="24" Style="{DynamicResource PrimaryColorLabel}"/>
+                        <Label Text="{Binding Description}"  FontSize="14" Style="{DynamicResource PrimaryColorLabel}"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </DataTemplate>
+
+            <DataTemplate x:Key="SecondaryColorTemplate">
+                <Frame Padding="6,6" Style="{DynamicResource SecondaryColorFrame}" Margin="0,4,0,0">
+                    <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
+                        <Label FontSize="12" Style="{DynamicResource SecondaryColorLabel}">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0}-{1}">
+                                    <Binding Path="StartTime" />
+                                    <Binding Path="EndTime" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <Label Text="{Binding Title}" FontSize="24" Style="{DynamicResource SecondaryColorLabel}"/>
+                        <Label Text="{Binding Description}"  FontSize="14" Style="{DynamicResource SecondaryColorLabel}"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </DataTemplate>
+
+        </ResourceDictionary>
+        <viewModels:TodayPageDataTemplateSelector 
+            x:Key="TodayPageDataTemplateSelector"
+            PrimaryColorTemplate="{StaticResource PrimaryColorTemplate}"
+            SecondaryColorTemplate="{StaticResource SecondaryColorTemplate}" />
+    </ContentPage.Resources>
 
     <ScrollView  x:Name="ScrollViewCtrl">
 
         <VerticalStackLayout Margin="6,6,6,6">
-            
+
             <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                 <Button
                     Text="«"
@@ -38,28 +83,10 @@
             HorizontalOptions="Center"
             IsVisible="{Binding IsSportsbagDay}"/>
 
-            <StackLayout BindableLayout.ItemsSource="{Binding Items}">
-                <BindableLayout.ItemTemplate>
+            <StackLayout BindableLayout.ItemsSource="{Binding Items}" 
+                         BindableLayout.ItemTemplateSelector="{StaticResource TodayPageDataTemplateSelector}">
 
-                    <DataTemplate>
-                        <Frame Padding="6,6" Style="{DynamicResource SecondaryColorFrame}" Margin="0,4,0,0">
-                            <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
-                                <Label FontSize="12" Style="{DynamicResource SecondaryColorLabel}">
-                                    <Label.Text>
-                                        <MultiBinding StringFormat="{}{0}-{1}">
-                                            <Binding Path="StartTime" />
-                                            <Binding Path="EndTime" />
-                                        </MultiBinding>
-                                    </Label.Text>
-                                </Label>
-                                <Label Text="{Binding Title}" FontSize="24" Style="{DynamicResource SecondaryColorLabel}"/>
-                                <Label Text="{Binding Description}"  FontSize="14" Style="{DynamicResource SecondaryColorLabel}"/>
-                            </VerticalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-
-                </BindableLayout.ItemTemplate>
             </StackLayout>
         </VerticalStackLayout>
-  </ScrollView>
+    </ScrollView>
 </ContentPage>

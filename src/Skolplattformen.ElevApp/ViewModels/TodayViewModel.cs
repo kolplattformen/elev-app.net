@@ -266,5 +266,18 @@ namespace Skolplattformen.ElevApp.ViewModels
 
     }
 
+    public class TodayPageDataTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate PrimaryColorTemplate { get; set; }
+        public DataTemplate SecondaryColorTemplate { get; set; }
 
+        protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
+        {
+       
+            return ((TodayItem)item).Mark == TodayItemMark.Standard 
+                ? PrimaryColorTemplate
+                : SecondaryColorTemplate;
+            
+        }
+    }
 }
