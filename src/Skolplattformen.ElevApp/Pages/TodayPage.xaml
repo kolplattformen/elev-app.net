@@ -2,16 +2,19 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Skolplattformen.ElevApp.Pages.TodayPage"
-             xmlns:s="Skolplattformen.ElevApp.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewModels="clr-namespace:Skolplattformen.ElevApp.ViewModels"
              Title="{Binding Title}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="IsStringNotNullOrWhiteSpaceConverter" />
             <DataTemplate x:Key="PrimaryColorTemplate">
-                <Frame Padding="6,6" Style="{DynamicResource PrimaryColorFrame}" Margin="0,4,0,0">
+                <Frame Padding="6,6" Margin="0,4,0,0">
                     <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
-                        <Label FontSize="12" Style="{DynamicResource PrimaryColorLabel}">
+                        <Label FontSize="12" Style="{DynamicResource PrimaryColorLabel}" 
+                               IsVisible="{Binding IsAllDay, Converter={StaticResource InvertedBoolConverter}}">
                             <Label.Text>
                                 <MultiBinding StringFormat="{}{0}-{1}">
                                     <Binding Path="StartTime" />
@@ -20,7 +23,8 @@
                             </Label.Text>
                         </Label>
                         <Label Text="{Binding Title}" FontSize="24" Style="{DynamicResource PrimaryColorLabel}"/>
-                        <Label Text="{Binding Description}"  FontSize="14" Style="{DynamicResource PrimaryColorLabel}"/>
+                        <Label Text="{Binding Description}"  FontSize="14" Style="{DynamicResource PrimaryColorLabel}" 
+                               IsVisible="{Binding Description, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}"/>
                     </VerticalStackLayout>
                 </Frame>
             </DataTemplate>
@@ -28,7 +32,8 @@
             <DataTemplate x:Key="SecondaryColorTemplate">
                 <Frame Padding="6,6" Style="{DynamicResource SecondaryColorFrame}" Margin="0,4,0,0">
                     <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
-                        <Label FontSize="12" Style="{DynamicResource SecondaryColorLabel}">
+                        <Label FontSize="12" Style="{DynamicResource SecondaryColorLabel}"   
+                               IsVisible="{Binding IsAllDay, Converter={StaticResource InvertedBoolConverter}}">
                             <Label.Text>
                                 <MultiBinding StringFormat="{}{0}-{1}">
                                     <Binding Path="StartTime" />
@@ -37,7 +42,8 @@
                             </Label.Text>
                         </Label>
                         <Label Text="{Binding Title}" FontSize="24" Style="{DynamicResource SecondaryColorLabel}"/>
-                        <Label Text="{Binding Description}"  FontSize="14" Style="{DynamicResource SecondaryColorLabel}"/>
+                        <Label Text="{Binding Description}"  FontSize="14" Style="{DynamicResource SecondaryColorLabel}"
+                               IsVisible="{Binding Description, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}"/>
                     </VerticalStackLayout>
                 </Frame>
             </DataTemplate>

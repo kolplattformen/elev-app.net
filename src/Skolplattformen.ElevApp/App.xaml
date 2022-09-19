@@ -130,13 +130,7 @@
                 <Setter Property="BackgroundColor" Value="{DynamicResource BoxBackgroundColor}" />
                 <Setter Property="CornerRadius" Value="8" />
             </Style>
-            <Style TargetType="Frame" x:Key="PrimaryColorFrame">
-                <Setter Property="HasShadow" Value="False" />
-                <Setter Property="BorderColor" Value="{DynamicResource FrameColor}" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource BoxBackgroundColor}" />
-                <Setter Property="CornerRadius" Value="8" />
-            </Style>
-
+       
             <Style TargetType="Frame" x:Key="SecondaryColorFrame">
                 <Setter Property="HasShadow" Value="False" />
                 <Setter Property="BorderColor" Value="{DynamicResource SecondaryFrameColor}" />

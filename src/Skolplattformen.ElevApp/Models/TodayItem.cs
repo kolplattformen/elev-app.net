@@ -14,11 +14,7 @@
         public string Description { get; set; } = "";
         public TodayItemMark Mark { get; set; } = TodayItemMark.Standard;
 
-        public Color Color => Mark switch
-        {
-            TodayItemMark.AllDay => Microsoft.Maui.Graphics.Color.FromRgb(128, 128, 128),
-            TodayItemMark.Warning => Microsoft.Maui.Graphics.Color.FromRgb(128, 128, 128),
-            _ => Microsoft.Maui.Graphics.Color.FromRgba(255, 255, 255, 0)
-        };
+        public bool IsAllDay => StartTime == "00:00" && EndTime == "00:00";
+
     }
 }
