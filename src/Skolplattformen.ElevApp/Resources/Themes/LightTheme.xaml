@@ -13,13 +13,25 @@
     <Color x:Key="Gray950">#141414</Color>
 
 
-    <Color x:Key="PageBackgroundColor">#08f9fd</Color>
-    <Color x:Key="NavigationBarColor">#10999e</Color>
+    <Color x:Key="PageBackgroundColor">#f8f9fd</Color>
+    <Color x:Key="NavigationBarColor">#e2f0f4</Color>
+    
     <Color x:Key="PrimaryColor">#10999e</Color>
-    <Color x:Key="SecondaryColor">Black</Color>
     <Color x:Key="PrimaryTextColor">#212121</Color>
-    <Color x:Key="SecondaryTextColor">White</Color>
-    <Color x:Key="TertiaryTextColor">Gray</Color>
+
+    <Color x:Key="BoxBackgroundColor">#ffffff</Color>
+
+    <Color x:Key="SecondaryColor">#f5a962</Color>
+    <Color x:Key="SecondaryTextColor">#252627</Color>
+
+    
+
     <Color x:Key="TransparentColor">Transparent</Color>
+
+    <Color x:Key="DisabledColor">#e3e4e7</Color>
+    <Color x:Key="DisabledTextColor">#717375</Color>
+
+    <Color x:Key="FrameColor">#ececec</Color>
+    <Color x:Key="SecondaryFrameColor">#f5a962</Color>
 
 </ResourceDictionary>

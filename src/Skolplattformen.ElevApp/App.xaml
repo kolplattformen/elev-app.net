@@ -329,19 +329,19 @@
                             <VisualState x:Name="Normal" />
                             <VisualState x:Name="Disabled">
                                 <VisualState.Setters>
-                                    <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
-                                    <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                                    <Setter Property="OnColor" Value="{DynamicResource DisabledColor}" />
+                                    <Setter Property="ThumbColor" Value="{DynamicResource DisabledColor}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="On">
                                 <VisualState.Setters>
                                     <Setter Property="OnColor" Value="{DynamicResource SecondaryColor}" />
-                                    <Setter Property="ThumbColor" Value="{DynamicResource SecondaryColor}" />
+                                    <Setter Property="ThumbColor" Value="{DynamicResource PrimaryColor}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Off">
                                 <VisualState.Setters>
-                                    <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
+                                    <Setter Property="ThumbColor" Value="{DynamicResource PrimaryColor}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -385,6 +385,19 @@
                 <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource PrimaryColor}" />
                 <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
             </Style>-->
+            <Style TargetType="Shell" ApplyToDerivedTypes="True">
+                <Setter Property="Shell.BackgroundColor" Value="{DynamicResource NavigationBarColor}" />
+                <!--<Setter Property="Shell.ForegroundColor" Value="{OnPlatform WinUI={StaticResource PrimaryColor}, Default={StaticResource White}}" />-->
+                <Setter Property="Shell.ForegroundColor" Value="{DynamicResource PrimaryTextColor}" />
+                <Setter Property="Shell.TitleColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray100}}" />
+                <Setter Property="Shell.DisabledColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
+                <Setter Property="Shell.UnselectedColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray200}}" />
+                <Setter Property="Shell.NavBarHasShadow" Value="False" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{DynamicResource BoxBackgroundColor}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
+            </Style>
 
             <!--<Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray950}}" />
@@ -398,7 +411,12 @@
                 <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
                 <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
             </Style>-->
-
+            <Style TargetType="TabbedPage">
+                <Setter Property="BarBackgroundColor" Value="{DynamicResource BoxBackgroundColor}" />
+                <Setter Property="BarTextColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
+                <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+            </Style>
 
         </ResourceDictionary>
     </Application.Resources>
