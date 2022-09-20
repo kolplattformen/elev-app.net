@@ -9,7 +9,7 @@ namespace Skolplattformen.ElevApp.ViewModels
 {
     public partial class LoginViewModel : ObservableObject
     {
-        [ObservableProperty] private bool isLoading;
+        [ObservableProperty] private bool isLoading = false;
 
         [ObservableProperty] private string email;
         [ObservableProperty] private string username;
