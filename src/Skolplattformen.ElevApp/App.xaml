@@ -27,8 +27,8 @@
             </Style>-->
 
             <Style TargetType="Button">
-                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource BoxBackgroundColor}" />
+                <Setter Property="TextColor" Value="{DynamicResource ButtonTextColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource ButtonColor}" />
                 <Setter Property="FontFamily" Value="PoppinsRegular"/>
                 <Setter Property="FontSize" Value="14"/>
                 <Setter Property="CornerRadius" Value="8"/>
@@ -389,7 +389,7 @@
                 <Setter Property="Shell.BackgroundColor" Value="{DynamicResource NavigationBarColor}" />
                 <!--<Setter Property="Shell.ForegroundColor" Value="{OnPlatform WinUI={StaticResource PrimaryColor}, Default={StaticResource White}}" />-->
                 <Setter Property="Shell.ForegroundColor" Value="{DynamicResource PrimaryTextColor}" />
-                <Setter Property="Shell.TitleColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray100}}" />
+                <Setter Property="Shell.TitleColor" Value="{DynamicResource NavigationBarTextColor}" />
                 <Setter Property="Shell.DisabledColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
                 <Setter Property="Shell.UnselectedColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray200}}" />
                 <Setter Property="Shell.NavBarHasShadow" Value="False" />

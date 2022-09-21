@@ -36,7 +36,7 @@ namespace Skolplattformen.ElevApp.ViewModels
         Task LoadData()
         {
             if(IsLoading) return Task.CompletedTask;
-            IsLoading = true;
+       //     IsLoading = true;
             var loginDetails = Storage.Get<LoginDetails>("login_details");
             if (loginDetails.RememberMe)
             {
@@ -47,7 +47,7 @@ namespace Skolplattformen.ElevApp.ViewModels
 
             PlatformSelectedIndex = loginDetails?.Platform ?? 0;
 
-            IsLoading = false;
+        //    IsLoading = false;
             return Task.CompletedTask;
         }
 

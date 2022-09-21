@@ -14,8 +14,12 @@
 
 
     <Color x:Key="PageBackgroundColor">#f8f9fd</Color>
-    <Color x:Key="NavigationBarColor">#e2f0f4</Color>
-    
+    <Color x:Key="NavigationBarColor">#10999e</Color>
+    <Color x:Key="NavigationBarTextColor">#f8f9fd</Color>
+
+    <Color x:Key="ButtonColor">#10999e</Color>
+    <Color x:Key="ButtonTextColor">#f8f9fd</Color>
+
     <Color x:Key="PrimaryColor">#10999e</Color>
     <Color x:Key="PrimaryTextColor">#212121</Color>
 
