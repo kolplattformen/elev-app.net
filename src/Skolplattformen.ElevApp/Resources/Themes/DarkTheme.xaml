@@ -19,19 +19,28 @@
     <Color x:Key="ButtonColor">#353637</Color>
     <Color x:Key="ButtonTextColor">#C8C8C8</Color>
     
-    <Color x:Key="PrimaryColor">#10999e</Color>
+    <Color x:Key="PrimaryColor">#108085</Color>
     <Color x:Key="PrimaryTextColor">#e7e7e7</Color>
 
     <Color x:Key="BoxBackgroundColor">#252627</Color>
+    <Color x:Key="BoxTextColor">#F1F1F1</Color>
 
     <Color x:Key="SecondaryColor">#f5a962</Color>
     <Color x:Key="SecondaryTextColor">#252627</Color>
-    
+
+    <Color x:Key="KalendariumColor">#3C3124</Color>
+    <Color x:Key="KalendariumFrameColor">#634C34</Color>
+    <Color x:Key="CalendarColor">#275356</Color>
+    <Color x:Key="CalendarFrameColor">#36767B</Color>
+
+    <Color x:Key="ActiveColor">#275356</Color>
+    <Color x:Key="ActiveFrameColor">#36767B</Color>
+
     <Color x:Key="TransparentColor">Transparent</Color>
 
     <Color x:Key="DisabledColor">#404040</Color>
     <Color x:Key="DisabledTextColor">#C8C8C8</Color>
 
-    <Color x:Key="FrameColor">#353637</Color>
+    <Color x:Key="FrameColor">#4E4F50</Color>
     <Color x:Key="SecondaryFrameColor">#f5a962</Color>
 </ResourceDictionary>

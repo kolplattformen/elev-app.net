@@ -138,6 +138,27 @@
                 <Setter Property="CornerRadius" Value="8" />
             </Style>
 
+            <Style TargetType="Frame" x:Key="KalendariumFrame">
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="BorderColor" Value="{DynamicResource KalendariumFrameColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource KalendariumColor}" />
+                <Setter Property="CornerRadius" Value="8" />
+            </Style>
+
+            <Style TargetType="Frame" x:Key="CalendarFrame">
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="BorderColor" Value="{DynamicResource CalendarFrameColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource CalendarColor}" />
+                <Setter Property="CornerRadius" Value="8" />
+            </Style>
+
+            <Style TargetType="Frame" x:Key="ActiveFrame">
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="BorderColor" Value="{DynamicResource ActiveFrameColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource ActiveColor}" />
+                <Setter Property="CornerRadius" Value="8" />
+            </Style>
+
             <!--<Style TargetType="ImageButton">
                 <Setter Property="Opacity" Value="1" />
                 <Setter Property="BorderColor" Value="Transparent"/>

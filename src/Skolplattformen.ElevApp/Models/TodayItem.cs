@@ -3,8 +3,10 @@
     public enum TodayItemMark
     {
         Standard = 0,
-        Warning = 1,
-        AllDay = 2
+        Lesson = 1,
+        Absence = 2,
+        Kalendarium = 3,
+        Calendar = 4
     }
     public class TodayItem
     {

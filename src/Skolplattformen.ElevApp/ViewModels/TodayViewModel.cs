@@ -134,6 +134,7 @@ namespace Skolplattformen.ElevApp.ViewModels
                     StartTime = lesson.TimeStart.Substring(0, 5),
                     EndTime = lesson.TimeEnd.Substring(0, 5),
                     Title = lesson.SubjectName,
+                    Mark = TodayItemMark.Lesson,
                     Description = $"{lesson.TeacherName}"
                                   + (string.IsNullOrWhiteSpace(lesson.Location)
                                       ? string.Empty
@@ -160,7 +161,7 @@ namespace Skolplattformen.ElevApp.ViewModels
                         allDayItems.Add(new TodayItem
                         {
                             Title = item.Title,
-                            Mark = TodayItemMark.AllDay
+                            Mark = TodayItemMark.Calendar
                         });
                     }
                     else
@@ -171,7 +172,7 @@ namespace Skolplattformen.ElevApp.ViewModels
                             Description = item.Location,
                             StartTime = item.Start.ToString("HH:mm"),
                             EndTime = item.End.ToString("HH:mm"),
-                            Mark = TodayItemMark.Warning
+                            Mark = TodayItemMark.Calendar
                         });
                     }
                 }
@@ -189,7 +190,7 @@ namespace Skolplattformen.ElevApp.ViewModels
                         {
                             Title = item.ReasonDescription,
                             Description = item.Reporter,
-                            Mark = TodayItemMark.AllDay
+                            Mark = TodayItemMark.Absence
                         });
                     }
                     else
@@ -199,8 +200,8 @@ namespace Skolplattformen.ElevApp.ViewModels
                             StartTime = item.DateTimeFrom.ToString("HH:mm"),
                             EndTime = item.DateTimeTo.ToString("HH:mm"),
                             Title = item.ReasonDescription,
-                            Description = item.Reporter
-
+                            Description = item.Reporter,
+                            Mark = TodayItemMark.Absence
                         });
                     }
                 }
@@ -217,7 +218,7 @@ namespace Skolplattformen.ElevApp.ViewModels
                         {
                             Title = item.Title,
                             Description = item.Description,
-                            Mark = TodayItemMark.Warning
+                            Mark = TodayItemMark.Kalendarium
                         });
                     }
                     else
@@ -228,7 +229,7 @@ namespace Skolplattformen.ElevApp.ViewModels
                             EndTime = item.EndDate.ToString("HH:mm"),
                             Title = item.Title,
                             Description = item.Description,
-                            Mark = TodayItemMark.Warning
+                            Mark = TodayItemMark.Kalendarium
                         });
                     }
                 }
@@ -269,15 +270,23 @@ namespace Skolplattformen.ElevApp.ViewModels
     public class TodayPageDataTemplateSelector : DataTemplateSelector
     {
         public DataTemplate PrimaryColorTemplate { get; set; }
-        public DataTemplate SecondaryColorTemplate { get; set; }
+        public DataTemplate AbsenceTemplate { get; set; }
+
+        public DataTemplate KalendariumTemplate { get; set; }
+        public DataTemplate CalendarTemplate { get; set; }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-       
-            return ((TodayItem)item).Mark == TodayItemMark.Standard 
-                ? PrimaryColorTemplate
-                : SecondaryColorTemplate;
-            
+
+            return ((TodayItem)item).Mark switch
+            {
+                TodayItemMark.Lesson => PrimaryColorTemplate,
+                TodayItemMark.Absence => AbsenceTemplate,
+                TodayItemMark.Kalendarium => KalendariumTemplate,
+                TodayItemMark.Calendar => CalendarTemplate,
+                _ => PrimaryColorTemplate
+            };
+
         }
     }
 }

@@ -29,7 +29,7 @@
                 </Frame>
             </DataTemplate>
 
-            <DataTemplate x:Key="SecondaryColorTemplate">
+            <DataTemplate x:Key="AbsenceTemplate">
                 <Frame Padding="6,6" Style="{DynamicResource SecondaryColorFrame}" Margin="0,4,0,0">
                     <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
                         <Label FontSize="12" Style="{DynamicResource SecondaryColorLabel}"   
@@ -48,11 +48,54 @@
                 </Frame>
             </DataTemplate>
 
+            <DataTemplate x:Key="KalendariumTemplate">
+                <Frame Padding="6,6" Style="{DynamicResource KalendariumFrame}" Margin="0,4,0,0">
+                    <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
+                        <Label FontSize="12" Style="{DynamicResource PrimaryColorLabel}"   
+                               IsVisible="{Binding IsAllDay, Converter={StaticResource InvertedBoolConverter}}">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0}-{1}">
+                                    <Binding Path="StartTime" />
+                                    <Binding Path="EndTime" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <Label Text="{Binding Title}" FontSize="24" Style="{DynamicResource PrimaryColorLabel}"/>
+                        <Label Text="{Binding Description}"  FontSize="14" Style="{DynamicResource PrimaryColorLabel}"
+                               IsVisible="{Binding Description, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </DataTemplate>
+
+            <DataTemplate x:Key="CalendarTemplate">
+                <Frame Padding="6,6" Style="{DynamicResource CalendarFrame}" Margin="0,4,0,0">
+                    <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
+                        <Label FontSize="12" Style="{DynamicResource PrimaryColorLabel}"   
+                               IsVisible="{Binding IsAllDay, Converter={StaticResource InvertedBoolConverter}}">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0}-{1}">
+                                    <Binding Path="StartTime" />
+                                    <Binding Path="EndTime" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <Label Text="{Binding Title}" FontSize="24" Style="{DynamicResource PrimaryColorLabel}"/>
+                        <Label Text="{Binding Description}"  FontSize="14" Style="{DynamicResource PrimaryColorLabel}"
+                               IsVisible="{Binding Description, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </DataTemplate>
+
+
+
         </ResourceDictionary>
         <viewModels:TodayPageDataTemplateSelector 
             x:Key="TodayPageDataTemplateSelector"
             PrimaryColorTemplate="{StaticResource PrimaryColorTemplate}"
-            SecondaryColorTemplate="{StaticResource SecondaryColorTemplate}" />
+            AbsenceTemplate="{StaticResource AbsenceTemplate}"
+            KalendariumTemplate="{StaticResource KalendariumTemplate}" 
+            CalendarTemplate="{StaticResource CalendarTemplate}"
+            />
     </ContentPage.Resources>
 
     <ScrollView  x:Name="ScrollViewCtrl">
