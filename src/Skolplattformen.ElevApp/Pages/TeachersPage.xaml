@@ -16,18 +16,20 @@
                 <BindableLayout.ItemTemplate>
 
                     <DataTemplate>
-                        <VerticalStackLayout Padding="10,0" Margin="0,10,10,10">
-                            <Label FontSize="24" FontAttributes="Bold">
-                                <Label.Text>
-                                    <MultiBinding StringFormat="{}{0} {1}">
-                                        <Binding Path="Firstname" />
-                                        <Binding Path="Lastname" />
-                                    </MultiBinding>
-                                </Label.Text>
-                            </Label>
-                            <Label Text="{Binding Email}" FontSize="14"/>
-                            <Label Text="{Binding Subjects, Converter={StaticResource ListToStringConverter}}" FontSize="18"/>
-                        </VerticalStackLayout>
+                        <Frame Padding="6,6" Margin="6,4,6,0">
+                            <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
+                                <Label FontSize="24" FontAttributes="Bold">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="Firstname" />
+                                            <Binding Path="Lastname" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                                <Label Text="{Binding Email}" FontSize="14"/>
+                                <Label Text="{Binding Subjects, Converter={StaticResource ListToStringConverter}}" FontSize="18"/>
+                            </VerticalStackLayout>
+                        </Frame>
                     </DataTemplate>
 
                 </BindableLayout.ItemTemplate>
