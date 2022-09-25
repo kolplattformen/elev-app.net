@@ -35,7 +35,7 @@
     <Color x:Key="CalendarFrameColor">#D9E9EA</Color>
 
     <Color x:Key="ActiveColor">#E9F2F3</Color>
-    <Color x:Key="ActiveFrameColor">#E9F1F2</Color>
+    <Color x:Key="ActiveFrameColor">#D9E9EA</Color>
 
 
     <Color x:Key="TransparentColor">Transparent</Color>
