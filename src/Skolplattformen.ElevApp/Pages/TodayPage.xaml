@@ -11,8 +11,8 @@
             <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
             <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="IsStringNotNullOrWhiteSpaceConverter" />
             <DataTemplate x:Key="PrimaryColorTemplate">
-                <Frame Padding="6,6" Margin="0,4,0,0">
-                    <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
+                <Frame Padding="12,6" Margin="0,6,0,0">
+                    <VerticalStackLayout Padding="0,0" Margin="0,0,0,0">
                         <Label FontSize="12" Style="{DynamicResource PrimaryColorLabel}" 
                                IsVisible="{Binding IsAllDay, Converter={StaticResource InvertedBoolConverter}}">
                             <Label.Text>
@@ -30,8 +30,8 @@
             </DataTemplate>
 
             <DataTemplate x:Key="AbsenceTemplate">
-                <Frame Padding="6,6" Style="{DynamicResource SecondaryColorFrame}" Margin="0,4,0,0">
-                    <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
+                <Frame Padding="12,6" Style="{DynamicResource SecondaryColorFrame}" Margin="0,6,0,0">
+                    <VerticalStackLayout Padding="0,0" Margin="0,0,0,0">
                         <Label FontSize="12" Style="{DynamicResource SecondaryColorLabel}"   
                                IsVisible="{Binding IsAllDay, Converter={StaticResource InvertedBoolConverter}}">
                             <Label.Text>
@@ -49,8 +49,8 @@
             </DataTemplate>
 
             <DataTemplate x:Key="KalendariumTemplate">
-                <Frame Padding="6,6" Style="{DynamicResource KalendariumFrame}" Margin="0,4,0,0">
-                    <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
+                <Frame Padding="12,6" Style="{DynamicResource KalendariumFrame}" Margin="0,6,0,0">
+                    <VerticalStackLayout Padding="0,0" Margin="0,0,0,0">
                         <Label FontSize="12" Style="{DynamicResource PrimaryColorLabel}"   
                                IsVisible="{Binding IsAllDay, Converter={StaticResource InvertedBoolConverter}}">
                             <Label.Text>
@@ -68,8 +68,8 @@
             </DataTemplate>
 
             <DataTemplate x:Key="CalendarTemplate">
-                <Frame Padding="6,6" Style="{DynamicResource CalendarFrame}" Margin="0,4,0,0">
-                    <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
+                <Frame Padding="12,6" Style="{DynamicResource CalendarFrame}" Margin="0,6,0,0">
+                    <VerticalStackLayout Padding="0,0" Margin="0,0,0,0">
                         <Label FontSize="12" Style="{DynamicResource PrimaryColorLabel}"   
                                IsVisible="{Binding IsAllDay, Converter={StaticResource InvertedBoolConverter}}">
                             <Label.Text>
@@ -100,7 +100,7 @@
 
     <ScrollView  x:Name="ScrollViewCtrl">
 
-        <VerticalStackLayout Margin="6,6,6,6">
+        <VerticalStackLayout Margin="12,12">
 
             <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                 <Button

@@ -10,13 +10,13 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView  x:Name="ScrollViewCtrl">
-        <VerticalStackLayout>
+        <VerticalStackLayout >
             <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
-            <StackLayout BindableLayout.ItemsSource="{Binding Items}">
+            <StackLayout BindableLayout.ItemsSource="{Binding Items}" Padding="0,6">
                 <BindableLayout.ItemTemplate>
 
                     <DataTemplate>
-                        <Frame Padding="6,6" Margin="6,4,6,0">
+                        <Frame Padding="12,6" Margin="12,6,12,0">
                             <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
                                 <Label FontSize="24" FontAttributes="Bold">
                                     <Label.Text>

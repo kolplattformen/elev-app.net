@@ -8,8 +8,8 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="StandardTemplate">
-                <Frame Padding="6,6" Margin="0,4,0,0">
-                    <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
+                <Frame Padding="12,6" Margin="0,6,0,0">
+                    <VerticalStackLayout Padding="0,0" Margin="0,0,0,0">
                         <Label Text="{Binding Title}" FontSize="24" FontAttributes="Bold" Style="{DynamicResource PrimaryColorLabel}"/>
                         <Label Text="{Binding Description}" FontSize="14" Style="{DynamicResource PrimaryColorLabel}"/>
                     </VerticalStackLayout>
@@ -18,8 +18,8 @@
             </DataTemplate>
             
             <DataTemplate x:Key="ActiveTemplate">
-                <Frame Padding="6,6" Margin="0,4,0,0" Style="{DynamicResource ActiveFrame}">
-                    <VerticalStackLayout Padding="1,0" Margin="0,0,0,0">
+                <Frame Padding="12,6" Margin="0,6,0,0" Style="{DynamicResource ActiveFrame}">
+                    <VerticalStackLayout Padding="0,0" Margin="0,0,0,0">
                         <Label Text="{Binding Title}" FontSize="24" FontAttributes="Bold" Style="{DynamicResource PrimaryColorLabel}" />
                         <Label Text="{Binding Description}" FontSize="14" Style="{DynamicResource PrimaryColorLabel}" />
                     </VerticalStackLayout>
@@ -38,7 +38,7 @@
     <!--<RefreshView IsRefreshing="{Binding IsRefreshing}"
                  Command="{Binding RefreshCommand}">-->
     <ScrollView x:Name="ScrollViewCtrl">
-        <StackLayout Margin="6,6,6,6" VerticalOptions="FillAndExpand">
+        <StackLayout Margin="12,12" VerticalOptions="FillAndExpand">
             <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                 <Button
                         Text="«"
@@ -49,7 +49,7 @@
                         <TapGestureRecognizer Command="{Binding TodayCommand}"/>
                     </Label.GestureRecognizers>
                 </Label>
-                <Button
+                <Button 
                         Text="»"
                         Command="{Binding NextCommand}"
                         HorizontalOptions="End" />
@@ -57,7 +57,7 @@
 
             <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
 
-            <StackLayout BindableLayout.ItemsSource="{Binding Items}"
+            <StackLayout Padding="0,6" BindableLayout.ItemsSource="{Binding Items}"
                          BindableLayout.ItemTemplateSelector="{StaticResource LunchPageDataTemplateSelector}">
             </StackLayout>
     
