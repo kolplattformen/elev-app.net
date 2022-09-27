@@ -342,8 +342,8 @@
             </Style>-->
 
             <Style TargetType="Switch">
-                <Setter Property="OnColor" Value="{DynamicResource PrimaryColor}" />
-                <Setter Property="ThumbColor" Value="{DynamicResource SecondaryColor}" />
+                <Setter Property="OnColor" Value="{DynamicResource DisabledColor}" />
+                <Setter Property="ThumbColor" Value="{DynamicResource PrimaryTextColor}" />
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
@@ -351,18 +351,19 @@
                             <VisualState x:Name="Disabled">
                                 <VisualState.Setters>
                                     <Setter Property="OnColor" Value="{DynamicResource DisabledColor}" />
-                                    <Setter Property="ThumbColor" Value="{DynamicResource DisabledColor}" />
+                                    <Setter Property="ThumbColor" Value="{DynamicResource DisabledTextColor}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="On">
                                 <VisualState.Setters>
-                                    <Setter Property="OnColor" Value="{DynamicResource SecondaryColor}" />
-                                    <Setter Property="ThumbColor" Value="{DynamicResource PrimaryColor}" />
+                                    <Setter Property="OnColor" Value="{DynamicResource PrimaryColor}" />
+                                    <Setter Property="ThumbColor" Value="{DynamicResource PrimaryTextColor}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Off">
                                 <VisualState.Setters>
-                                    <Setter Property="ThumbColor" Value="{DynamicResource PrimaryColor}" />
+                                    <Setter Property="OnColor" Value="{DynamicResource DisabledColor}" />
+                                    <Setter Property="ThumbColor" Value="{DynamicResource PrimaryTextColor}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
