@@ -3,6 +3,7 @@ using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Skolplattformen.ElevApp.Data;
+using Skolplattformen.ElevApp.Models;
 using SkolplattformenElevApi.Models;
 
 namespace Skolplattformen.ElevApp.ViewModels
@@ -12,7 +13,7 @@ namespace Skolplattformen.ElevApp.ViewModels
         private readonly SkolplattformenService _skolplattformenService;
         [ObservableProperty] private bool isLoading;
 
-        [ObservableProperty] private ObservableCollection<Meal> items;
+        [ObservableProperty] private ObservableCollection<LunchItem> items;
         [ObservableProperty] private string title;
         [ObservableProperty] private bool isRefreshing;
         [ObservableProperty] private DateTime day;
@@ -21,7 +22,7 @@ namespace Skolplattformen.ElevApp.ViewModels
         public LunchViewModel(SkolplattformenService skolplattformenService)
         {
             _skolplattformenService = skolplattformenService;
-            items = new ObservableCollection<Meal>();
+            items = new ObservableCollection<LunchItem>();
 
             Day = DateTime.Now; // Skip weekends
             if (Day.DayOfWeek == DayOfWeek.Saturday)
@@ -58,7 +59,12 @@ namespace Skolplattformen.ElevApp.ViewModels
                 items.Clear();
                 foreach (var meal in meals.OrderBy(m => m.Date))
                 {
-                    items.Add(meal);
+                    items.Add(new LunchItem
+                    {
+                        Date = meal.Date,
+                        Title = meal.Title,
+                        Description = meal.Description
+                    });
                 }
 
                 UsingSkolmatenSe = Settings.UseSkolmatenSe;
@@ -104,6 +110,23 @@ namespace Skolplattformen.ElevApp.ViewModels
         public Task OnActivated()
         {
             return LoadData();
+        }
+    }
+
+    public class LunchPageDataTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate StandardTemplate { get; set; }
+        public DataTemplate ActiveTemplate { get; set; }
+
+        
+        protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
+        {
+            return ((LunchItem)item).IsToday switch
+            {
+                true => ActiveTemplate,
+                _ => StandardTemplate
+            };
+
         }
     }
 }
