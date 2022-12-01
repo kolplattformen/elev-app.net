@@ -58,7 +58,7 @@ public partial class Api
                         {
                             // Dates seems to be in UTC, and should be converted unless it's all day event
                             Title = item.Title,
-                            Description = item.Description,
+                            Description = HtmlCleaner.CleanHtml(item.Description),
                             IsAllDayEvent = item.FAllDayEvent
                         };
 
