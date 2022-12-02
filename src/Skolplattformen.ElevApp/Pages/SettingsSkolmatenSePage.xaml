@@ -2,11 +2,25 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Skolplattformen.ElevApp.Pages.SettingsSkolmatenSePage"
-             Title="SettingsSkolmatenSePage">
+             xmlns:viewmodel="clr-namespace:Skolplattformen.ElevApp.ViewModels"
+             x:DataType="viewmodel:SettingsSkolmatenSeViewModel"
+             Title="Skolmaten.se">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Sätt upp skolmaten.se"
             VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Label
+            Text="1. Surfa till skolmaten.se med en webbläsare och hitta din skola"
+            VerticalOptions="Start" 
+            HorizontalOptions="Center" />
+        <Label
+            Text="2. Hitta skolans namn i URL:en i webbläsarens adressrad"
+            VerticalOptions="Start" 
+            HorizontalOptions="Center" />
+        <Label
+            Text="3. Skriv in skolans namn EXAKT som det står i addressraden."
+            VerticalOptions="Start" 
             HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>

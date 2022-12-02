@@ -66,6 +66,34 @@ namespace Skolplattformen.ElevApp.Data
                 };
             return entries.ToList();
         }
+
+        public static async Task< (bool valid, string schoolName)> ValidateSchoolAsync(string school)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var response = await client.GetAsync($"https://skolmaten.se/{school}/rss/days/");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        var doc = XDocument.Parse(content);
+                        var schoolName = doc.Root.Descendants()
+                            .First(i => i.Name.LocalName == "channel")
+                            .Elements()
+                            .First(i => i.Name.LocalName == "title").Value;
+                        return (true, schoolName);
+                    }
+                }
+            } 
+            catch
+            {
+                return (false, null);
+            }
+            
+            return (false, null);
+        }
     }
 
     internal class RssItem{
