@@ -12,11 +12,11 @@
         ContentTemplate="{DataTemplate local:LoginPage}"
         Route="LoginPage" />
 
-    <!--<ShellContent
+    <ShellContent
         Title="Inställningar skolmaten.se"
         Shell.PresentationMode="Modal"
         ContentTemplate="{DataTemplate local:SettingsSkolmatenSePage}"
-        Route="SettingsPage" />-->
+        Route="SkolmatenSeSettingsPage" />
 
     <TabBar >
         <Tab

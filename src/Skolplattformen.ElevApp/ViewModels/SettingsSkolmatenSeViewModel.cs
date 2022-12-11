@@ -38,6 +38,13 @@ namespace Skolplattformen.ElevApp.ViewModels
             }
         }
 
+        [RelayCommand]
+        public async Task SaveAndPop()
+        {
+            
+            Settings.SkolmatenSeSchoolName = skolmatenSeSchoolName;
+            await Shell.Current.Navigation.PopAsync();
+        }
 
         public Task LoadData()
         {

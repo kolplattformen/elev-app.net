@@ -22,5 +22,19 @@
             Text="3. Skriv in skolans namn EXAKT som det står i addressraden."
             VerticalOptions="Start" 
             HorizontalOptions="Center" />
+
+
+        <Label 
+            Text="Skolmaten.se skola"
+            FontAttributes="Bold"
+            VerticalOptions="Start" 
+            HorizontalOptions="Start" />
+        <Entry 
+            Text="{Binding SkolmatenSeSchoolName}"
+            Placeholder="Namn"
+            VerticalOptions="Start" 
+            HorizontalOptions="Start" />
+
+        <Button Text="Stäng" Command="{Binding SaveAndPopCommand}"></Button>
     </VerticalStackLayout>
 </ContentPage>

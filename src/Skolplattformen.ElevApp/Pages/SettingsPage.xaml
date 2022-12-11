@@ -24,6 +24,7 @@
                 <Switch IsToggled="{Binding UseSkolmatenSe}" HorizontalOptions="End"></Switch>
             </StackLayout>
         </VerticalStackLayout>
+        <Button Text="Yo" Command="{Binding PopupSkolmatenCommand}"></Button>
         <VerticalStackLayout Margin="0,20">
             <Label 
                 Text="Inkludera i Min dag-vyn"

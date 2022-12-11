@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Skolplattformen.ElevApp.Data;
+using Skolplattformen.ElevApp.Pages;
 
 namespace Skolplattformen.ElevApp.ViewModels
 {
@@ -24,6 +25,12 @@ namespace Skolplattformen.ElevApp.ViewModels
             Settings.ShowKalendariumInTodayView = showKalendariumInTodayView;
         }
 
+        [RelayCommand]
+        public async Task PopupSkolmaten()
+        {
+            await Shell.Current.Navigation.PushAsync(new SettingsSkolmatenSePage(new SettingsSkolmatenSeViewModel()));
+       
+        }
 
         public Task LoadData()
         {
