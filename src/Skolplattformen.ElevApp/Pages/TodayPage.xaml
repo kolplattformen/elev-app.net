@@ -61,7 +61,7 @@
                             </Label.Text>
                         </Label>
                         <Label Text="{Binding Title}" FontSize="24" Style="{DynamicResource PrimaryColorLabel}"/>
-                        <Label Text="{Binding Description}"  FontSize="14" Style="{DynamicResource PrimaryColorLabel}"
+                        <Label Text="{Binding Description}"  FontSize="14" Style="{DynamicResource PrimaryColorLabel}"  
                                IsVisible="{Binding Description, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}"/>
                     </VerticalStackLayout>
                 </Frame>
@@ -102,7 +102,7 @@
 
         <VerticalStackLayout Margin="12,12">
 
-            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+            <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
                 <Button
                     Text="«"
                     Command="{Binding PreviousCommand}"

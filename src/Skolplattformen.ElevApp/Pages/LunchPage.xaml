@@ -39,7 +39,7 @@
                  Command="{Binding RefreshCommand}">-->
     <ScrollView x:Name="ScrollViewCtrl">
         <StackLayout Margin="12,12" VerticalOptions="FillAndExpand">
-            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+            <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
                 <Button
                         Text="«"
                         Command="{Binding PreviousCommand}"
