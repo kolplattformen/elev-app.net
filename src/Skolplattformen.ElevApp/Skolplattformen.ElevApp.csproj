@@ -30,13 +30,13 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)'=='net6.0-ios' and '$(Configuration)' == 'Release'">
+	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios' and '$(Configuration)' == 'Release'">
 		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
 		<CodesignKey>Apple Distribution: Not Free Beer AB (76DV673YHX)</CodesignKey>
 		<CodesignProvision>ElevAppSigning</CodesignProvision>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)'=='net6.0-ios' and '$(Configuration)' == 'Debug'">
+	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios' and '$(Configuration)' == 'Debug'">
 	  <CodesignKey>Apple Development: Created via API (ZYVYLJDUYH)</CodesignKey>
 	  <CodesignProvision>VS: WildCard Development</CodesignProvision>
 	</PropertyGroup>
