@@ -54,6 +54,11 @@ namespace Skolplattformen.ElevApp.ViewModels
             UseSkolmatenSe = Settings.UseSkolmatenSe;
             SkolmatenSeSchoolName = Settings.SkolmatenSeSchoolName;
             IsLoading = false;
+
+
+
+
+
             return Task.CompletedTask;
         }
 
