@@ -2,11 +2,45 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Skolplattformen.ElevApp.Pages.SettingsSkolmatenSePage"
-             Title="SettingsSkolmatenSePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
+             xmlns:viewmodel="clr-namespace:Skolplattformen.ElevApp.ViewModels"
+             x:DataType="viewmodel:SettingsSkolmatenSeViewModel"
+             Title="Inställningar">
+    <VerticalStackLayout Margin="24,12">
+        <Label Margin="0,21"
+            FontSize="21"
+            Text="Sätt upp skolmaten.se"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Label
+            Margin="0,6"
+            Text="1. Surfa till skolmaten.se med en webbläsare och hitta din skola"
+            VerticalOptions="Start" 
+            HorizontalOptions="Fill" />
+        <Label
+            Margin="0,6"
+            Text="2. Hitta skolans namn i URL:en i webbläsarens adressrad"
+            VerticalOptions="Start" 
+            HorizontalOptions="Fill" />
+        <Label
+            Margin="0,6"
+            Text="3. Skriv in skolans namn EXAKT som det står i addressraden."
+            VerticalOptions="Start" 
+            HorizontalOptions="Fill" />
+
+
+        <!--<Label 
+            Margin="0,6"
+            Text="Skolmaten.se skola"
+            FontAttributes="Bold"
+            VerticalOptions="Start" 
+            HorizontalOptions="Start" />-->
+        <Entry 
+            Margin="0,6"
+            Text="{Binding SkolmatenSeSchoolName}"
+            Placeholder="Skolans namn"
+            VerticalOptions="Start" 
+            HorizontalOptions="Fill" />
+
+        <Button Text="Stäng" Command="{Binding SaveAndPopCommand}"></Button>
     </VerticalStackLayout>
 </ContentPage>
