@@ -39,14 +39,7 @@
            Icon="teacher_with_stick_svgrepo_com.png"
            ContentTemplate="{DataTemplate local:TeachersPage}"
            Route="TeacherPage" />
-
-
-        <ShellContent
-           Title="Jag"
-           Icon="headphones_svgrepo_com.png"
-           ContentTemplate="{DataTemplate local:MePage}"
-           Route="MePage" />
-        
+       
         <ShellContent
             Title="Inställningar"
             Icon="settings_svgrepo_com.png"
