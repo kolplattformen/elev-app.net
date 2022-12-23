@@ -30,9 +30,6 @@ public static class MauiProgram
         builder.Services.AddSingleton<LunchPage>();
         builder.Services.AddSingleton<LunchViewModel>();
 
-        builder.Services.AddSingleton<MePage>();
-        builder.Services.AddSingleton<MeViewModel>();
-
         builder.Services.AddSingleton<SettingsPage>();
         builder.Services.AddSingleton<SettingsViewModel>();
 
