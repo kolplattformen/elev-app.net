@@ -43,4 +43,7 @@
 
     <Color x:Key="FrameColor">#4E4F50</Color>
     <Color x:Key="SecondaryFrameColor">#f5a962</Color>
+
+    <Color x:Key="SwitchColor">#e7e7e7</Color>
+    <Color x:Key="SwitchBackgroundColor">#108085</Color>
 </ResourceDictionary>

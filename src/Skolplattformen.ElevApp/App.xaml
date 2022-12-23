@@ -343,7 +343,7 @@
 
             <Style TargetType="Switch">
                 <Setter Property="OnColor" Value="{DynamicResource DisabledColor}" />
-                <Setter Property="ThumbColor" Value="{DynamicResource PrimaryTextColor}" />
+                <Setter Property="ThumbColor" Value="{DynamicResource SwitchColor}" />
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
@@ -356,14 +356,14 @@
                             </VisualState>
                             <VisualState x:Name="On">
                                 <VisualState.Setters>
-                                    <Setter Property="OnColor" Value="{DynamicResource PrimaryColor}" />
-                                    <Setter Property="ThumbColor" Value="{DynamicResource PrimaryTextColor}" />
+                                    <Setter Property="OnColor" Value="{DynamicResource SwitchBackgroundColor}" />
+                                    <Setter Property="ThumbColor" Value="{DynamicResource SwitchColor}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Off">
                                 <VisualState.Setters>
-                                    <Setter Property="OnColor" Value="{DynamicResource DisabledColor}" />
-                                    <Setter Property="ThumbColor" Value="{DynamicResource PrimaryTextColor}" />
+                                    <Setter Property="OnColor" Value="{DynamicResource SwitchBackgroundColor}" />
+                                    <Setter Property="ThumbColor" Value="{DynamicResource SwitchColor}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
