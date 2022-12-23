@@ -15,19 +15,7 @@
                 FontAttributes="Bold"
                 VerticalOptions="Start" 
                 HorizontalOptions="Start" />
-            <!--<Entry 
-                Text="{Binding SkolmatenSeSchoolName}"
-                Placeholder="Namn"
-                VerticalOptions="Start" 
-                HorizontalOptions="Fill" 
-                />-->
 
-            <Frame Padding="12,6" Margin="0,6,0,0">
-                <StackLayout  Orientation="Horizontal">
-                    <Label HorizontalOptions="StartAndExpand" Text="Använd skolmaten.se" Margin="0,5"></Label>
-                    <Switch IsToggled="{Binding UseSkolmatenSe}" HorizontalOptions="End"></Switch>
-                </StackLayout>
-            </Frame>
         </VerticalStackLayout>
 
         <Button Text="Sätt upp matsedel från skolmaten.se" Command="{Binding PopupSkolmatenCommand}" Margin="0,6,0,0"></Button>
@@ -41,13 +29,10 @@
                 HorizontalOptions="Start" />
 
             <Frame Padding="12,6" Margin="0,6,0,0">
-                <!--<VerticalStackLayout Padding="0,0" Margin="0,0,0,0">-->
                 <StackLayout  Orientation="Horizontal">
                     <Label HorizontalOptions="StartAndExpand" Text="Min kalender" Margin="0,5"></Label>
                     <Switch IsToggled="{Binding ShowCalendarInTodayView}" HorizontalOptions="End"></Switch>
                 </StackLayout>
-                <!--</VerticalStackLayout>-->
-
             </Frame>
 
             <Frame Padding="12,6" Margin="0,6,0,0">
@@ -63,9 +48,6 @@
                     <Switch IsToggled="{Binding ShowKalendariumInTodayView}" HorizontalOptions="End"></Switch>
                 </StackLayout>
             </Frame>
-
-
-
         </VerticalStackLayout>
 
         <Button Text="Spara"

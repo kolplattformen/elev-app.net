@@ -46,4 +46,7 @@
     <Color x:Key="FrameColor">#EDECED</Color>
     <Color x:Key="SecondaryFrameColor">#f5a962</Color>
 
+    <Color x:Key="SwitchColor">#108085</Color>
+    <Color x:Key="SwitchBackgroundColor">#D9E9EA</Color>
+
 </ResourceDictionary>

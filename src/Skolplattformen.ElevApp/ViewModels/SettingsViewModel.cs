@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Skolplattformen.ElevApp.Data;
 using Skolplattformen.ElevApp.Pages;
@@ -9,8 +10,7 @@ namespace Skolplattformen.ElevApp.ViewModels
     {
         private readonly SkolplattformenService _skolplattformenService;
         [ObservableProperty] private bool isLoading;
-        [ObservableProperty] private string skolmatenSeSchoolName;
-        [ObservableProperty] private bool useSkolmatenSe;
+
         [ObservableProperty] private bool showCalendarInTodayView;
         [ObservableProperty] private bool showPlannedAbsenceInTodayView;
         [ObservableProperty] private bool showKalendariumInTodayView;
@@ -34,11 +34,12 @@ namespace Skolplattformen.ElevApp.ViewModels
         [RelayCommand]
         public void Save()
         {
-            Settings.UseSkolmatenSe = useSkolmatenSe;
-            Settings.SkolmatenSeSchoolName = skolmatenSeSchoolName;
             Settings.ShowCalendarInTodayView = showCalendarInTodayView;
             Settings.ShowPlannedAbsenceInTodayView = showPlannedAbsenceInTodayView;
             Settings.ShowKalendariumInTodayView = showKalendariumInTodayView;
+
+            Toast.Make("Inställningarna sparades").Show();
+
         }
 
         [RelayCommand]
@@ -53,8 +54,6 @@ namespace Skolplattformen.ElevApp.ViewModels
             if(IsLoading) return ;
             IsLoading = true;
 
-            UseSkolmatenSe = Settings.UseSkolmatenSe;
-            SkolmatenSeSchoolName = Settings.SkolmatenSeSchoolName;
             ShowCalendarInTodayView = Settings.ShowCalendarInTodayView;
             ShowPlannedAbsenceInTodayView = Settings.ShowPlannedAbsenceInTodayView;
             ShowKalendariumInTodayView = Settings.ShowKalendariumInTodayView;
