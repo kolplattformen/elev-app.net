@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Skolplattformen.ElevApp.Data;
@@ -13,8 +16,8 @@ namespace Skolplattformen.ElevApp.ViewModels
     {
         [ObservableProperty] private bool isLoading;
         [ObservableProperty] private string skolmatenSeSchoolName;
-        [ObservableProperty] private string skolmatenSeSchooFullName;
-        [ObservableProperty] private bool isSchoolNameValid;
+        [ObservableProperty] private string skolmatenSeSchoolFullName;
+        [ObservableProperty] private string skolmatenSeSchoolUrl;
         [ObservableProperty] private bool useSkolmatenSe;
 
         [RelayCommand]
@@ -24,26 +27,40 @@ namespace Skolplattformen.ElevApp.ViewModels
             Settings.SkolmatenSeSchoolName = skolmatenSeSchoolName;
         }
 
-        [RelayCommand]
-        public async Task Validate()
+        
+        public async Task<bool> Validate(string schoolName)
         {
-            if (!string.IsNullOrEmpty(SkolmatenSeSchoolName))
+            if (!string.IsNullOrEmpty(schoolName))
             {
-                var validationResult = await SkolmatenSeService.ValidateSchoolAsync(SkolmatenSeSchoolName);
-                if (validationResult.valid)
-                {
-                    IsSchoolNameValid = true;
-                    SkolmatenSeSchooFullName = validationResult.schoolName;
-                }
+                var validationResult = await SkolmatenSeService.ValidateSchoolAsync(schoolName);
+                return validationResult.valid;
             }
+            return false;
+        }
+
+
+        [RelayCommand]
+        public async Task CancelAndPop()
+        {
+            SkolmatenSeSchoolName = Settings.SkolmatenSeSchoolName;
+            
+            await Shell.Current.Navigation.PopAsync();
         }
 
         [RelayCommand]
         public async Task SaveAndPop()
         {
+            SkolmatenSeSchoolName = SchoolUrlToSchoolName(SkolmatenSeSchoolUrl);
             
-            Settings.SkolmatenSeSchoolName = skolmatenSeSchoolName;
-            await Shell.Current.Navigation.PopAsync();
+            if (!UseSkolmatenSe ||  await Validate(SkolmatenSeSchoolName))
+            {
+                Settings.SkolmatenSeSchoolName = skolmatenSeSchoolName;
+                Settings.UseSkolmatenSe = UseSkolmatenSe;
+                await Shell.Current.Navigation.PopAsync();
+                return;
+            }
+
+            await Toast.Make("Fel. Kan inte hämta skola på den länken.", ToastDuration.Long).Show();
         }
 
         public Task LoadData()
@@ -55,9 +72,7 @@ namespace Skolplattformen.ElevApp.ViewModels
             SkolmatenSeSchoolName = Settings.SkolmatenSeSchoolName;
             IsLoading = false;
 
-
-
-
+            SkolmatenSeSchoolUrl = SchoolNameToSchoolUrl(SkolmatenSeSchoolName);
 
             return Task.CompletedTask;
         }
@@ -66,6 +81,19 @@ namespace Skolplattformen.ElevApp.ViewModels
         {
             return LoadData();
         }
+
+        private string SchoolUrlToSchoolName(string url)
+        {
+            url = url.Trim();
+            while (url.EndsWith("/"))
+            {
+                url = url.Substring(0, url.Length - 1);
+            }
+
+            return url?.Split('/').LastOrDefault();
+        }
+
+        private string SchoolNameToSchoolUrl(string name) =>  $"https://skolmaten.se/{name}/";
     }
         
     
