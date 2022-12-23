@@ -6,16 +6,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using SkolplattformenElevApi.Models;
+using SkolplattformenElevApi.Models.News;
 
 namespace Skolplattformen.ElevApp.Data
 {
     internal static class SkolmatenSeService
     {
-
+        private static Dictionary<string, List<Meal>> _cache = new();
 
         public static async Task<List<Meal>> GetWeekAsync(string school, int year, int week)
         {
-
+            var key = $"{year}_{week}";
+            if (_cache.ContainsKey(key))
+            {
+                return _cache[key];
+            }
+            
             var limit = 1;
             var offset = 0;
 
@@ -45,6 +51,8 @@ namespace Skolplattformen.ElevApp.Data
                     }
                 }
             }
+
+            _cache[key] = meals;
             return meals;
         }
 
