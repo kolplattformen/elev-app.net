@@ -78,11 +78,19 @@ namespace Skolplattformen.ElevApp.ViewModels
                 Platform = PlatformSelectedIndex
             };
             Storage.Store("login_details", loginDetails);
-
-            await _skolplattformenService.LogInAsync(email, username, password);
-
-            IsLoading = false;
-            await Shell.Current.GoToAsync($"//{nameof(TodayPage)}");
+            try
+            {
+                await _skolplattformenService.LogInAsync(email, username, password);
+                await Shell.Current.GoToAsync($"//{nameof(TodayPage)}");
+            }
+            catch (Exception e)
+            {
+                await Shell.Current.DisplayAlert("Något blev fel", "Kontrollera uppgifterna och försök igen", "Ok");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
 
         
