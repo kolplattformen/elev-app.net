@@ -96,7 +96,7 @@ namespace Skolplattformen.ElevApp.ViewModels
             return url?.Split('/').LastOrDefault();
         }
 
-        private string SchoolNameToSchoolUrl(string name) =>  $"https://skolmaten.se/{name}/";
+        private string SchoolNameToSchoolUrl(string name) => !string.IsNullOrWhiteSpace(name) ? $"https://skolmaten.se/{name}/": "";
     }
         
     
