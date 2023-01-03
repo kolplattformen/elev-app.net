@@ -6,33 +6,35 @@
              x:DataType="viewmodel:SettingsSkolmatenSeViewModel"
              Title="Inställningar">
 
-    <VerticalStackLayout Margin="12,12">
-        <Frame Padding="12,6" Margin="0,6,0,0">
-            <StackLayout  Orientation="Horizontal">
-                <Label HorizontalOptions="StartAndExpand" Text="Använd skolmaten.se" Margin="0,5"></Label>
-                <Switch IsToggled="{Binding UseSkolmatenSe}" HorizontalOptions="End"></Switch>
-            </StackLayout>
-        </Frame>
+    <ScrollView x:Name="ScrollViewCtrl">
+        <VerticalStackLayout Margin="12,12">
+            <Frame Padding="12,6" Margin="0,6,0,0">
+                <StackLayout  Orientation="Horizontal">
+                    <Label HorizontalOptions="StartAndExpand" Text="Använd skolmaten.se" Margin="0,5"></Label>
+                    <Switch IsToggled="{Binding UseSkolmatenSe}" HorizontalOptions="End" 
+                            Toggled="Switch_OnToggled"></Switch>
+                </StackLayout>
+            </Frame>
 
-        <VerticalStackLayout Margin="12,0" IsVisible="{Binding UseSkolmatenSe}">
-            <Label Margin="0,21"
+            <VerticalStackLayout Margin="12,0" IsVisible="{Binding UseSkolmatenSe}">
+                <Label Margin="0,21"
                FontSize="21"
                Text="Hämta matsedel från skolmaten.se"
                VerticalOptions="Center" 
                HorizontalOptions="Center" />
-            <Label
+                <Label
             Margin="0,6"
             Text="1. Surfa till skolmaten.se med en webbläsare och hitta din skola"
             VerticalOptions="Start" 
             HorizontalOptions="Fill" />
-            <Label
+                <Label
             Margin="0,6"
             Text="2. Kopiera länkadressen när du hittat din skola och fyll sedan i den nedan"
             VerticalOptions="Start" 
             HorizontalOptions="Fill" />
 
-        </VerticalStackLayout>
-        <Entry  
+            </VerticalStackLayout>
+            <Entry  
             Margin="0,6"
             Text="{Binding SkolmatenSeSchoolUrl}"
             Placeholder="https://skolmaten.se/skolans-namn/"
@@ -42,17 +44,12 @@
             IsVisible="{Binding UseSkolmatenSe}"
             />
 
+            <HorizontalStackLayout HorizontalOptions="End" Margin="0,6">
+                <Button HorizontalOptions="Start" Margin="6,0" Text="Avbryt" Command="{Binding CancelAndPopCommand}"></Button>
+                <Button HorizontalOptions="End"  Margin="6,0,0,0" Text="Spara" Command="{Binding SaveAndPopCommand}"></Button>
+            </HorizontalStackLayout>
 
-            
-
-        
-
-        <HorizontalStackLayout HorizontalOptions="End" Margin="0,6">
-            <Button HorizontalOptions="Start" Margin="6,0" Text="Avbryt" Command="{Binding CancelAndPopCommand}"></Button>
-            <Button HorizontalOptions="End"  Margin="6,0,0,0" Text="Spara" Command="{Binding SaveAndPopCommand}"></Button>
-        </HorizontalStackLayout>
-
-    </VerticalStackLayout>
-
+        </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage>

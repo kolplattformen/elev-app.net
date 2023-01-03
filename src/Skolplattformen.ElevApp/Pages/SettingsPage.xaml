@@ -5,100 +5,92 @@
              xmlns:viewmodel="clr-namespace:Skolplattformen.ElevApp.ViewModels"
              x:DataType="viewmodel:SettingsViewModel"
              Title="Inställningar">
-    <VerticalStackLayout Margin="12,12">
-        <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
 
-        <VerticalStackLayout>
-            <Label 
+    <ScrollView x:Name="ScrollViewCtrl">
+        <VerticalStackLayout Margin="12,12">
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
+
+            <VerticalStackLayout>
+                <Label 
                 FontSize="21"
                 Text="Skolmaten.se"
                 FontAttributes="Bold"
                 VerticalOptions="Start" 
                 HorizontalOptions="Start" />
 
-        </VerticalStackLayout>
+            </VerticalStackLayout>
 
-        <Button Text="Sätt upp matsedel från skolmaten.se" Command="{Binding PopupSkolmatenCommand}" Margin="0,6,0,0"></Button>
+            <Button Text="Sätt upp matsedel från skolmaten.se" Command="{Binding PopupSkolmatenCommand}" Margin="0,6,0,0"></Button>
 
-        <VerticalStackLayout Margin="0,20">
-            <Label 
+            <VerticalStackLayout Margin="0,20">
+                <Label 
                 FontSize="21"
                 Text="Inkludera i Min dag-vyn"
                 FontAttributes="Bold"
                 VerticalOptions="Start" 
                 HorizontalOptions="Start" />
 
-            <Frame Padding="12,6" Margin="0,6,0,0">
-                <StackLayout  Orientation="Horizontal">
-                    <Label HorizontalOptions="StartAndExpand" Text="Min kalender" Margin="0,5"></Label>
-                    <Switch IsToggled="{Binding ShowCalendarInTodayView}" HorizontalOptions="End"></Switch>
-                </StackLayout>
-            </Frame>
+                <Frame Padding="12,6" Margin="0,6,0,0">
+                    <StackLayout  Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Min kalender" Margin="0,5"></Label>
+                        <Switch IsToggled="{Binding ShowCalendarInTodayView}" HorizontalOptions="End"></Switch>
+                    </StackLayout>
+                </Frame>
 
-            <Frame Padding="12,6" Margin="0,6,0,0">
-                <StackLayout  Orientation="Horizontal">
-                    <Label HorizontalOptions="StartAndExpand" Text="Frånvaro" Margin="0,5"></Label>
-                    <Switch IsToggled="{Binding ShowPlannedAbsenceInTodayView}" HorizontalOptions="End"></Switch>
-                </StackLayout>
-            </Frame>
+                <Frame Padding="12,6" Margin="0,6,0,0">
+                    <StackLayout  Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Frånvaro" Margin="0,5"></Label>
+                        <Switch IsToggled="{Binding ShowPlannedAbsenceInTodayView}" HorizontalOptions="End"></Switch>
+                    </StackLayout>
+                </Frame>
 
-            <Frame Padding="12,6" Margin="0,6,0,0">
-                <StackLayout  Orientation="Horizontal">
-                    <Label HorizontalOptions="StartAndExpand" Text="Skolans kalendarium" Margin="0,5"></Label>
-                    <Switch IsToggled="{Binding ShowKalendariumInTodayView}" HorizontalOptions="End"></Switch>
-                </StackLayout>
-            </Frame>
-        </VerticalStackLayout>
+                <Frame Padding="12,6" Margin="0,6,0,0">
+                    <StackLayout  Orientation="Horizontal">
+                        <Label HorizontalOptions="StartAndExpand" Text="Skolans kalendarium" Margin="0,5"></Label>
+                        <Switch IsToggled="{Binding ShowKalendariumInTodayView}" HorizontalOptions="End"></Switch>
+                    </StackLayout>
+                </Frame>
+            </VerticalStackLayout>
 
-        <Button Text="Spara"
+            <Button Text="Spara"
                 Command="{Binding SaveCommand}"
                 VerticalOptions="End" 
                 HorizontalOptions="End" />
 
 
-        <VerticalStackLayout Margin="0,20">
+            <VerticalStackLayout Margin="0,20">
 
-            <Label 
+                <Label 
                 FontSize="21"
                 Text="Inloggad"
                 FontAttributes="Bold"
                 VerticalOptions="Start" 
                 HorizontalOptions="Start" />
 
-            <Frame Padding="12,6" Margin="0,6">
-                <VerticalStackLayout>
-                    <Label 
+                <Frame Padding="12,6" Margin="0,6">
+                    <VerticalStackLayout>
+                        <Label 
                         Text="{Binding StudentName}"
                         VerticalOptions="Center" 
                         HorizontalOptions="Center"
                         FontSize="28"
                         Margin="0,0"/>
 
-                    <Label 
+                        <Label 
                         Text="{Binding SchoolName}"
                         VerticalOptions="Center" 
                         HorizontalOptions="Center"
                         FontSize="20"
                         Margin="0,0"/>
 
-                </VerticalStackLayout>
-                
-            </Frame>
-            <Button
+                    </VerticalStackLayout>
+                </Frame>
+                <Button
                 Text="Logga ut"
                 SemanticProperties.Hint="Loggar ut"
                 Command="{Binding LogoutCommand}"
                 HorizontalOptions="End" />
-
-
-
-</VerticalStackLayout>
-
-        
-
-
-    </VerticalStackLayout>
-
-    
-
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
