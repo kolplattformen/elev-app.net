@@ -62,7 +62,7 @@ namespace Skolplattformen.ElevApp.ViewModels
 
             await Toast.Make("Fel. Kan inte hämta skola på den länken.", ToastDuration.Long).Show();
         }
-
+        
         public Task LoadData()
         {
             if (IsLoading) return Task.CompletedTask;
@@ -73,9 +73,12 @@ namespace Skolplattformen.ElevApp.ViewModels
             IsLoading = false;
 
             SkolmatenSeSchoolUrl = SchoolNameToSchoolUrl(SkolmatenSeSchoolName);
+            NotifyScrollChangeAction();
 
             return Task.CompletedTask;
         }
+
+        public Action NotifyScrollChangeAction;
 
         public Task OnActivated()
         {
@@ -93,7 +96,7 @@ namespace Skolplattformen.ElevApp.ViewModels
             return url?.Split('/').LastOrDefault();
         }
 
-        private string SchoolNameToSchoolUrl(string name) =>  $"https://skolmaten.se/{name}/";
+        private string SchoolNameToSchoolUrl(string name) => !string.IsNullOrWhiteSpace(name) ? $"https://skolmaten.se/{name}/": "";
     }
         
     
