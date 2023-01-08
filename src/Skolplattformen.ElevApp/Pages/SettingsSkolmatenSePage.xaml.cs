@@ -26,9 +26,4 @@ public partial class SettingsSkolmatenSePage : ContentPage
             ScrollViewCtrl.Content = content;
         }
     }
-
-    private void Switch_OnToggled(object sender, ToggledEventArgs e)
-    {
-        NotifyScrollChanged();
-    }
 }

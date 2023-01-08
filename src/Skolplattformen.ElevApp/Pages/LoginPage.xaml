@@ -31,7 +31,8 @@
                     Text="{Binding Email}" 
                     Placeholder="E-mail" 
                     Focused="Entry_Focused" 
-                    Unfocused="Entry_Unfocused"/>
+                    Unfocused="Entry_Unfocused"
+                    Keyboard="Email"/>
             <Entry
                     MaxLength="200"
                     Text="{Binding Username}" 
