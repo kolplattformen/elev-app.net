@@ -11,8 +11,7 @@
             <Frame Padding="12,6" Margin="0,6,0,0">
                 <StackLayout  Orientation="Horizontal">
                     <Label HorizontalOptions="StartAndExpand" Text="Använd skolmaten.se" Margin="0,5"></Label>
-                    <Switch IsToggled="{Binding UseSkolmatenSe}" HorizontalOptions="End" 
-                            Toggled="Switch_OnToggled"></Switch>
+                    <Switch IsToggled="{Binding UseSkolmatenSe}" HorizontalOptions="End"></Switch>
                 </StackLayout>
             </Frame>
 
