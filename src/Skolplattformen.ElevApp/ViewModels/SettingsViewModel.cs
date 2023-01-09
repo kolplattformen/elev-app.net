@@ -64,8 +64,11 @@ namespace Skolplattformen.ElevApp.ViewModels
 
             var schoolDetails = await _skolplattformenService.GetSchoolDetailsAsync(user.PrimarySchoolGuid);
             SchoolName = schoolDetails.Name;
+            NotifyScrollChangeAction();
             IsLoading = false;
         }
+
+        public Action NotifyScrollChangeAction;
 
         public Task OnActivated()
         {
