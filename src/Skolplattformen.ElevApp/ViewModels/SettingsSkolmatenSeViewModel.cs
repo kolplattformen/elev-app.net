@@ -73,7 +73,10 @@ namespace Skolplattformen.ElevApp.ViewModels
             IsLoading = false;
 
             SkolmatenSeSchoolUrl = SchoolNameToSchoolUrl(SkolmatenSeSchoolName);
-            NotifyScrollChangeAction();
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                NotifyScrollChangeAction();
+            });
 
             return Task.CompletedTask;
         }
