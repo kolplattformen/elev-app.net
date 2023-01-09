@@ -57,13 +57,21 @@ namespace Skolplattformen.ElevApp.ViewModels
             ShowCalendarInTodayView = Settings.ShowCalendarInTodayView;
             ShowPlannedAbsenceInTodayView = Settings.ShowPlannedAbsenceInTodayView;
             ShowKalendariumInTodayView = Settings.ShowKalendariumInTodayView;
-            
 
-            var user = await _skolplattformenService.GetUserAsync();
-            StudentName = user?.Name ?? "";
+            try
+            {
+                var user = await _skolplattformenService.GetUserAsync();
+                StudentName = user?.Name ?? "";
 
-            var schoolDetails = await _skolplattformenService.GetSchoolDetailsAsync(user.PrimarySchoolGuid);
-            SchoolName = schoolDetails.Name;
+                if (user != null)
+                {
+                    var schoolDetails = await _skolplattformenService.GetSchoolDetailsAsync(user.PrimarySchoolGuid);
+                    SchoolName = schoolDetails.Name;
+                }
+
+            }
+            catch {/* do nothing */}
+
             NotifyScrollChangeAction();
             IsLoading = false;
         }
