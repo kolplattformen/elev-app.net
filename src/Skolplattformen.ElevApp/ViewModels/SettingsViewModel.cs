@@ -71,8 +71,10 @@ namespace Skolplattformen.ElevApp.ViewModels
 
             }
             catch {/* do nothing */}
-
-            NotifyScrollChangeAction();
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                NotifyScrollChangeAction();
+            });
             IsLoading = false;
         }
 
