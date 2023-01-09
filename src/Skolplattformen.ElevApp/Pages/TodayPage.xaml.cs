@@ -8,7 +8,6 @@ public partial class TodayPage : ContentPage
 	{
 		InitializeComponent();
         this.BindingContext = model;
-        model.NotifyScrollChangeAction = NotifyScrollChanged;
     }
 
     protected override void OnAppearing()
@@ -16,16 +15,4 @@ public partial class TodayPage : ContentPage
         var model = this.BindingContext as TodayViewModel;
         Task.Run(model.OnActivated);
     }
-
-    private void NotifyScrollChanged()
-    {
-        if (DeviceInfo.Current.Platform == DevicePlatform.iOS)
-        {
-            var content = ScrollViewCtrl.Content;
-            ScrollViewCtrl.Content = null;
-            ScrollViewCtrl.Content = content;
-        }
-
-    }
-
 }

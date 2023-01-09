@@ -6,7 +6,7 @@
              x:DataType="viewmodel:SettingsViewModel"
              Title="Inställningar">
 
-    <ScrollView x:Name="ScrollViewCtrl">
+    <ScrollView>
         <VerticalStackLayout Margin="12,12">
             <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
 

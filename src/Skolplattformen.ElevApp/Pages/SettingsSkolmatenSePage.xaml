@@ -6,7 +6,7 @@
              x:DataType="viewmodel:SettingsSkolmatenSeViewModel"
              Title="Inställningar">
 
-    <ScrollView x:Name="ScrollViewCtrl">
+    <ScrollView>
         <VerticalStackLayout Margin="12,12">
             <Frame Padding="12,6" Margin="0,6,0,0">
                 <StackLayout  Orientation="Horizontal">
