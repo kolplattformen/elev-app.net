@@ -68,15 +68,12 @@ namespace Skolplattformen.ElevApp.ViewModels
                 }
 
                 UsingSkolmatenSe = Settings.UseSkolmatenSe;
-                NotifyScrollChangeAction();
-                
+
             });
 
             IsLoading = false;
         }
 
-        public Action NotifyScrollChangeAction;
-        
 
         [RelayCommand]
         void Previous()

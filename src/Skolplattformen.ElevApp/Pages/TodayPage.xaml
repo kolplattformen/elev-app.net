@@ -98,7 +98,7 @@
             />
     </ContentPage.Resources>
 
-    <ScrollView  x:Name="ScrollViewCtrl">
+    <ScrollView>
 
         <VerticalStackLayout Margin="12,12">
 
