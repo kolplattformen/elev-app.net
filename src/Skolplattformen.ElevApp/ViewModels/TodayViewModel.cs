@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Handlers;
 using Skolplattformen.ElevApp.Data;
 using Skolplattformen.ElevApp.Models;
+using SkolplattformenElevApi.Models;
 
 
 namespace Skolplattformen.ElevApp.ViewModels
@@ -255,9 +257,14 @@ namespace Skolplattformen.ElevApp.ViewModels
                 {
                     items.Add(item);
                 }
+
+                NotifyScrollChangeAction();
             });
             IsLoading = false;
         }
+
+        public Action NotifyScrollChangeAction;
+
     }
 
     public class TodayPageDataTemplateSelector : DataTemplateSelector

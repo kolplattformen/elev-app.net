@@ -9,7 +9,7 @@
             <toolkit:ListToStringConverter x:Key="ListToStringConverter" Separator=", " />
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ScrollView>
+    <ScrollView  x:Name="ScrollViewCtrl">
         <VerticalStackLayout >
             <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
             <StackLayout BindableLayout.ItemsSource="{Binding Items}" Padding="0,6">

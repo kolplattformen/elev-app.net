@@ -6,8 +6,8 @@
              x:DataType="viewmodel:SettingsSkolmatenSeViewModel"
              Title="Inställningar">
 
-    <ScrollView>
-        <VerticalStackLayout Margin="12,12">
+    <ScrollView x:Name="ScrollViewCtrl">
+        <VerticalStackLayout Margin="12,12"  x:Name="layout">
             <Frame Padding="12,6" Margin="0,6,0,0">
                 <StackLayout  Orientation="Horizontal">
                     <Label HorizontalOptions="StartAndExpand" Text="Använd skolmaten.se" Margin="0,5"></Label>
@@ -40,6 +40,8 @@
             VerticalOptions="Start" 
             TextTransform="Lowercase"
             HorizontalOptions="Fill" 
+            Focused="Entry_Focused" 
+            Unfocused="Entry_Unfocused"
             IsVisible="{Binding UseSkolmatenSe}"
             />
 

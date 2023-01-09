@@ -37,7 +37,7 @@
 
     <!--<RefreshView IsRefreshing="{Binding IsRefreshing}"
                  Command="{Binding RefreshCommand}">-->
-    <ScrollView>
+    <ScrollView x:Name="ScrollViewCtrl">
         <StackLayout Margin="12,12" VerticalOptions="FillAndExpand">
             <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
                 <Button
