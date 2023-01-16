@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Skolplattformen.ElevApp.Data;
 using Skolplattformen.ElevApp.Models;
-using SkolplattformenElevApi.Models;
+using Skolplattformen.ElevApp.ApiInterface.Models;    
 
 namespace Skolplattformen.ElevApp.ViewModels
 {

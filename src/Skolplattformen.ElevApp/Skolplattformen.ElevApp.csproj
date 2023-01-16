@@ -60,7 +60,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\SkolplattformenElevApi\SkolplattformenElevApi.csproj" />
+	  <ProjectReference Include="..\Skolplattformen.ElevApp.ApiInterface\Skolplattformen.ElevApp.ApiInterface.csproj" />
+	  <ProjectReference Include="..\Skolplattformen.ElevApp.FakeApi\Skolplattformen.ElevApp.FakeApi.csproj" />
+	  <ProjectReference Include="..\Skolplattformen.ElevApp.SkolplattformenApi\Skolplattformen.ElevApp.SkolplattformenApi.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

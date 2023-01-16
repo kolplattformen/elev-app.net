@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.ComponentModel.__Internals;
+using Skolplattformen.ElevApp.ApiInterface.Models;
 using Skolplattformen.ElevApp.Data;
-using SkolplattformenElevApi.Models;
+
 
 namespace Skolplattformen.ElevApp.ViewModels
 {

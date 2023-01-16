@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using SkolplattformenElevApi.Models;
-using SkolplattformenElevApi.Models.News;
+using Skolplattformen.ElevApp.ApiInterface.Models;
+
 
 namespace Skolplattformen.ElevApp.Data
 {
