@@ -1,6 +1,8 @@
 ﻿using System.Globalization;
-using SkolplattformenElevApi;
-using SkolplattformenElevApi.Models;
+using Skolplattformen.ElevApp.ApiInterface;
+using Skolplattformen.ElevApp.ApiInterface.Models;
+using Skolplattformen.ElevApp.SkolplattformenApi;
+
 
 namespace Skolplattformen.ElevApp.Data;
 
@@ -21,7 +23,7 @@ public class SkolplattformenService
 
     public SkolplattformenService()
     {
-        _api = new CachedSchoolPlattformenElevApi(new SkolplattformenElevApi.Api());
+        _api = new CachedSchoolPlattformenElevApi(new Api());
 
     }
 
@@ -37,11 +39,11 @@ public class SkolplattformenService
         _loggedInTime = DateTime.MinValue;
         if (_apiKind == ApiKind.Skolplattformen)
         {
-            _api = new CachedSchoolPlattformenElevApi(new SkolplattformenElevApi.Api());
+            _api = new CachedSchoolPlattformenElevApi(new Api());
         }
         else
         {
-            _api = new FakeApi();
+            _api = new FakeApi.FakeApi();
         }
     }
 

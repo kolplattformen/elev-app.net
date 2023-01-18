@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using SkolplattformenElevApi;
-using SkolplattformenElevApi.Models;
-using SkolplattformenElevApi.Models.News;
+using Skolplattformen.ElevApp.ApiInterface;
+using Skolplattformen.ElevApp.ApiInterface.Models;
+
 
 namespace Skolplattformen.ElevApp.Data
 {
@@ -25,26 +25,7 @@ namespace Skolplattformen.ElevApp.Data
             return _api.LogInAsync(email, username, password);
         }
 
-        public async Task<List<NewsListItem>> GetNewsItemListAsync(int numItems = 5)
-        {
-            var key = $"newsList_{numItems}";
-            if (!_cache.ContainsKey(key))
-            {
-                _cache[key] = await _api.GetNewsItemListAsync(numItems);
-            }
-            return _cache[key] as List<NewsListItem>;
-        }
-
-        public async Task<NewsItem> GetNewsItemAsync(string path)
-        {
-            var key = $"newsItem_{path}";
-            if (!_cache.ContainsKey(key))
-            {
-                _cache[key] = await _api.GetNewsItemAsync(path);
-            }
-            return _cache[key] as NewsItem;
-        }
-
+ 
         public async Task<ApiUser> GetUserAsync()
         {
             var key = "user";
