@@ -12,7 +12,7 @@ env:
     DOTNETVERSION: 7.0.102
     MAUIFRAMEWORK: net7.0-ios
     PROJECTNAME: Skolplattformen.ElevApp
-    APPLICATIONID: se.kolplattformen.elevapp ${{env.PROJECTNAME}}
+    APPLICATIONID: se.kolplattformen.elevapp
     
 jobs:
   buildIOS:
