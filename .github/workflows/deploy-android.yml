@@ -58,7 +58,7 @@ jobs:
           shell: bash
           run: |
             cd src/${{env.PROJECTNAME}}
-            dotnet publish ${{env.PROJECTNAME}}.csproj -f:${{env.MAUIFRAMEWORK}} -c:Release -p:AndroidKeyStore=True -p:AndroidSigningKeyStore=elevapp.release.keystore -p:AndroidSigningKeyPass=${{secrets.ANDROID_RELEASE_KEYSTORE_PASSWORD }} -p:AndroidSigningStorePass=${{secrets.ANDROID_RELEASE_KEYSTORE_PASSWORD }} "/p:ApplicationId=${{env.APPLICATIONID}}"
+            dotnet publish ${{env.PROJECTNAME}}.csproj -f:${{env.MAUIFRAMEWORK}} -c:Release -p:AndroidKeyStore=True -p:AndroidSigningKeyAlias=key -p:AndroidSigningKeyStore=elevapp.release.keystore -p:AndroidSigningKeyPass=${{secrets.ANDROID_RELEASE_KEYSTORE_PASSWORD }} -p:AndroidSigningStorePass=${{secrets.ANDROID_RELEASE_KEYSTORE_PASSWORD }} "/p:ApplicationId=${{env.APPLICATIONID}}"
 
 
         - uses: actions/upload-artifact@v2
