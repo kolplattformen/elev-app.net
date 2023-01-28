@@ -1,0 +1,68 @@
+name: Build Android app
+
+on:
+  # push:
+  #   branches: [ main ]
+  # pull_request:
+  #   branches: [ main ]
+
+  workflow_dispatch:
+
+env:
+    DOTNETVERSION: 7.0.102
+    MAUIFRAMEWORK: net7.0-android
+    PROJECTNAME: Skolplattformen.ElevApp
+    APPLICATIONID: se.kolplattformen.elevapp ${{env.PROJECTNAME}}
+
+    
+jobs:
+  build-Android:
+      runs-on: ubuntu-22.04
+      env:
+        BUILDNUMBER: $(expr ${{ github.run_number }} + 16)
+      steps:
+        - uses: actions/checkout@v2
+
+        - name: Setup .NET SDK ${{env.DOTNETVERSION}}
+          uses: actions/setup-dotnet@v1
+          with:
+            dotnet-version:  '${{env.DOTNETVERSION}}'
+
+        - name: List installed .NET info
+          shell: pwsh
+          run: dotnet --info
+
+        - name: Remove unused frameworks from project
+          run: |
+            sed -E -i "s:<TargetFrameworks>[^<]+</TargetFrameworks>:<TargetFrameworks>${{env.MAUIFRAMEWORK}}</TargetFrameworks>:g" src/${{env.PROJECTNAME}}/${{env.PROJECTNAME}}.csproj
+
+        - name: Set build number
+          run: |
+            sed -E -i "s:<ApplicationVersion>[^<]+</ApplicationVersion>:<ApplicationVersion>${{env.BUILDNUMBER}}</ApplicationVersion>:g" src/${{env.PROJECTNAME}}/${{env.PROJECTNAME}}.csproj
+
+        - name: Install .NET MAUI
+          shell: bash
+          run: |
+            dotnet nuget locals all --clear 
+            dotnet workload install maui-android
+            dotnet workload install android
+        
+        - name: Restore nuget packages
+          shell: bash
+          run: |
+            cd src
+            dotnet restore ${{env.PROJECTNAME}}.sln
+
+          # https://docs.microsoft.com/en-us/dotnet/maui/android/deployment/overview
+        - name : Build Android App
+          shell: bash
+          run: |
+            cd src/${{env.PROJECTNAME}}
+            dotnet publish ${{env.PROJECTNAME}}.csproj -f:${{env.MAUIFRAMEWORK}} -c:Release -p:AndroidKeyStore=True -p:AndroidSigningKeyStore=elevapp.release.keystore -p:AndroidSigningKeyPass=${{secrets.ANDROID_RELEASE_KEYSTORE_PASSWORD }} -p:AndroidSigningStorePass=${{secrets.ANDROID_RELEASE_KEYSTORE_PASSWORD }} "/p:ApplicationId=${{env.APPLICATIONID}}"
+
+
+        - uses: actions/upload-artifact@v2
+          with:
+            name: artifacts-android
+            path: |
+              src/${{env.PROJECTNAME}}/bin/Release/${{env.MAUIFRAMEWORK}}/publish/${{env.APPLICATIONID}}-Signed.aab
