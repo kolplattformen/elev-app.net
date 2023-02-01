@@ -9,7 +9,8 @@ namespace Skolplattformen.ElevApp.Data;
 public enum ApiKind
 {
     Skolplattformen = 1,
-    FakeData = 2
+    FakeData = 2,
+    Dexter = 3,
 }
 
 
@@ -40,6 +41,10 @@ public class SkolplattformenService
         if (_apiKind == ApiKind.Skolplattformen)
         {
             _api = new CachedSchoolPlattformenElevApi(new Api());
+        }
+        else if (_apiKind == ApiKind.Dexter)
+        {
+            _api = new DexterApi.DexterApi();
         }
         else
         {

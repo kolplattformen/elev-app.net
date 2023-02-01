@@ -26,7 +26,8 @@ namespace Skolplattformen.ElevApp.ViewModels
             PlatformList = new ObservableCollection<string>
             {
                 "Skolplattformen Stockholm",
-                "Demo"
+                "Demo",
+                "Dexter (Kramfors) Preview"
             };
             PlatformSelectedIndex = 0;
 
@@ -62,6 +63,7 @@ namespace Skolplattformen.ElevApp.ViewModels
             {
                 0 => ApiKind.Skolplattformen,
                 1 => ApiKind.FakeData,
+                2 => ApiKind.Dexter,
                 _ => ApiKind.FakeData
             };
             if (PlatformSelectedIndex != -1)
