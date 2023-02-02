@@ -66,3 +66,4 @@ jobs:
             name: artifacts-android
             path: |
               src/${{env.PROJECTNAME}}/bin/Release/${{env.MAUIFRAMEWORK}}/publish/${{env.APPLICATIONID}}-Signed.aab
+              src/${{env.PROJECTNAME}}/bin/Release/${{env.MAUIFRAMEWORK}}/publish/${{env.APPLICATIONID}}-Signed.apk
