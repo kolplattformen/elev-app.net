@@ -1,9 +1,30 @@
-﻿namespace Skolplattformen.ElevApp;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public partial class AppShell : Shell
+namespace Skolplattformen.ElevApp;
+
+public partial class AppShell : Shell 
 {
-	public AppShell()
+    private bool _isTeachersTabVisible = true;
+
+
+    public bool IsTeachersTabVisible
+    {
+        get => _isTeachersTabVisible;
+        set
+        {
+            _isTeachersTabVisible = value;
+            OnPropertyChanged();
+        }
+    }
+
+
+
+    public AppShell()
 	{
 		InitializeComponent();
-	}
+
+        BindingContext = this;
+    }
+
+  
 }

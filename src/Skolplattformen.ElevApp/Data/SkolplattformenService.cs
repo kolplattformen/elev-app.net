@@ -28,6 +28,8 @@ public class SkolplattformenService
 
     }
 
+    public ApiFeatures ApiFeatures => _api.Features;
+
     public void SelectApi(ApiKind apiKind)
     {
         _apiKind = apiKind;

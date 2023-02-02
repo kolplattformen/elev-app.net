@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Skolplattformen.ElevApp.ApiInterface;
 using Skolplattformen.ElevApp.Data;
 using Skolplattformen.ElevApp.Models;
 using Skolplattformen.ElevApp.Pages;
@@ -69,6 +70,12 @@ namespace Skolplattformen.ElevApp.ViewModels
             if (PlatformSelectedIndex != -1)
             {
                 _skolplattformenService.SelectApi(kind);
+                // = _skolplattformenService.ApiFeatures.HasFlag(ApiFeatures.Teachers);
+                if (App.Current.MainPage is AppShell shell)
+                {
+                    shell.IsTeachersTabVisible = _skolplattformenService.ApiFeatures.HasFlag(ApiFeatures.Teachers);
+                }
+
             }
 
             var loginDetails = new LoginDetails
@@ -83,6 +90,7 @@ namespace Skolplattformen.ElevApp.ViewModels
             try
             {
                 await _skolplattformenService.LogInAsync(email, username, password);
+
                 await Shell.Current.GoToAsync($"//{nameof(TodayPage)}");
             }
             catch (Exception e)
