@@ -21,6 +21,9 @@ namespace Skolplattformen.ElevApp.DexterApi
 
         private HttpClient _client;
 
+        public ApiFeatures Features => ApiFeatures.Timetable | 
+                                       ApiFeatures.SchoolDetails;
+
         public async Task LogInAsync(string email, string username, string password)
         {
             _username = username;
@@ -163,7 +166,7 @@ namespace Skolplattformen.ElevApp.DexterApi
         {
             return new Dictionary<string, ApiReadSuccessIndicator>();
         }
-
+        
         private async Task<T> GetAsync<T>(string route)
         {
             var deserializeOptions = new JsonSerializerOptions

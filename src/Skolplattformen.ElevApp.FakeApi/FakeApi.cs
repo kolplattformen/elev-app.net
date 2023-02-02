@@ -10,6 +10,14 @@ namespace Skolplattformen.ElevApp.FakeApi
     {
         private FakeData.FakeData _fakeData;
 
+        public ApiFeatures Features => ApiFeatures.Timetable |
+                                       ApiFeatures.Calendar | 
+                                       ApiFeatures.PlannedAbsence | 
+                                       ApiFeatures.Meals | 
+                                       ApiFeatures.Kalendarium | 
+                                       ApiFeatures.SchoolDetails | 
+                                       ApiFeatures.Teachers;
+
         public FakeApi()
         {
 

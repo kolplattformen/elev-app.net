@@ -15,11 +15,14 @@ namespace Skolplattformen.ElevApp.Data
         private readonly IApi _api;
         private readonly Dictionary<string, object> _cache = new Dictionary<string, object>();
 
+        public ApiFeatures Features => _api.Features;
+
         public CachedSchoolPlattformenElevApi(IApi api)
         {
             _api = api;
         }
 
+        
         public Task LogInAsync(string email, string username, string password)
         {
             return _api.LogInAsync(email, username, password);
