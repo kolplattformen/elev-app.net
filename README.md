@@ -2,7 +2,7 @@
 # Sätt upp en utvecklingsmiljö för en .NET MAUI Elevapp
 
 Denna guide kommer att gå igenom processen att sätta upp en utvecklingsmiljö i Visual Studio och få Elevappen som är skriven i C# och .NET MAUI att kompilera och köra på en Android-emulator eller en telefon som är ansluten till din dator.
-
+<img src="screenshots/1.png" width="200"><img src="screenshots/2.png" width="200"><img src="screenshots/3.png" width="200"><img src="screenshots/4.png" width="200"><img src="screenshots/5.png" width="200">
 
 ## Förutsättningar
 Before you begin, make sure that you have the following:
@@ -50,7 +50,7 @@ Med dessa steg bör du nu ha satt upp en utvecklingsmiljö i Visual Studio och k
 # Setting Up a Development Environment for a .NET MAUI Elevapp
 
 This guide will walk you through the process of setting up a development environment in Visual Studio and getting a student application written in C# and .NET MAUI to compile and run on an Android emulator or a phone connected to your computer.
-
+<img src="screenshots/1.png" width="200"><img src="screenshots/2.png" width="200"><img src="screenshots/3.png" width="200"><img src="screenshots/4.png" width="200"><img src="screenshots/5.png" width="200">
 
 
 ## Prerequisites
