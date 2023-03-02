@@ -27,8 +27,8 @@ namespace Skolplattformen.ElevApp.ViewModels
             PlatformList = new ObservableCollection<string>
             {
                 "Skolplattformen Stockholm",
+                "IST Dexter",
                 "Demo",
-                "Dexter (Kramfors) Preview"
             };
             PlatformSelectedIndex = 0;
 
@@ -63,14 +63,14 @@ namespace Skolplattformen.ElevApp.ViewModels
             ApiKind kind = PlatformSelectedIndex switch
             {
                 0 => ApiKind.Skolplattformen,
-                1 => ApiKind.FakeData,
-                2 => ApiKind.Dexter,
+                2 => ApiKind.FakeData,
+                1 => ApiKind.Dexter,
                 _ => ApiKind.FakeData
             };
             if (PlatformSelectedIndex != -1)
             {
                 _skolplattformenService.SelectApi(kind);
-                // = _skolplattformenService.ApiFeatures.HasFlag(ApiFeatures.Teachers);
+               
                 if (App.Current.MainPage is AppShell shell)
                 {
                     shell.IsTeachersTabVisible = _skolplattformenService.ApiFeatures.HasFlag(ApiFeatures.Teachers);
@@ -87,9 +87,17 @@ namespace Skolplattformen.ElevApp.ViewModels
                 Platform = PlatformSelectedIndex
             };
             Storage.Store("login_details", loginDetails);
+            
+            object loginCredentials = kind switch
+            {
+                ApiKind.Skolplattformen => new SkolplattformenApi.LoginCredentials() {Email = email, Username = username, Password = password },
+                ApiKind.Dexter => new DexterApi.LoginCredentials() {Username = username, Password = password },
+                _ => new { username, password }
+            };
+            
             try
             {
-                await _skolplattformenService.LogInAsync(email, username, password);
+                await _skolplattformenService.LogInAsync(loginCredentials);
 
                 await Shell.Current.GoToAsync($"//{nameof(TodayPage)}");
             }

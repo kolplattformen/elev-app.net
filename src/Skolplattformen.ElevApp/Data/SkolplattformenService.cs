@@ -54,9 +54,9 @@ public class SkolplattformenService
         }
     }
 
-    public async Task LogInAsync(string email, string username, string password)
+    public async Task LogInAsync(object loginCredentials)
     {
-        await _api.LogInAsync(email, username, password);
+        await _api.LogInAsync(loginCredentials);
         _loggedInTime = DateTime.UtcNow;
         var user = await _api.GetUserAsync();
     }

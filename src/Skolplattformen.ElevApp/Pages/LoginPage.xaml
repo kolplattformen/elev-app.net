@@ -2,10 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Skolplattformen.ElevApp.Pages.LoginPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodel="clr-namespace:Skolplattformen.ElevApp.ViewModels"
              x:DataType="viewmodel:LoginViewModel">
+    <ContentPage.Resources>
+        <toolkit:IsEqualConverter x:Key="IsEqualConverter" />
+    </ContentPage.Resources>
 
-    <ScrollView>
+        <ScrollView>
         <VerticalStackLayout
             x:Name="layout"
             Spacing="5"
@@ -25,27 +29,60 @@
                     HorizontalOptions="Center" />
 
             <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
-
-            <Entry
+<!-- Why do I have to do it this way? But hey, if it works... -->
+            <Entry x:Name="blaj" Text="{Binding Source={x:Reference picker},Path=SelectedIndex}" IsVisible="False"></Entry>
+            
+            <!-- Skolplattformen login form-->
+            <VerticalStackLayout 
+                IsVisible="{Binding Source={x:Reference blaj}, 
+                Path=Text,Converter={StaticResource IsEqualConverter}, ConverterParameter=0 }">
+                <Entry
                     MaxLength="200"
                     Text="{Binding Email}" 
                     Placeholder="E-mail" 
                     Focused="Entry_Focused" 
                     Unfocused="Entry_Unfocused"
                     Keyboard="Email"/>
-            <Entry
+                <Entry
                     MaxLength="200"
                     Text="{Binding Username}" 
                     Placeholder="Användarnamn" 
                     Focused="Entry_Focused" 
                     Unfocused="Entry_Unfocused"/>
-            <Entry
+                <Entry
                     MaxLength="200"
                     Text="{Binding Password}" 
                     IsPassword="true"
                     Placeholder="Lösenord" 
                     Focused="Entry_Focused" 
                     Unfocused="Entry_Unfocused"/>
+            </VerticalStackLayout>
+
+            <!-- Dexter login form-->
+            <VerticalStackLayout 
+                IsVisible="{Binding Source={x:Reference blaj}, 
+                Path=Text,Converter={StaticResource IsEqualConverter}, ConverterParameter=1 }">
+                <Entry
+                    MaxLength="200"
+                    Text="{Binding Email}" 
+                    Placeholder="E-mail" 
+                    Focused="Entry_Focused" 
+                    Unfocused="Entry_Unfocused"
+                    Keyboard="Email"/>
+                <Entry
+                    MaxLength="200"
+                    Text="{Binding Username}" 
+                    Placeholder="Användarnamn" 
+                    Focused="Entry_Focused" 
+                    Unfocused="Entry_Unfocused"/>
+                <Entry
+                    MaxLength="200"
+                    Text="{Binding Password}" 
+                    IsPassword="true"
+                    Placeholder="Lösenord" 
+                    Focused="Entry_Focused" 
+                    Unfocused="Entry_Unfocused"/>
+            </VerticalStackLayout>
 
             <Button
                     Text="Logga in"

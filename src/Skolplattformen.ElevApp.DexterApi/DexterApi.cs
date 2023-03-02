@@ -24,16 +24,23 @@ namespace Skolplattformen.ElevApp.DexterApi
         public ApiFeatures Features => ApiFeatures.Timetable | 
                                        ApiFeatures.SchoolDetails;
 
-        public async Task LogInAsync(string email, string username, string password)
+        public async Task LogInAsync(object loginCredentials)
         {
-            _username = username;
-            _password = password;
+            if (loginCredentials is LoginCredentials lc)
+            {
+                _username = lc.Username;
+                _password = lc.Password;
+            }
+            else { throw new Exception("Wrong login credentials"); }
 
+            //var (username, password) = ((string, string))loginCredentials;
+            //_username = username;
+            //_password = password;
 
             _client = new HttpClient();
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
             _client.BaseAddress = new Uri(_dexterLink);
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes($"{username}:{password}")));
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes($"{_username}:{_password}")));
 
             var rolesResponse = await GetAsync<GetRolesResponse>(Routes.GetRoles);
             var role = rolesResponse.RoleData.FirstOrDefault(x => x.RoleType == "STUDENT");
@@ -180,5 +187,12 @@ namespace Skolplattformen.ElevApp.DexterApi
             var result = JsonSerializer.Deserialize<T>(content, deserializeOptions);
             return result ?? default!;
         }
+    }
+
+    public class LoginCredentials
+    {
+   
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }

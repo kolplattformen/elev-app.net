@@ -23,9 +23,9 @@ namespace Skolplattformen.ElevApp.Data
         }
 
         
-        public Task LogInAsync(string email, string username, string password)
+        public Task LogInAsync(object loginCredentials)
         {
-            return _api.LogInAsync(email, username, password);
+            return _api.LogInAsync(loginCredentials);
         }
 
  
