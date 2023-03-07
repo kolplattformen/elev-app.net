@@ -7,5 +7,6 @@
         public string Password { get; set; }
         public bool RememberMe { get; set; }
         public int Platform { get; set; }
+        public string DexterInstallation { get; set; }
     }
 }

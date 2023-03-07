@@ -18,11 +18,16 @@ namespace Skolplattformen.ElevApp.ViewModels
         [ObservableProperty] private ObservableCollection<string> platformList;
         [ObservableProperty] private int _platformSelectedIndex;
 
+        [ObservableProperty] private ObservableCollection<DexterApi.Installation> dexterInstallations;
+        [ObservableProperty] private DexterApi.Installation selectedDexterInstallation;
+
         private readonly SkolplattformenService _skolplattformenService;
 
         public LoginViewModel(SkolplattformenService skolplattformenService)
         {
             _skolplattformenService = skolplattformenService;
+
+            DexterInstallations = new ObservableCollection<DexterApi.Installation>(DexterApi.DexterApi.Installations);
 
             PlatformList = new ObservableCollection<string>
             {
@@ -38,15 +43,19 @@ namespace Skolplattformen.ElevApp.ViewModels
         Task LoadData()
         {
             if(IsLoading) return Task.CompletedTask;
-       //     IsLoading = true;
+            //     IsLoading = true;
+
             var loginDetails = Storage.Get<LoginDetails>("login_details");
+
             if (loginDetails.RememberMe)
             {
                 Email = loginDetails.Email;
                 Username = loginDetails.Username;
                 Password = loginDetails.Password;
+                SelectedDexterInstallation = DexterApi.DexterApi.Installations.Find(x => x.Id == loginDetails.DexterInstallation) 
+                    ?? DexterApi.DexterApi.Installations.First();
             }
-
+           
             PlatformSelectedIndex = loginDetails?.Platform ?? 0;
 
         //    IsLoading = false;
@@ -63,7 +72,6 @@ namespace Skolplattformen.ElevApp.ViewModels
             ApiKind kind = PlatformSelectedIndex switch
             {
                 0 => ApiKind.Skolplattformen,
-                2 => ApiKind.FakeData,
                 1 => ApiKind.Dexter,
                 _ => ApiKind.FakeData
             };
@@ -84,14 +92,15 @@ namespace Skolplattformen.ElevApp.ViewModels
                 Email = email,
                 Password = password,
                 RememberMe = true,
-                Platform = PlatformSelectedIndex
+                Platform = PlatformSelectedIndex,
+                DexterInstallation = SelectedDexterInstallation.Id
             };
             Storage.Store("login_details", loginDetails);
             
             object loginCredentials = kind switch
             {
                 ApiKind.Skolplattformen => new SkolplattformenApi.LoginCredentials() {Email = email, Username = username, Password = password },
-                ApiKind.Dexter => new DexterApi.LoginCredentials() {Username = username, Password = password },
+                ApiKind.Dexter => new DexterApi.LoginCredentials() {Username = username, Password = password, InstallationId = SelectedDexterInstallation.Id },
                 _ => new { username, password }
             };
             

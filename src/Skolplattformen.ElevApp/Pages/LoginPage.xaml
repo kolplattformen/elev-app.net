@@ -62,13 +62,12 @@
             <VerticalStackLayout 
                 IsVisible="{Binding Source={x:Reference blaj}, 
                 Path=Text,Converter={StaticResource IsEqualConverter}, ConverterParameter=1 }">
-                <Entry
-                    MaxLength="200"
-                    Text="{Binding Email}" 
-                    Placeholder="E-mail" 
-                    Focused="Entry_Focused" 
-                    Unfocused="Entry_Unfocused"
-                    Keyboard="Email"/>
+              
+                <Picker x:Name="DexterInstallationPicker"
+                        Title="Välj installation"
+                        ItemsSource="{Binding DexterInstallations}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedDexterInstallation}"></Picker>
                 <Entry
                     MaxLength="200"
                     Text="{Binding Username}" 
@@ -90,7 +89,7 @@
                     HorizontalOptions="End" />
 
             <Picker x:Name="picker"
-                        Title="Välj inloggning"
+                        Title="Välj lärplattform"
                         ItemsSource="{Binding PlatformList}"
                         SelectedIndex="{Binding PlatformSelectedIndex}">
 

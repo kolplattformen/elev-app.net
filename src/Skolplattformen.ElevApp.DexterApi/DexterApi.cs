@@ -15,7 +15,7 @@ namespace Skolplattformen.ElevApp.DexterApi
         private string _email = string.Empty;
         private string _userId = string.Empty;
         private string _name = string.Empty;
-        private readonly string _dexterLink = "https://kramfors.dexter-ist.com/Kramfors/services/resources/";
+        private string _dexterLink = string.Empty;
         private Guid _dummySchoolGuid = new Guid("00000000-0000-0000-0000-000000000001");
         private string _schoolName = String.Empty;
 
@@ -30,12 +30,13 @@ namespace Skolplattformen.ElevApp.DexterApi
             {
                 _username = lc.Username;
                 _password = lc.Password;
+                _dexterLink = ElevApp.DexterApi.Installations.Get(lc.InstallationId)?.BaseUrl 
+                              ?? throw new Exception("Unknown Installation"); ;
             }
             else { throw new Exception("Wrong login credentials"); }
 
-            //var (username, password) = ((string, string))loginCredentials;
-            //_username = username;
-            //_password = password;
+            
+
 
             _client = new HttpClient();
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
@@ -187,11 +188,13 @@ namespace Skolplattformen.ElevApp.DexterApi
             var result = JsonSerializer.Deserialize<T>(content, deserializeOptions);
             return result ?? default!;
         }
+
+        public static List<Installation> Installations => ElevApp.DexterApi.Installations.GetAll().OrderBy(x => x.Name).ToList();
     }
 
     public class LoginCredentials
     {
-   
+        public string InstallationId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
     }
