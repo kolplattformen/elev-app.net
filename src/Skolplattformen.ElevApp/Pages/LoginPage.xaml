@@ -11,10 +11,10 @@
 
     <ScrollView>
         <Grid x:Name="layout"
-              Padding="30,20,30,10">
+              Padding="0,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="200" />
-                <RowDefinition Height="180" />
+                <RowDefinition Height="120" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="100" />
             </Grid.RowDefinitions>
@@ -39,6 +39,8 @@
 
             <VerticalStackLayout 
                 Grid.Row="2"
+                Padding="18,0,18,12"
+                Spacing="6"
                 VerticalOptions="End"
                 IsVisible="{Binding Source={x:Reference blaj}, 
                 Path=Text,Converter={StaticResource IsEqualConverter}, ConverterParameter=0 }">
@@ -67,6 +69,8 @@
             <!-- Dexter login form-->
             <VerticalStackLayout 
                 Grid.Row="2"
+                Padding="18,0,18,12"
+                Spacing="6"
                 VerticalOptions="End"
                 IsVisible="{Binding Source={x:Reference blaj}, 
                 Path=Text,Converter={StaticResource IsEqualConverter}, ConverterParameter=1 }">
@@ -92,7 +96,10 @@
             </VerticalStackLayout>
 
             <VerticalStackLayout
-    Grid.Row="3">
+                    Grid.Row="3"
+                    Padding="18,0"
+                    Spacing="8"
+                >
                 <Button
         Text="Logga in"
         Command="{Binding LoginCommand}"
