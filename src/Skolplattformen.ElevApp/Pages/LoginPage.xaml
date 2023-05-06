@@ -107,7 +107,7 @@
             </VerticalStackLayout>
 
 
-            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Grid.Row ="3"/>
             <!-- Why do I have to do it this way? But hey, if it works... -->
             <Entry x:Name="blaj" Text="{Binding Source={x:Reference picker},Path=SelectedIndex}" IsVisible="False"></Entry>
 
