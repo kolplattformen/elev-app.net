@@ -4,7 +4,7 @@ namespace Skolplattformen.ElevApp.ApiInterface
 {
     public interface IApi
     {
-        Task LogInAsync(string email, string username, string password);
+        Task LogInAsync(object loginCredentials);
         Task<ApiUser?> GetUserAsync();
         Task<List<Teacher>> GetTeachersAsync();
         Task<SchoolDetails?> GetSchoolDetailsAsync(Guid schoolId);
@@ -19,6 +19,7 @@ namespace Skolplattformen.ElevApp.ApiInterface
         Task RefreshLoginAsync();
         ApiReadSuccessIndicator GetStatus(string part);
         Dictionary<string, ApiReadSuccessIndicator> GetStatusAll();
+        ApiFeatures Features { get; }
     }
 
     public enum ApiReadSuccessIndicator
@@ -27,6 +28,19 @@ namespace Skolplattformen.ElevApp.ApiInterface
         Success = 1,
         NoData = 2,
         Error = 3
+    }
+
+    [Flags]
+    public enum ApiFeatures
+    {
+        None = 0,
+        Timetable = 1,
+        Calendar = 2,
+        PlannedAbsence = 4,
+        Meals = 8,
+        Kalendarium = 16,
+        SchoolDetails = 32,
+        Teachers = 64,
     }
 
 }

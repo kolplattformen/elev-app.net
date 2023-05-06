@@ -33,12 +33,14 @@
            ContentTemplate="{DataTemplate local:LunchPage}"
            Route="LunchPage" />
 
-
-        <ShellContent
-           Title="Lärare"
-           Icon="teacher_with_stick_svgrepo_com.png"
-           ContentTemplate="{DataTemplate local:TeachersPage}"
-           Route="TeacherPage" />
+        <Tab
+            IsVisible="{Binding IsTeachersTabVisible}"
+            Title="Lärare"
+            Icon="teacher_with_stick_svgrepo_com.png"
+            Route="TeacherPage">
+            <ShellContent ContentTemplate="{DataTemplate local:TeachersPage}"/>
+        </Tab>
+        
        
         <ShellContent
             Title="Inställningar"

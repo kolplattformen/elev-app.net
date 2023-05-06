@@ -9,7 +9,8 @@ namespace Skolplattformen.ElevApp.Data;
 public enum ApiKind
 {
     Skolplattformen = 1,
-    FakeData = 2
+    FakeData = 2,
+    Dexter = 3,
 }
 
 
@@ -27,6 +28,8 @@ public class SkolplattformenService
 
     }
 
+    public ApiFeatures ApiFeatures => _api.Features;
+
     public void SelectApi(ApiKind apiKind)
     {
         _apiKind = apiKind;
@@ -41,15 +44,19 @@ public class SkolplattformenService
         {
             _api = new CachedSchoolPlattformenElevApi(new Api());
         }
+        else if (_apiKind == ApiKind.Dexter)
+        {
+            _api = new DexterApi.DexterApi();
+        }
         else
         {
             _api = new FakeApi.FakeApi();
         }
     }
 
-    public async Task LogInAsync(string email, string username, string password)
+    public async Task LogInAsync(object loginCredentials)
     {
-        await _api.LogInAsync(email, username, password);
+        await _api.LogInAsync(loginCredentials);
         _loggedInTime = DateTime.UtcNow;
         var user = await _api.GetUserAsync();
     }

@@ -23,6 +23,15 @@ public partial class Api:IApi
 
     private Dictionary<string, ApiReadSuccessIndicator> _statusDictionary = new Dictionary<string, ApiReadSuccessIndicator>();
 
+    public ApiFeatures Features => ApiFeatures.Timetable |
+                                   ApiFeatures.Calendar |
+                                   ApiFeatures.PlannedAbsence |
+                                   ApiFeatures.Meals |
+                                   ApiFeatures.Kalendarium |
+                                   ApiFeatures.SchoolDetails |
+                                   ApiFeatures.Teachers;
+
+
     public Api()
     {
         _cookieContainer = new CookieContainer();

@@ -19,7 +19,7 @@
 		<ApplicationIdGuid>C81F9A8E-51C7-4AC4-B06D-397154E0EDC0</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0.2</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
@@ -55,12 +55,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="3.1.0" />
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+	  <PackageReference Include="CommunityToolkit.Maui" Version="4.0.0" />
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Skolplattformen.ElevApp.ApiInterface\Skolplattformen.ElevApp.ApiInterface.csproj" />
+	  <ProjectReference Include="..\Skolplattformen.ElevApp.DexterApi\Skolplattformen.ElevApp.DexterApi.csproj" />
 	  <ProjectReference Include="..\Skolplattformen.ElevApp.FakeApi\Skolplattformen.ElevApp.FakeApi.csproj" />
 	  <ProjectReference Include="..\Skolplattformen.ElevApp.SkolplattformenApi\Skolplattformen.ElevApp.SkolplattformenApi.csproj" />
 	</ItemGroup>

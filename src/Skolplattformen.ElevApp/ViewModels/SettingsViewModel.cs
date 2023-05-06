@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Skolplattformen.ElevApp.ApiInterface;
 using Skolplattformen.ElevApp.Data;
 using Skolplattformen.ElevApp.Pages;
 
@@ -17,6 +18,11 @@ namespace Skolplattformen.ElevApp.ViewModels
 
         [ObservableProperty] private string schoolName;
         [ObservableProperty] private string studentName;
+        
+        [ObservableProperty] private bool todayTabSettingsVisible;
+        [ObservableProperty] private bool todayTabSettingsMyCalendarVisible;
+        [ObservableProperty] private bool todayTabSettingsAbsenceVisible;
+        [ObservableProperty] private bool todayTabSettingsKalendariumVisible;
 
         public SettingsViewModel(SkolplattformenService skolplattformenService)
         {
@@ -58,6 +64,7 @@ namespace Skolplattformen.ElevApp.ViewModels
             ShowPlannedAbsenceInTodayView = Settings.ShowPlannedAbsenceInTodayView;
             ShowKalendariumInTodayView = Settings.ShowKalendariumInTodayView;
 
+            SetVisibilityDependingOnApiFetures();
             try
             {
                 var user = await _skolplattformenService.GetUserAsync();
@@ -76,6 +83,18 @@ namespace Skolplattformen.ElevApp.ViewModels
                 NotifyScrollChangeAction();
             });
             IsLoading = false;
+        }
+
+        private void SetVisibilityDependingOnApiFetures()
+        {
+            TodayTabSettingsMyCalendarVisible = _skolplattformenService.ApiFeatures.HasFlag(ApiFeatures.Calendar);
+            TodayTabSettingsAbsenceVisible = _skolplattformenService.ApiFeatures.HasFlag(ApiFeatures.PlannedAbsence);
+            TodayTabSettingsKalendariumVisible = _skolplattformenService.ApiFeatures.HasFlag(ApiFeatures.Kalendarium);
+
+            TodayTabSettingsVisible = TodayTabSettingsMyCalendarVisible ||
+                                      TodayTabSettingsAbsenceVisible ||
+                                      TodayTabSettingsKalendariumVisible;
+
         }
 
         public Action NotifyScrollChangeAction;

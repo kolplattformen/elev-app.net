@@ -10,6 +10,14 @@ namespace Skolplattformen.ElevApp.FakeApi
     {
         private FakeData.FakeData _fakeData;
 
+        public ApiFeatures Features => ApiFeatures.Timetable |
+                                       ApiFeatures.Calendar | 
+                                       ApiFeatures.PlannedAbsence | 
+                                       ApiFeatures.Meals | 
+                                       ApiFeatures.Kalendarium | 
+                                       ApiFeatures.SchoolDetails | 
+                                       ApiFeatures.Teachers;
+
         public FakeApi()
         {
 
@@ -86,7 +94,7 @@ namespace Skolplattformen.ElevApp.FakeApi
             _fakeData.PlannedAbsenceItems[0].IsFullDayAbsence = true;
         }
 
-        public async Task LogInAsync(string email, string username, string password)
+        public async Task LogInAsync(object loginCredentials)
         {
             await Task.Delay(1000);
         }

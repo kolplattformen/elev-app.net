@@ -8,14 +8,21 @@ namespace Skolplattformen.ElevApp.SkolplattformenApi
 {
     public partial class Api
     {
-        public async Task LogInAsync(string email, string username, string password)
+        public async Task LogInAsync(object loginCredentials)
         {
+            if (loginCredentials is LoginCredentials lc)
+            {
+                _email = lc.Email;
+                _username = lc.Username;
+                _password = lc.Password;
 
-            _email = email;
-            _username = username;
-            _password = password;
+            } else 
+            {
+                throw new ArgumentException();
 
-
+            }
+          
+            
             var jsonSerializerOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
@@ -57,7 +64,7 @@ namespace Skolplattformen.ElevApp.SkolplattformenApi
             //TODO what is flowToken and OriginalRequest? FlowToken is sFT in the result of line 43 (sso_reload=true). OriginalRequest is sCtx. Regex "\$Config=(.*});"gm 
             // todo: Anropet innehåller en hel del headers. Kolla var de kommer ifrån. Verkar inte behövas
             var content =
-                "{\"username\":\"" + email + "\",\"isOtherIdpSupported\":true,\"checkPhones\":false,\"isRemoteNGCSupported\":true,\"isCookieBannerShown\":false,\"isFidoSupported\":true,\"originalRequest\":\"" + authorizeResponse.sCtx + "\",\"country\":\"SE\",\"forceotclogin\":false,\"isExternalFederationDisallowed\":false,\"isRemoteConnectSupported\":false,\"federationFlags\":0,\"isSignup\":false,\"flowToken\":\"" + authorizeResponse.sFT + "\",\"isAccessPassSupported\":true}";
+                "{\"username\":\"" + _email + "\",\"isOtherIdpSupported\":true,\"checkPhones\":false,\"isRemoteNGCSupported\":true,\"isCookieBannerShown\":false,\"isFidoSupported\":true,\"originalRequest\":\"" + authorizeResponse.sCtx + "\",\"country\":\"SE\",\"forceotclogin\":false,\"isExternalFederationDisallowed\":false,\"isRemoteConnectSupported\":false,\"federationFlags\":0,\"isSignup\":false,\"flowToken\":\"" + authorizeResponse.sFT + "\",\"isAccessPassSupported\":true}";
 
             temp_url = "https://login.microsoftonline.com/common/GetCredentialType?mkt=en-US";
             var request = new HttpRequestMessage
@@ -127,8 +134,8 @@ namespace Skolplattformen.ElevApp.SkolplattformenApi
             temp_url = "https://login001.stockholm.se/siteminderagent/forms/login.fcc";
             temp_res = await _httpClient.PostAsync(temp_url, new FormUrlEncodedContent(new[]
             {
-            new KeyValuePair<string, string>("user", username),
-            new KeyValuePair<string, string>("password", password),
+            new KeyValuePair<string, string>("user", _username),
+            new KeyValuePair<string, string>("password", _password),
             new KeyValuePair<string, string>("SMENC", "ISO-8859-1"),
             new KeyValuePair<string, string>("SMLOCALE", "US-EN"),
             new KeyValuePair<string, string>("target", UpdateSamlTransactionIdInEncodedStartpageParam("https://login001.stockholm.se/NECSelev/form/b64startpage.jsp?startpage=aHR0cHM6Ly9sb2dpbjAwMS5zdG9ja2hvbG0uc2UvYWZmd2Vic2VydmljZXMvcmVkaXJlY3Rqc3AvZWR1YWRmcy5qc3A/U01QT1JUQUxVUkw9aHR0cHMlM0ElMkYlMkZsb2dpbjAwMS5zdG9ja2hvbG0uc2UlMkZhZmZ3ZWJzZXJ2aWNlcyUyRnB1YmxpYyUyRnNhbWwyc3NvJlNBTUxUUkFOU0FDVElPTklEPTEwMjkwNThjLTM0MTg2YWFhLTRmYWRiYzY5LTRkN2RkMDU3LTczYmRkNGQ3LTA1MA==", samlTransactionId)),
@@ -229,7 +236,7 @@ namespace Skolplattformen.ElevApp.SkolplattformenApi
 
             await SetupAfterLoginAsync(res);
 
-            _email = email;
+            _email = _email;
             
 
             // Tests below this line -------------------------------------------------------------------------------------------
@@ -297,5 +304,12 @@ namespace Skolplattformen.ElevApp.SkolplattformenApi
             return newUrl;
         }
 
+    }
+
+    public class LoginCredentials
+    {
+        public string Email { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }

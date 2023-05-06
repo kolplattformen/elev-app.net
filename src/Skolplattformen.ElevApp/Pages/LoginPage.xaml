@@ -2,65 +2,125 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Skolplattformen.ElevApp.Pages.LoginPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodel="clr-namespace:Skolplattformen.ElevApp.ViewModels"
              x:DataType="viewmodel:LoginViewModel">
+    <ContentPage.Resources>
+        <toolkit:IsEqualConverter x:Key="IsEqualConverter" />
+    </ContentPage.Resources>
 
     <ScrollView>
-        <VerticalStackLayout
-            x:Name="layout"
-            Spacing="5"
-            Padding="30,20,30,0"
-            VerticalOptions="Center">
+        <Grid x:Name="layout"
+              Padding="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200" />
+                <RowDefinition Height="120" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
             <Image
+                    Grid.Row="0"
                     Source="children.png"
                     SemanticProperties.Description="Barn leker"
                     HeightRequest="180"
                     HorizontalOptions="Center" />
 
             <Label
-                    Text="Öppna skolplattformen"
+                    Grid.Row="1"
+                    Padding="10"
+                    Text="Öppna elevappen"
                     SemanticProperties.HeadingLevel="Level1"
                     FontSize="32"
                     HorizontalOptions="Center" />
 
-            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}"/>
-
-            <Entry
+            <VerticalStackLayout 
+                Grid.Row="2"
+                Padding="18,0,18,12"
+                Spacing="6"
+                VerticalOptions="End"
+                IsVisible="{Binding Source={x:Reference blaj}, 
+                Path=Text,Converter={StaticResource IsEqualConverter}, ConverterParameter=0 }">
+                <Entry
                     MaxLength="200"
                     Text="{Binding Email}" 
                     Placeholder="E-mail" 
                     Focused="Entry_Focused" 
                     Unfocused="Entry_Unfocused"
                     Keyboard="Email"/>
-            <Entry
+                <Entry
                     MaxLength="200"
                     Text="{Binding Username}" 
                     Placeholder="Användarnamn" 
                     Focused="Entry_Focused" 
                     Unfocused="Entry_Unfocused"/>
-            <Entry
+                <Entry
                     MaxLength="200"
                     Text="{Binding Password}" 
                     IsPassword="true"
                     Placeholder="Lösenord" 
                     Focused="Entry_Focused" 
                     Unfocused="Entry_Unfocused"/>
+            </VerticalStackLayout>
 
-            <Button
-                    Text="Logga in"
-                    Command="{Binding LoginCommand}"
-                    HorizontalOptions="End" />
+            <!-- Dexter login form-->
+            <VerticalStackLayout 
+                Grid.Row="2"
+                Padding="18,0,18,12"
+                Spacing="6"
+                VerticalOptions="End"
+                IsVisible="{Binding Source={x:Reference blaj}, 
+                Path=Text,Converter={StaticResource IsEqualConverter}, ConverterParameter=1 }">
 
-            <Picker x:Name="picker"
-                        Title="Välj inloggning"
-                        ItemsSource="{Binding PlatformList}"
-                        SelectedIndex="{Binding PlatformSelectedIndex}">
+                <Picker x:Name="DexterInstallationPicker"
+                        Title="Välj installation"
+                        ItemsSource="{Binding DexterInstallations}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedDexterInstallation}"></Picker>
+                <Entry
+                    MaxLength="200"
+                    Text="{Binding Username}" 
+                    Placeholder="Användarnamn" 
+                    Focused="Entry_Focused" 
+                    Unfocused="Entry_Unfocused"/>
+                <Entry
+                    MaxLength="200"
+                    Text="{Binding Password}" 
+                    IsPassword="true"
+                    Placeholder="Lösenord" 
+                    Focused="Entry_Focused" 
+                    Unfocused="Entry_Unfocused"/>
+            </VerticalStackLayout>
 
-            </Picker>
+            <VerticalStackLayout
+                    Grid.Row="3"
+                    Padding="18,0"
+                    Spacing="8"
+                >
+                <Button
+        Text="Logga in"
+        Command="{Binding LoginCommand}"
+        HorizontalOptions="End" />
+
+                <Picker x:Name="picker"
+            Title="Välj lärplattform"
+            ItemsSource="{Binding PlatformList}"
+            SelectedIndex="{Binding PlatformSelectedIndex}">
+
+                </Picker>
+            </VerticalStackLayout>
 
 
-        </VerticalStackLayout>
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Grid.Row ="3"/>
+            <!-- Why do I have to do it this way? But hey, if it works... -->
+            <Entry x:Name="blaj" Text="{Binding Source={x:Reference picker},Path=SelectedIndex}" IsVisible="False"></Entry>
+
+
+        </Grid>
+
     </ScrollView>
 
 </ContentPage>

@@ -22,7 +22,7 @@
 
             <Button Text="Sätt upp matsedel från skolmaten.se" Command="{Binding PopupSkolmatenCommand}" Margin="0,6,0,0"></Button>
 
-            <VerticalStackLayout Margin="0,20">
+            <VerticalStackLayout Margin="0,20" IsVisible="{Binding TodayTabSettingsVisible}">
                 <Label 
                 FontSize="21"
                 Text="Inkludera i Min dag-vyn"
@@ -30,21 +30,21 @@
                 VerticalOptions="Start" 
                 HorizontalOptions="Start" />
 
-                <Frame Padding="12,6" Margin="0,6,0,0">
+                <Frame Padding="12,6" Margin="0,6,0,0" IsVisible="{Binding TodayTabSettingsMyCalendarVisible}">
                     <StackLayout  Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Min kalender" Margin="0,5"></Label>
                         <Switch IsToggled="{Binding ShowCalendarInTodayView}" HorizontalOptions="End"></Switch>
                     </StackLayout>
                 </Frame>
 
-                <Frame Padding="12,6" Margin="0,6,0,0">
+                <Frame Padding="12,6" Margin="0,6,0,0" IsVisible="{Binding TodayTabSettingsAbsenceVisible}">
                     <StackLayout  Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Frånvaro" Margin="0,5"></Label>
                         <Switch IsToggled="{Binding ShowPlannedAbsenceInTodayView}" HorizontalOptions="End"></Switch>
                     </StackLayout>
                 </Frame>
 
-                <Frame Padding="12,6" Margin="0,6,0,0">
+                <Frame Padding="12,6" Margin="0,6,0,0" IsVisible="{Binding TodayTabSettingsKalendariumVisible}">
                     <StackLayout  Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" Text="Skolans kalendarium" Margin="0,5"></Label>
                         <Switch IsToggled="{Binding ShowKalendariumInTodayView}" HorizontalOptions="End"></Switch>
@@ -52,7 +52,7 @@
                 </Frame>
             </VerticalStackLayout>
 
-            <Button Text="Spara"
+            <Button Text="Spara" IsVisible="{Binding TodayTabSettingsVisible}"
                 Command="{Binding SaveCommand}"
                 VerticalOptions="End" 
                 HorizontalOptions="End" />
