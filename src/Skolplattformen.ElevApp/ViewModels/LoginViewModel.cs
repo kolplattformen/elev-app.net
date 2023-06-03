@@ -77,7 +77,7 @@ namespace Skolplattformen.ElevApp.ViewModels
             };
             if (PlatformSelectedIndex != -1)
             {
-                _skolplattformenService.SelectApi(kind);
+                await _skolplattformenService.SelectApi(kind);
                
                 if (App.Current.MainPage is AppShell shell)
                 {
