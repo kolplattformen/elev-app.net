@@ -93,7 +93,7 @@ namespace Skolplattformen.ElevApp.ViewModels
                 Password = password,
                 RememberMe = true,
                 Platform = PlatformSelectedIndex,
-                DexterInstallation = SelectedDexterInstallation.Id
+                DexterInstallation = SelectedDexterInstallation?.Id
             };
             Storage.Store("login_details", loginDetails);
             
