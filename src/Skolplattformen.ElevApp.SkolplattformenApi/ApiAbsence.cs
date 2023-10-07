@@ -10,8 +10,9 @@ public partial class Api
 {
     private async Task AbsenceSsoLoginAsync()
     {
-        var temp_url = "https://fnsservicesso1.stockholm.se/sso-ng/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=Skola24Widget";
-        
+        var temp_url = "https://stockholm-sso.skola24.se/nssso/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=Skola24Widget";
+
+
         var temp_res = await _httpClient.GetAsync(temp_url);
         var temp_content = await temp_res.Content.ReadAsStringAsync();
 
@@ -40,7 +41,7 @@ public partial class Api
         while (temp_res.Headers.Location != null)
         {
             temp_url = temp_res.Headers.Location?.ToString();
-            temp_url = temp_url.StartsWith("/") ? "https://fns.stockholm.se" + temp_url : temp_url;
+            temp_url = temp_url.StartsWith("/") ? "https://stockholm.skola24.se" + temp_url : temp_url;
             temp_res = await _httpClient.GetAsync(temp_url);
         }
     }
@@ -55,7 +56,7 @@ public partial class Api
         var url = "https://login001.stockholm.se/siteminderagent/forms/aelever.jsp?SMAUTHREASON=0"
                   + $"&SMAGENTNAME={smagentname}"
                   + "&SMQUERYDATA=null"
-                  + "&TARGET=-SM-HTTPS://fnsservicesso1.stockholm.se/sso-ng/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=Skola24Widget";
+                  + "&TARGET=-SM-HTTPS://stockholm-sso.skola24.se/nssso/saml-2.0/authenticate?customer=https://login001.stockholm.se&targetsystem=Skola24Widget";
 
         temp_res = await _httpClient.GetAsync(url);
         //var temp_content = await temp_res.Content.ReadAsStringAsync();
@@ -64,8 +65,8 @@ public partial class Api
         url =
             "https://login001.stockholm.se/siteminderagent/forms/loginForm.jsp"+
             "?SMAGENTNAME=login001-ext.stockholm.se"+
-            "&POSTTARGET=https://login001.stockholm.se/NECSelev/form/b64startpage.jsp?startpage=aHR0cHM6Ly9mbnNzZXJ2aWNlc3NvMS5zdG9ja2hvbG0uc2Uvc3NvLW5nL3NhbWwtMi4wL2F1dGhlbnRpY2F0ZT9jdXN0b21lcj1odHRwczovL2xvZ2luMDAxLnN0b2NraG9sbS5zZSZ0YXJnZXRzeXN0ZW09U2tvbGEyNFdpZGdldA=="+
-            "&TARGET=-SM-HTTPS://fnsservicesso1.stockholm.se/sso-ng/saml-2.0/authenticate?customer=https://login001.stockholm.se";
+            "&POSTTARGET=https://login001.stockholm.se/NECSelev/form/b64startpage.jsp?startpage=aHR0cHM6Ly9zdG9ja2hvbG0tc3NvLnNrb2xhMjQuc2UvbnNzc28vc2FtbC0yLjAvYXV0aGVudGljYXRlP2N1c3RvbWVyPWh0dHBzOi8vbG9naW4wMDEuc3RvY2tob2xtLnNlJnRhcmdldHN5c3RlbT1Ta29sYTI0V2lkZ2V0" +
+            "&TARGET=-SM-HTTPS://stockholm-sso.skola24.se/nssso/saml-2.0/authenticate?customer=https://login001.stockholm.se";
         temp_res = await _httpClient.GetAsync(url);
         //temp_content = await temp_res.Content.ReadAsStringAsync();
 
@@ -76,7 +77,7 @@ public partial class Api
             new KeyValuePair<string, string>("password", _password),
             new KeyValuePair<string, string>("SMENC", "ISO-8859-1"),
             new KeyValuePair<string, string>("SMLOCALE", "US-EN"),
-            new KeyValuePair<string, string>("target", "https://login001.stockholm.se/NECSelev/form/b64startpage.jsp?startpage=aHR0cHM6Ly9mbnNzZXJ2aWNlc3NvMS5zdG9ja2hvbG0uc2Uvc3NvLW5nL3NhbWwtMi4wL2F1dGhlbnRpY2F0ZT9jdXN0b21lcj1odHRwczovL2xvZ2luMDAxLnN0b2NraG9sbS5zZSZ0YXJnZXRzeXN0ZW09U2tvbGEyNFdpZGdldA=="),
+            new KeyValuePair<string, string>("target", "https://login001.stockholm.se/NECSelev/form/b64startpage.jsp?startpage=aHR0cHM6Ly9zdG9ja2hvbG0tc3NvLnNrb2xhMjQuc2UvbnNzc28vc2FtbC0yLjAvYXV0aGVudGljYXRlP2N1c3RvbWVyPWh0dHBzOi8vbG9naW4wMDEuc3RvY2tob2xtLnNlJnRhcmdldHN5c3RlbT1Ta29sYTI0V2lkZ2V0"),
             new KeyValuePair<string, string>("smauthreason", "null"),
             new KeyValuePair<string, string>("smagentname", "login001-ext.stockholm.se"),
             new KeyValuePair<string, string>("smquerydata", "null"),
@@ -97,7 +98,7 @@ public partial class Api
 
     private async Task GetAbsenceUserInfo()
     {
-        var temp_url = "https://fns.stockholm.se/ng/api/get/user/info";
+        var temp_url = "https://stockholm.skola24.se/ng/api/get/user/info";
 
         var request = new HttpRequestMessage
         {
@@ -105,10 +106,10 @@ public partial class Api
             Method = HttpMethod.Post,
             Headers =
             {
-                { "Referer", "https://fns.stockholm.se/ng/portal/start" },
+                { "Referer", "https://stockholm.skola24.se/ng/portal/start" },
                 { "X-Scope", "a0b6c9c4-11d7-4a52-a030-a55a15058eef" },
                 { "Accept", "application/json"},
-                { "Origin", "https://fns.stockholm.se" },
+                { "Origin", "https://stockholm.skola24.se" },
             },
         };
 
@@ -119,7 +120,7 @@ public partial class Api
 
     private async Task<string> GetPlannedAbsenceUserGuid()
     {
-        var temp_url = "https://fns.stockholm.se/ng/api/get/guid/for/current/user";
+        var temp_url = "https://stockholm.skola24.se/ng/api/get/guid/for/current/user";
 
         var request = new HttpRequestMessage
         {
@@ -127,10 +128,10 @@ public partial class Api
             Method = HttpMethod.Post,
             Headers =
             {
-                { "Referer", "https://fns.stockholm.se/ng/portal/start/absence/planned" },
+                { "Referer", "https://stockholm.skola24.se/ng/portal/start/absence/planned" },
                 { "X-Scope", "f9193d2f-b9f5-41a5-b5ca-b2f52690b27e" },
                 { "Accept", "application/json"},
-                { "Origin", "https://fns.stockholm.se" },
+                { "Origin", "https://stockholm.skola24.se" },
             },
         };
 
@@ -159,7 +160,7 @@ public partial class Api
             var content = "{\"studentPersonGuid\":\"" + guid +
                           "\",\"groupGuid\":null,\"isPrivate\":true,\"selectedDate\":null}";
 
-            var temp_url = "https://fns.stockholm.se/ng/api/get/planned/absence";
+            var temp_url = "https://stockholm.skola24.se/ng/api/get/planned/absence";
 
             var request = new HttpRequestMessage
             {
@@ -167,10 +168,10 @@ public partial class Api
                 Method = HttpMethod.Post,
                 Headers =
                 {
-                    { "Referer", "https://fns.stockholm.se/ng/portal/start/absence/planned" },
+                    { "Referer", "https://stockholm.skola24.se/ng/portal/start/absence/planned" },
                     { "X-Scope", "f9193d2f-b9f5-41a5-b5ca-b2f52690b27e" },
                     { "Accept", "application/json" },
-                    { "Origin", "https://fns.stockholm.se" },
+                    { "Origin", "https://stockholm.skola24.se" },
                 },
                 Content = new StringContent(content)
             };
