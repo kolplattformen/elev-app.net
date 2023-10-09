@@ -21,12 +21,17 @@ namespace Skolplattformen.ElevApp.SkolplattformenApi
                 throw new ArgumentException();
 
             }
-          
-            
+
+
             var jsonSerializerOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
+
+            _cookieContainer = new CookieContainer();
+            var httpClientHandler = new HttpClientHandler { CookieContainer = _cookieContainer, AllowAutoRedirect = false };
+            _httpClient = new HttpClient(httpClientHandler);
+            _httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36");
 
             var temp_url = "https://skolplattformen.stockholm.se/";
             var temp_res = await _httpClient.GetAsync(temp_url);
@@ -304,6 +309,25 @@ namespace Skolplattformen.ElevApp.SkolplattformenApi
             return newUrl;
         }
 
+        public async Task LogOutAsync()
+        {
+            if (_httpClient == null)
+            {
+                return;
+            }
+            
+            var url = "https://elevstockholm.sharepoint.com/sites/skolplattformen/_layouts/15/SignOut.aspx?ru=https%3A%2F%2Felevstockholm.sharepoint.com%2Fsites%2Fskolplattformen%2F"; // 
+            var res = await _httpClient.GetAsync(url);
+            while (res.StatusCode == HttpStatusCode.Redirect)
+            {
+                url = res.Headers.Location.ToString();
+                res = await _httpClient.GetAsync(url);
+            }
+            
+            _httpClient.Dispose();
+            _httpClient = null;
+            _cookieContainer = null;
+        }
     }
 
     public class LoginCredentials

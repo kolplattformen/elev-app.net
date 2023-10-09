@@ -5,6 +5,7 @@ namespace Skolplattformen.ElevApp.ApiInterface
     public interface IApi
     {
         Task LogInAsync(object loginCredentials);
+        Task LogOutAsync();
         Task<ApiUser?> GetUserAsync();
         Task<List<Teacher>> GetTeachersAsync();
         Task<SchoolDetails?> GetSchoolDetailsAsync(Guid schoolId);

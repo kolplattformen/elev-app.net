@@ -99,6 +99,11 @@ namespace Skolplattformen.ElevApp.FakeApi
             await Task.Delay(1000);
         }
 
+        public async Task LogOutAsync()
+        {
+            await Task.Delay(100);
+        }
+
         public Task<ApiUser?> GetUserAsync()
         {
             return Task.FromResult(_fakeData.ApiUser);
