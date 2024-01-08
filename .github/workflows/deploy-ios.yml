@@ -67,6 +67,7 @@ jobs:
           shell: bash
           run: |
             cd src
+            dotnet workload restore ${{env.PROJECTNAME}}.sln
             dotnet restore ${{env.PROJECTNAME}}.sln
 
         - name : Build iOS App
