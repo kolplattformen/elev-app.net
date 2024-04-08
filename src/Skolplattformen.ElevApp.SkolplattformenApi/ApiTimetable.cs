@@ -41,7 +41,7 @@ public partial class Api
         while (temp_res.Headers.Location != null)
         {
             temp_url = temp_res.Headers.Location?.ToString();
-            temp_url = temp_url.StartsWith("/") ? "https://stockholm.skola24.se" + temp_url : temp_url;
+            temp_url = temp_url.StartsWith("/") ? "https://websthlm.skola24.se" + temp_url : temp_url;
             temp_res = await _httpClient.GetAsync(temp_url);
         }
     }
@@ -97,7 +97,7 @@ public partial class Api
 
     private async Task<(string, string)> GetTimetableUnitGuidAndPersonGuid()
     {
-        var temp_url = "https://stockholm.skola24.se/ng/api/services/skola24/get/personal/timetables";
+        var temp_url = "https://websthlm.skola24.se/api/services/skola24/get/personal/timetables";
 
         var content = "{\"getPersonalTimetablesRequest\":{\"hostName\":\"stockholm.skola24.se\"}}";
         var request = new HttpRequestMessage
@@ -106,10 +106,10 @@ public partial class Api
             Method = HttpMethod.Post,
             Headers =
             {
-                { "Referer", "https://stockholm.skola24.se/ng/timetable/timetable-viewer" },
+                { "Referer", "https://websthlm.skola24.se/ng/timetable/timetable-viewer" },
                 { "X-Scope", "8a22163c-8662-4535-9050-bc5e1923df48" },
                 { "Accept", "application/json" },
-                { "Origin", "https://stockholm.skola24.se" },
+                { "Origin", "https://websthlm.skola24.se" },
             },
             Content = new StringContent(content)
         };
@@ -134,7 +134,7 @@ public partial class Api
 
     private async Task<string> GetTimetableRenderKey()
     {
-        var temp_url = "https://stockholm.skola24.se/ng/api/get/timetable/render/key";
+        var temp_url = "https://websthlm.skola24.se/api/get/timetable/render/key";
 
         var request = new HttpRequestMessage
         {
@@ -142,10 +142,10 @@ public partial class Api
             Method = HttpMethod.Post,
             Headers =
             {
-                { "Referer", "https://stockholm.skola24.se/ng/timetable/timetable-viewer/stockholm.skola24.se/" },
+                { "Referer", "https://websthlm.skola24.se/timetable/timetable-viewer/stockholm.skola24.se/" },
                 { "X-Scope", "8a22163c-8662-4535-9050-bc5e1923df48" },
                 { "Accept", "application/json" },
-                { "Origin", "https://stockholm.skola24.se" },
+                { "Origin", "https://websthlm.skola24.se" },
             },
         };
 
@@ -174,9 +174,10 @@ public partial class Api
             var content = "{\"renderKey\":\"" + key + "\",\"host\":\"stockholm.skola24.se\",\"unitGuid\":\"" + unitGuid +
                           "\",\"startDate\":null,\"endDate\":null,\"scheduleDay\":0,\"blackAndWhite\":false,\"width\":1227,\"height\":1191,\"selectionType\":5,\"selection\":\"" +
                           personGuid + "\",\"showHeader\":false,\"periodText\":\"\",\"week\":" + week + ",\"year\":" +
-                          year + ",\"privateFreeTextMode\":null,\"privateSelectionMode\":true,\"customerKey\":\"\"}";
-
-            var temp_url = "https://stockholm.skola24.se/ng/api/render/timetable";
+                          year + ",\"privateFreeTextMode\":null,\"privateSelectionMode\":true,\"customerKey\":\"\",\"schoolYear\": \"b976f986-4308-4583-b39e-2d3933094eb2\"}";
+            // TODO: schoolYear is hardcoded, should be fetched from https://websthlm.skola24.se/api/get/active/school/years
+            
+            var temp_url = "https://websthlm.skola24.se/api/render/timetable";
 
             var request = new HttpRequestMessage
             {
@@ -184,10 +185,10 @@ public partial class Api
                 Method = HttpMethod.Post,
                 Headers =
             {
-                { "Referer", "https://stockholm.skola24.se/ng/timetable/timetable-viewer/stockholm.skola24.se/" },
+                { "Referer", "https://websthlm.skola24.se/timetable/timetable-viewer/stockholm.skola24.se/" },
                 { "X-Scope", "8a22163c-8662-4535-9050-bc5e1923df48" },
                 { "Accept", "application/json" },
-                { "Origin", "https://stockholm.skola24.se" },
+                { "Origin", "https://websthlm.skola24.se" },
             },
                 Content = new StringContent(content)
             };
