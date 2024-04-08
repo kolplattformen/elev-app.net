@@ -41,7 +41,7 @@ public partial class Api
         while (temp_res.Headers.Location != null)
         {
             temp_url = temp_res.Headers.Location?.ToString();
-            temp_url = temp_url.StartsWith("/") ? "https://stockholm.skola24.se" + temp_url : temp_url;
+            temp_url = temp_url.StartsWith("/") ? "https://websthlm.skola24.se" + temp_url : temp_url;
             temp_res = await _httpClient.GetAsync(temp_url);
         }
     }
@@ -98,7 +98,7 @@ public partial class Api
 
     private async Task GetAbsenceUserInfo()
     {
-        var temp_url = "https://stockholm.skola24.se/ng/api/get/user/info";
+        var temp_url = "https://websthlm.skola24.se/api/get/user/info";
 
         var request = new HttpRequestMessage
         {
@@ -106,10 +106,10 @@ public partial class Api
             Method = HttpMethod.Post,
             Headers =
             {
-                { "Referer", "https://stockholm.skola24.se/ng/portal/start" },
+                { "Referer", "https://websthlm.skola24.se/portal/start" },
                 { "X-Scope", "a0b6c9c4-11d7-4a52-a030-a55a15058eef" },
                 { "Accept", "application/json"},
-                { "Origin", "https://stockholm.skola24.se" },
+                { "Origin", "https://websthlm.skola24.se" },
             },
         };
 
@@ -120,7 +120,7 @@ public partial class Api
 
     private async Task<string> GetPlannedAbsenceUserGuid()
     {
-        var temp_url = "https://stockholm.skola24.se/ng/api/get/guid/for/current/user";
+        var temp_url = "https://websthlm.skola24.se/api/get/guid/for/current/user";
 
         var request = new HttpRequestMessage
         {
@@ -128,10 +128,10 @@ public partial class Api
             Method = HttpMethod.Post,
             Headers =
             {
-                { "Referer", "https://stockholm.skola24.se/ng/portal/start/absence/planned" },
+                { "Referer", "https://websthlm.skola24.se/portal/start/absence/planned" },
                 { "X-Scope", "f9193d2f-b9f5-41a5-b5ca-b2f52690b27e" },
                 { "Accept", "application/json"},
-                { "Origin", "https://stockholm.skola24.se" },
+                { "Origin", "https://websthlm.skola24.se" },
             },
         };
 
@@ -160,7 +160,7 @@ public partial class Api
             var content = "{\"studentPersonGuid\":\"" + guid +
                           "\",\"groupGuid\":null,\"isPrivate\":true,\"selectedDate\":null}";
 
-            var temp_url = "https://stockholm.skola24.se/ng/api/get/planned/absence";
+            var temp_url = "https://websthlm.skola24.se/api/get/planned/absence";
 
             var request = new HttpRequestMessage
             {
@@ -168,10 +168,10 @@ public partial class Api
                 Method = HttpMethod.Post,
                 Headers =
                 {
-                    { "Referer", "https://stockholm.skola24.se/ng/portal/start/absence/planned" },
+                    { "Referer", "https://websthlm.skola24.se/portal/start/absence/planned" },
                     { "X-Scope", "f9193d2f-b9f5-41a5-b5ca-b2f52690b27e" },
                     { "Accept", "application/json" },
-                    { "Origin", "https://stockholm.skola24.se" },
+                    { "Origin", "https://websthlm.skola24.se" },
                 },
                 Content = new StringContent(content)
             };
