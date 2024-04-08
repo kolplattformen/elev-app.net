@@ -54,6 +54,13 @@ jobs:
             dotnet workload restore ${{env.PROJECTNAME}}.sln
             dotnet restore ${{env.PROJECTNAME}}.sln
 
+        - name: Set Up Android tools
+          run: |
+            ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager \
+            --sdk_root=$ANDROID_SDK_ROOT \
+            "platform-tools"
+
+
           # https://docs.microsoft.com/en-us/dotnet/maui/android/deployment/overview
         - name : Build Android App
           shell: bash
