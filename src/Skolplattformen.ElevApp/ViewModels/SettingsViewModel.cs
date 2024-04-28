@@ -29,6 +29,12 @@ namespace Skolplattformen.ElevApp.ViewModels
             _skolplattformenService = skolplattformenService;
         }
 
+        [RelayCommand]
+        public void OpenPrivacyPolicy()
+        {
+            Browser.OpenAsync("https://skolplattformen.org/integritet");
+        }
+
 
         [RelayCommand]
         async Task Logout()
