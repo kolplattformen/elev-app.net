@@ -91,6 +91,15 @@
                 Command="{Binding LogoutCommand}"
                 HorizontalOptions="End" />
             </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label 
+                    FontSize="21"
+                    Text="Integritetspolicy"
+                    FontAttributes="Bold"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" />
+                <Button Text="Vi samlar ingen data om dig. Läs mer här." Command="{Binding OpenPrivacyPolicyCommand}" Margin="0,6,0,0"></Button>
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
