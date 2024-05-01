@@ -32,7 +32,7 @@ namespace Skolplattformen.ElevApp.ViewModels
         [RelayCommand]
         public void OpenPrivacyPolicy()
         {
-            Browser.OpenAsync("https://skolplattformen.org/integritet");
+            Browser.OpenAsync("https://skolplattformen.org/integritetspolicy-elevapp");
         }
 
 

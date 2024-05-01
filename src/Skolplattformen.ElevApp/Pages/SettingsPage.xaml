@@ -98,7 +98,7 @@
                     FontAttributes="Bold"
                     VerticalOptions="Start" 
                     HorizontalOptions="Start" />
-                <Button Text="Vi samlar ingen data om dig. Läs mer här." Command="{Binding OpenPrivacyPolicyCommand}" Margin="0,6,0,0"></Button>
+                <Button Text="Vi samlar ingen data om dig. Läs mer..." Command="{Binding OpenPrivacyPolicyCommand}" Margin="0,6,0,0"></Button>
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
