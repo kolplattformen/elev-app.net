@@ -30,16 +30,19 @@ public class SkolplattformenService
 
     public ApiFeatures ApiFeatures => _api.Features;
 
-    public void SelectApi(ApiKind apiKind)
+    public async Task SelectApi(ApiKind apiKind)
     {
         _apiKind = apiKind;
 
-        LogOut();
+        await LogOut();
     }
 
-    public void LogOut()
+    public async Task LogOut()
     {
         _loggedInTime = DateTime.MinValue;
+
+        await _api.LogOutAsync();
+
         if (_apiKind == ApiKind.Skolplattformen)
         {
             _api = new CachedSchoolPlattformenElevApi(new Api());
