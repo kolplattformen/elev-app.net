@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -19,7 +19,7 @@
 		<ApplicationIdGuid>C81F9A8E-51C7-4AC4-B06D-397154E0EDC0</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0.6</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>1.0.7</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
@@ -31,7 +31,7 @@
 		<ProvisioningType>manual</ProvisioningType>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
+	<PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
 	  <CodesignKey>Apple Development: Created via API (ZYVYLJDUYH)</CodesignKey>
 	  <CodesignProvision>VS: WildCard Development</CodesignProvision>
 	</PropertyGroup>
@@ -55,15 +55,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="4.0.0" />
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.70" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.70" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Skolplattformen.ElevApp.ApiInterface\Skolplattformen.ElevApp.ApiInterface.csproj" />
-	  <ProjectReference Include="..\Skolplattformen.ElevApp.DexterApi\Skolplattformen.ElevApp.DexterApi.csproj" />
-	  <ProjectReference Include="..\Skolplattformen.ElevApp.FakeApi\Skolplattformen.ElevApp.FakeApi.csproj" />
-	  <ProjectReference Include="..\Skolplattformen.ElevApp.SkolplattformenApi\Skolplattformen.ElevApp.SkolplattformenApi.csproj" />
+		<ProjectReference Include="..\Skolplattformen.ElevApp.ApiInterface\Skolplattformen.ElevApp.ApiInterface.csproj" />
+		<ProjectReference Include="..\Skolplattformen.ElevApp.DexterApi\Skolplattformen.ElevApp.DexterApi.csproj" />
+		<ProjectReference Include="..\Skolplattformen.ElevApp.FakeApi\Skolplattformen.ElevApp.FakeApi.csproj" />
+		<ProjectReference Include="..\Skolplattformen.ElevApp.SkolplattformenApi\Skolplattformen.ElevApp.SkolplattformenApi.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -45,7 +45,13 @@ namespace Skolplattformen.ElevApp.ViewModels
             if(IsLoading) return Task.CompletedTask;
             //     IsLoading = true;
 
-            var loginDetails = Storage.Get<LoginDetails>("login_details");
+            var loginDetails = Storage.Get<LoginDetails>("login_details")
+                ?? new LoginDetails
+                    {
+                        RememberMe = false,
+                        Platform = 0
+                    };
+            
 
             if (loginDetails.RememberMe)
             {
