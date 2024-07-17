@@ -9,8 +9,8 @@ on:
   workflow_dispatch:
 
 env:
-    DOTNETVERSION: 7.0.203
-    MAUIFRAMEWORK: net7.0-ios
+    DOTNETVERSION: 8.0.303
+    MAUIFRAMEWORK: net8.0-ios
     PROJECTNAME: Skolplattformen.ElevApp
     APPLICATIONID: se.kolplattformen.elevapp
     

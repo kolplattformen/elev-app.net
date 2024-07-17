@@ -11,7 +11,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skolplattformen.ElevApp.Api
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skolplattformen.ElevApp.FakeApi", "Skolplattformen.ElevApp.FakeApi\Skolplattformen.ElevApp.FakeApi.csproj", "{66DF3218-7253-43B0-81C0-D106B375D6C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skolplattformen.ElevApp.DexterApi", "Skolplattformen.ElevApp.DexterApi\Skolplattformen.ElevApp.DexterApi.csproj", "{784E4EE5-8EED-4315-BEA5-B765BF128141}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skolplattformen.ElevApp.DexterApi", "Skolplattformen.ElevApp.DexterApi\Skolplattformen.ElevApp.DexterApi.csproj", "{784E4EE5-8EED-4315-BEA5-B765BF128141}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4274B5DA-A7B3-4C0E-B550-5C5B6B64A86D}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\CONTRIBUTE-sv.md = ..\CONTRIBUTE-sv.md
+		..\CONTRIBUTE.md = ..\CONTRIBUTE.md
+		..\.github\workflows\deploy-android.yml = ..\.github\workflows\deploy-android.yml
+		..\.github\workflows\deploy-ios.yml = ..\.github\workflows\deploy-ios.yml
+		global.json = global.json
+		..\README-sv.md = ..\README-sv.md
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
