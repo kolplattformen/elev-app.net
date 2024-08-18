@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Skolplattformen.ElevApp.ApiInterface;
 using Skolplattformen.ElevApp.ApiInterface.Models;
+//using Skolplattformen.Elevapp.InfomentorStockholmApi;
 using Skolplattformen.ElevApp.SkolplattformenApi;
 
 
@@ -11,6 +12,7 @@ public enum ApiKind
     Skolplattformen = 1,
     FakeData = 2,
     Dexter = 3,
+    InfoMentorStockholm = 4
 }
 
 
@@ -47,6 +49,10 @@ public class SkolplattformenService
         else if (_apiKind == ApiKind.Dexter)
         {
             _api = new DexterApi.DexterApi();
+        }
+        else if (_apiKind == ApiKind.InfoMentorStockholm)
+        {
+            _api = new InfomentorStockholmApi.InfomentorApi();
         }
         else
         {

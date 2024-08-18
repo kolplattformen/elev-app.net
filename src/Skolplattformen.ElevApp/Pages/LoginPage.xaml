@@ -37,6 +37,8 @@
                     FontSize="32"
                     HorizontalOptions="Center" />
 
+            <!-- Infomentor login form-->
+
             <VerticalStackLayout 
                 Grid.Row="2"
                 Padding="18,0,18,12"
@@ -44,13 +46,7 @@
                 VerticalOptions="End"
                 IsVisible="{Binding Source={x:Reference blaj}, 
                 Path=Text,Converter={StaticResource IsEqualConverter}, ConverterParameter=0 }">
-                <Entry
-                    MaxLength="200"
-                    Text="{Binding Email}" 
-                    Placeholder="E-mail" 
-                    Focused="Entry_Focused" 
-                    Unfocused="Entry_Unfocused"
-                    Keyboard="Email"/>
+
                 <Entry
                     MaxLength="200"
                     Text="{Binding Username}" 
@@ -94,6 +90,8 @@
                     Focused="Entry_Focused" 
                     Unfocused="Entry_Unfocused"/>
             </VerticalStackLayout>
+
+
 
             <VerticalStackLayout
                     Grid.Row="3"

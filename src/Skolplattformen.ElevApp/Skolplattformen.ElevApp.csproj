@@ -19,7 +19,7 @@
 		<ApplicationIdGuid>C81F9A8E-51C7-4AC4-B06D-397154E0EDC0</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0.7</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>1.0.8</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
@@ -67,6 +67,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Skolplattformen.ElevApp.ApiInterface\Skolplattformen.ElevApp.ApiInterface.csproj" />
 		<ProjectReference Include="..\Skolplattformen.ElevApp.DexterApi\Skolplattformen.ElevApp.DexterApi.csproj" />
+		<ProjectReference Include="..\Skolplattformen.Elevapp.InfomentorStockholmApi\Skolplattformen.ElevApp.InfomentorStockholmApi.csproj" />
 		<ProjectReference Include="..\Skolplattformen.ElevApp.FakeApi\Skolplattformen.ElevApp.FakeApi.csproj" />
 		<ProjectReference Include="..\Skolplattformen.ElevApp.SkolplattformenApi\Skolplattformen.ElevApp.SkolplattformenApi.csproj" />
 	</ItemGroup>
