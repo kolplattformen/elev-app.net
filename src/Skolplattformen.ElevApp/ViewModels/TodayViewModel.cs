@@ -242,7 +242,7 @@ namespace Skolplattformen.ElevApp.ViewModels
 
             SchoolStartTime = timetable?.OrderBy(l => l.TimeStart).FirstOrDefault()?.TimeStart.Substring(0, 5) ?? "";
             SchoolEndTime = timetable?.OrderByDescending(l => l.TimeEnd).FirstOrDefault()?.TimeEnd.Substring(0, 5) ?? "";
-            IsSportsbagDay = timetable?.Any(l => l.SubjectCode == "IDH") ?? false;
+            IsSportsbagDay = timetable?.Any(l => l.SubjectCode == "IDH" || (l.SubjectName?.ToLower().Contains("idrott") ?? false)) ?? false;
             
 
             MainThread.BeginInvokeOnMainThread(() =>
