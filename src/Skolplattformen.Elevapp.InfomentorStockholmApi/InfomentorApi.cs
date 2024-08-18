@@ -8,12 +8,37 @@ namespace Skolplattformen.ElevApp.InfomentorStockholmApi
 {
     public partial class InfomentorApi : IApi
     {
-     
+
+        public ApiFeatures Features => ApiFeatures.Timetable;
+        //| ApiFeatures.Calendar
+        //| ApiFeatures.PlannedAbsence
+        //| ApiFeatures.Meals
+        //| ApiFeatures.Kalendarium
+        //| ApiFeatures.SchoolDetails
+        //| ApiFeatures.Teachers;
 
         public async Task<ApiUser?> GetUserAsync()
         {
-            return new ApiUser();
-            throw new NotImplementedException();
+            var response = await _httpClient.PostAsync("https://hub.infomentor.se/NotificationApp/NotificationApp/appData", null) ;
+            var content = await response.Content.ReadAsStringAsync();
+
+            var name = string.Empty;
+
+            if (content.Contains("pupilName"))
+            {
+                try
+                {
+                    name = RegExp("\"pupilName\":\"([^\"]*)\"", content);
+                }
+                catch
+                {
+                    // Do nothing
+                }
+                
+            }
+
+            return new ApiUser{Name = name};
+            
         }
 
         public async Task<List<Teacher>> GetTeachersAsync()
@@ -124,12 +149,6 @@ namespace Skolplattformen.ElevApp.InfomentorStockholmApi
         }
 
     
-        public ApiFeatures Features => ApiFeatures.Timetable;
-        //| ApiFeatures.Calendar
-        //| ApiFeatures.PlannedAbsence
-        //| ApiFeatures.Meals
-        //| ApiFeatures.Kalendarium
-        //| ApiFeatures.SchoolDetails
-        //| ApiFeatures.Teachers;
+      
     }
 }
