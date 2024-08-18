@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Skolplattformen.Elevapp.InfomentorStockholmApi.Models
+namespace Skolplattformen.ElevApp.InfomentorStockholmApi.Models
 {
     public class TimeTableItem
     {

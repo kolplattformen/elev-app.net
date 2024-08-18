@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Skolplattformen.Elevapp.InfomentorStockholmApi.Models;
+namespace Skolplattformen.ElevApp.InfomentorStockholmApi.Models;
 
 public class TimeTableItemNotes
 {

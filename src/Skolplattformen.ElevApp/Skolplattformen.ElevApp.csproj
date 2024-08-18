@@ -67,6 +67,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Skolplattformen.ElevApp.ApiInterface\Skolplattformen.ElevApp.ApiInterface.csproj" />
 		<ProjectReference Include="..\Skolplattformen.ElevApp.DexterApi\Skolplattformen.ElevApp.DexterApi.csproj" />
+		<ProjectReference Include="..\Skolplattformen.Elevapp.InfomentorStockholmApi\Skolplattformen.ElevApp.InfomentorStockholmApi.csproj" />
 		<ProjectReference Include="..\Skolplattformen.ElevApp.FakeApi\Skolplattformen.ElevApp.FakeApi.csproj" />
 		<ProjectReference Include="..\Skolplattformen.ElevApp.SkolplattformenApi\Skolplattformen.ElevApp.SkolplattformenApi.csproj" />
 	</ItemGroup>

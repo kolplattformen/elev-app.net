@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skolplattformen.Elevapp.InfomentorStockholmApi", "Skolplattformen.Elevapp.InfomentorStockholmApi\Skolplattformen.Elevapp.InfomentorStockholmApi.csproj", "{C4318B91-DBD1-46CA-8853-F29D9DA44E0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skolplattformen.ElevApp.InfomentorStockholmApi", "Skolplattformen.Elevapp.InfomentorStockholmApi\Skolplattformen.ElevApp.InfomentorStockholmApi.csproj", "{C4318B91-DBD1-46CA-8853-F29D9DA44E0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

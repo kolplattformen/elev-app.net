@@ -2,9 +2,9 @@
 using Skolplattformen.ElevApp.ApiInterface.Models;
 using System.Globalization;
 using System.Text.Json;
-using Skolplattformen.Elevapp.InfomentorStockholmApi.Models;
+using Skolplattformen.ElevApp.InfomentorStockholmApi.Models;
 
-namespace Skolplattformen.Elevapp.InfomentorStockholmApi
+namespace Skolplattformen.ElevApp.InfomentorStockholmApi
 {
     public partial class InfomentorApi : IApi
     {
@@ -12,16 +12,19 @@ namespace Skolplattformen.Elevapp.InfomentorStockholmApi
 
         public async Task<ApiUser?> GetUserAsync()
         {
+            return new ApiUser();
             throw new NotImplementedException();
         }
 
         public async Task<List<Teacher>> GetTeachersAsync()
         {
+            return new List<Teacher>();
             throw new NotImplementedException();
         }
 
         public async Task<SchoolDetails?> GetSchoolDetailsAsync(Guid schoolId)
         {
+            return new SchoolDetails();
             throw new NotImplementedException();
         }
 
@@ -65,11 +68,13 @@ namespace Skolplattformen.Elevapp.InfomentorStockholmApi
 
         public async Task<List<CalendarItem>> GetCalendarAsync(DateOnly date)
         {
+            return new List<CalendarItem>();
             throw new NotImplementedException();
         }
 
         public async Task<List<PlannedAbsenceItem>> GetPlannedAbsenceListAsync()
         {
+            return new List<PlannedAbsenceItem>();
             throw new NotImplementedException();
         }
 
@@ -90,26 +95,31 @@ namespace Skolplattformen.Elevapp.InfomentorStockholmApi
 
         public async Task<List<Meal>> GetMealsAsync(int year, int week)
         {
+            return new List<Meal>();
             throw new NotImplementedException();
         }
 
         public async Task<List<KalendariumItem>> GetKalendariumAsync()
         {
+            return new List<KalendariumItem>();
             throw new NotImplementedException();
         }
 
         public async Task RefreshLoginAsync()
         {
+            return;
             throw new NotImplementedException();
         }
 
         public ApiReadSuccessIndicator GetStatus(string part)
         {
+            return ApiReadSuccessIndicator.Unknown;
             throw new NotImplementedException();
         }
 
         public Dictionary<string, ApiReadSuccessIndicator> GetStatusAll()
         {
+            return new Dictionary<string, ApiReadSuccessIndicator>();
             throw new NotImplementedException();
         }
 

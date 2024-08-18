@@ -33,6 +33,7 @@ namespace Skolplattformen.ElevApp.ViewModels
             {
                 "Skolplattformen Stockholm",
                 "IST Dexter",
+                "InfoMentor Stockholm",
                 "Demo",
             };
             PlatformSelectedIndex = 0;
@@ -79,6 +80,7 @@ namespace Skolplattformen.ElevApp.ViewModels
             {
                 0 => ApiKind.Skolplattformen,
                 1 => ApiKind.Dexter,
+                2 => ApiKind.InfoMentorStockholm,
                 _ => ApiKind.FakeData
             };
             if (PlatformSelectedIndex != -1)
@@ -107,6 +109,7 @@ namespace Skolplattformen.ElevApp.ViewModels
             {
                 ApiKind.Skolplattformen => new SkolplattformenApi.LoginCredentials() {Email = email, Username = username, Password = password },
                 ApiKind.Dexter => new DexterApi.LoginCredentials() {Username = username, Password = password, InstallationId = SelectedDexterInstallation.Id },
+                ApiKind.InfoMentorStockholm => new InfomentorStockholmApi.LoginCredentials() {Username = username, Password = password },
                 _ => new { username, password }
             };
             
