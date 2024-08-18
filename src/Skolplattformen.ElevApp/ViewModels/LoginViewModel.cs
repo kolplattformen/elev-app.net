@@ -31,9 +31,8 @@ namespace Skolplattformen.ElevApp.ViewModels
 
             PlatformList = new ObservableCollection<string>
             {
-                "Skolplattformen Stockholm",
-                "IST Dexter",
                 "InfoMentor Stockholm",
+                "IST Dexter",
                 "Demo",
             };
             PlatformSelectedIndex = 0;
@@ -78,9 +77,8 @@ namespace Skolplattformen.ElevApp.ViewModels
 
             ApiKind kind = PlatformSelectedIndex switch
             {
-                0 => ApiKind.Skolplattformen,
+                0 => ApiKind.InfoMentorStockholm,
                 1 => ApiKind.Dexter,
-                2 => ApiKind.InfoMentorStockholm,
                 _ => ApiKind.FakeData
             };
             if (PlatformSelectedIndex != -1)
@@ -107,9 +105,10 @@ namespace Skolplattformen.ElevApp.ViewModels
             
             object loginCredentials = kind switch
             {
-                ApiKind.Skolplattformen => new SkolplattformenApi.LoginCredentials() {Email = email, Username = username, Password = password },
+                //  ApiKind.Skolplattformen => new SkolplattformenApi.LoginCredentials() {Email = email, Username = username, Password = password },
+                ApiKind.InfoMentorStockholm => new InfomentorStockholmApi.LoginCredentials() { Username = username, Password = password },
                 ApiKind.Dexter => new DexterApi.LoginCredentials() {Username = username, Password = password, InstallationId = SelectedDexterInstallation.Id },
-                ApiKind.InfoMentorStockholm => new InfomentorStockholmApi.LoginCredentials() {Username = username, Password = password },
+                
                 _ => new { username, password }
             };
             

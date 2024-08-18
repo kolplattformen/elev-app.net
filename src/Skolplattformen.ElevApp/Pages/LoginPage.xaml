@@ -37,7 +37,8 @@
                     FontSize="32"
                     HorizontalOptions="Center" />
 
-            <!-- Skolplattformen login form-->
+            <!-- Infomentor login form-->
+
             <VerticalStackLayout 
                 Grid.Row="2"
                 Padding="18,0,18,12"
@@ -45,13 +46,7 @@
                 VerticalOptions="End"
                 IsVisible="{Binding Source={x:Reference blaj}, 
                 Path=Text,Converter={StaticResource IsEqualConverter}, ConverterParameter=0 }">
-                <Entry
-                    MaxLength="200"
-                    Text="{Binding Email}" 
-                    Placeholder="E-mail" 
-                    Focused="Entry_Focused" 
-                    Unfocused="Entry_Unfocused"
-                    Keyboard="Email"/>
+
                 <Entry
                     MaxLength="200"
                     Text="{Binding Username}" 
@@ -81,29 +76,6 @@
                         ItemsSource="{Binding DexterInstallations}"
                         ItemDisplayBinding="{Binding Name}"
                         SelectedItem="{Binding SelectedDexterInstallation}"></Picker>
-                <Entry
-                    MaxLength="200"
-                    Text="{Binding Username}" 
-                    Placeholder="Användarnamn" 
-                    Focused="Entry_Focused" 
-                    Unfocused="Entry_Unfocused"/>
-                <Entry
-                    MaxLength="200"
-                    Text="{Binding Password}" 
-                    IsPassword="true"
-                    Placeholder="Lösenord" 
-                    Focused="Entry_Focused" 
-                    Unfocused="Entry_Unfocused"/>
-            </VerticalStackLayout>
-
-            <VerticalStackLayout 
-                Grid.Row="2"
-                Padding="18,0,18,12"
-                Spacing="6"
-                VerticalOptions="End"
-                IsVisible="{Binding Source={x:Reference blaj}, 
-                Path=Text,Converter={StaticResource IsEqualConverter}, ConverterParameter=2 }">
-
                 <Entry
                     MaxLength="200"
                     Text="{Binding Username}" 
