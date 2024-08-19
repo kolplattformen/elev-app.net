@@ -19,7 +19,7 @@ namespace Skolplattformen.ElevApp.DexterApi
         private Guid _dummySchoolGuid = new Guid("00000000-0000-0000-0000-000000000001");
         private string _schoolName = String.Empty;
 
-        private HttpClient _client;
+        private HttpClient? _client;
 
         public ApiFeatures Features => ApiFeatures.Timetable | 
                                        ApiFeatures.SchoolDetails;
@@ -61,6 +61,24 @@ namespace Skolplattformen.ElevApp.DexterApi
 
             _name = student.FirstName! + " " + student.LastName!;
 
+        }
+
+        public async Task LogOutAsync()
+        {
+            _username = string.Empty;
+            _password = string.Empty;
+            _email = string.Empty;
+            _userId = string.Empty;
+            _name = string.Empty;
+            _dexterLink = string.Empty;
+            _dummySchoolGuid = new Guid("00000000-0000-0000-0000-000000000001");
+            _schoolName = String.Empty;
+
+            if (_client != null)
+            {
+                _client.Dispose();
+                _client = null;
+            }
         }
 
         public async Task<ApiUser?> GetUserAsync()

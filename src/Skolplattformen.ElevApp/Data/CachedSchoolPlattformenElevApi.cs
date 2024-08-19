@@ -28,7 +28,12 @@ namespace Skolplattformen.ElevApp.Data
             return _api.LogInAsync(loginCredentials);
         }
 
- 
+        public Task LogOutAsync()
+        {
+            return _api.LogOutAsync();
+        }
+
+
         public async Task<ApiUser> GetUserAsync()
         {
             var key = "user";

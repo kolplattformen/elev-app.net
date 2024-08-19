@@ -39,7 +39,7 @@ namespace Skolplattformen.ElevApp.ViewModels
         [RelayCommand]
         async Task Logout()
         {
-            _skolplattformenService.LogOut();
+            await _skolplattformenService.LogOut();
             await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
 
